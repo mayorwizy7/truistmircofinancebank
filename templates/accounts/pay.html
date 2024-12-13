@@ -1,0 +1,54 @@
+{% extends 'base2.html' %}
+
+{% load static %}
+
+{% block content %} 
+    <!-- Dashboard Section start -->
+    <section class="dashboard-section body-collapse pay">
+        <div class="overlay pt-120">
+            <div class="container-fruid">
+                <div class="main-content">
+                    {% include 'includes/alert.html' %}
+                    <div class="head-area d-flex align-items-center justify-content-between">
+                        <h4>Make a Payment</h4>
+                        <div class="icon-area">
+                            <img src="{% static 'dashboard_assets/images/icon/support-icon.png' %}" alt="icon">
+                        </div>
+                    </div>
+                    <div class="row pb-120">
+                        <div class="col-xxl-3 col-xl-4 col-md-5">
+                            <a href="{% url 'search_user' %}" class="single-item">
+                                <div class="icon-area">
+                                    <img src="{% static 'dashboard_assets/images/fav.png' %}" alt="icon">
+                                </div>
+                                <p class="mdr">Wealth Wave Transfer</p>
+                                <br>
+                                <span class="mdr">Pay for free</span>
+                            </a>
+                        </div>
+                        <div class="col-xxl-3 col-xl-4 col-md-5">
+                            <a href="{% url 'local_transfer_form' %}" class="single-item">
+                                <div class="icon-area">
+                                    <img src="{% static 'dashboard_assets/images/icon/bank-account-icon.png' %}" alt="icon">
+                                </div>
+                                <p class="mdr">Local Transfer</p>
+                                <span class="mdr">Pay via bank transfer</span>
+                            </a>
+                        </div>
+                        <div class="col-xxl-3 col-xl-4 col-md-5">
+                            <a href="{% url 'intltransfer' %}" class="single-item">
+                                <div class="icon-area">
+                                    <img src="{% static 'dashboard_assets/images/icon/bank-account-icon.png' %}" alt="icon">
+                                </div>
+                                <p class="mdr">International Transfer</p>
+                                <span class="mdr">Pay via bank transfer</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Dashboard Section end -->
+
+{% endblock content %}

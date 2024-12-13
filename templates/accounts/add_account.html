@@ -1,0 +1,264 @@
+{% extends 'base2.html' %}
+{% load custom_filters %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+  <main class="main-content has-sidebar">
+    <div class="main-inner">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4 lg:mb-8">
+        <h2 class="h2">Add New Beneficiary</h2>
+        <button class="btn qt-modal-btn">
+          <i class="las la-plus-circle text-base md:text-lg"></i>
+          Search Account
+        </button>
+      </div>
+
+      <div class="box mb-4 xxxl:mb-6">
+        <div class="mb-6 pb-6 bb-dashed flex justify-between items-center">
+          <h4 class="h4">Add New Beneficiary</h4>
+          <div class="relative">
+            <i class="las la-ellipsis-h horiz-option-btn cursor-pointer"></i>
+            <ul class="horiz-option hide absolute top-full z-[3] min-w-[122px] rounded-md bg-n0 p-3 shadow-[0px_6px_30px_0px_rgba(0,0,0,0.08)] duration-300 dark:bg-bg3 ltr:right-0 ltr:origin-top-right rtl:left-0 rtl:origin-top-left">
+              <li>
+                <span class="block cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">Edit</span>
+              </li>
+              <li>
+                <span class="block cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">Print</span>
+              </li>
+              <li>
+                <span class="block cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">Share</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <form class="grid grid-cols-2 gap-4 xxxl:gap-6" action="{% url 'add_account' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="col-span-2 md:col-span-1">
+            <label for="bank" class="mb-4 md:text-lg font-medium block">Locality</label>
+            {{ form.type }}
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <label for="acc_name" class="mb-4 md:text-lg font-medium block">Account Holder Name</label>
+            {{ form.acc_name }}
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <label for="bank" class="mb-4 md:text-lg font-medium block">Bank Name</label>
+            {{ form.bank }}
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <label for="acc_number" class="mb-4 md:text-lg font-medium block">Account Number</label>
+            {{ form.acc_number }}
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <label for="routing_number" class="md:text-lg font-medium block mb-4">Routing Number</label>
+            {{ form.rout_number }}
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <label for="swift_code" class="md:text-lg font-medium block mb-4">Swift Code</label>
+            {{ form.swift_code }}
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <label for="currency" class="mb-4 md:text-lg font-medium block">Currency</label>
+            {{ form.currency }}
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <label for="address" class="md:text-lg font-medium block mb-4">Addresses</label>
+            {{ form.address }}
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <label for="country" class="md:text-lg font-medium block mb-4">Country</label>
+            {{ form.country }}
+          </div>
+
+          <div class="col-span-2 md:col-span-1">
+            <label for="rate" class="md:text-lg font-medium block mb-4">Image</label>
+            {{ form.image }}
+          </div>
+
+          <div class="col-span-2 flex gap-4 md:gap-6 mt-2">
+            <button class="btn" type="submit">Create Beneficiary</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <!-- open Account modal -->
+  <div class="ac-modal-overlay fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div class="modal box modal-inner absolute left-1/2 my-10 max-h-[90vh] w-[95%] max-w-[710px] duration-300 -translate-x-1/2 overflow-y-auto xl:p-8">
+        <!-- { "translate-y-0 scale-100 opacity-100 my-10": open } -->
+        <div class="relative">
+          <button class="ac-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0"><i class="las la-times"></i></button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Create Bank Account</h4>
+          </div>
+          <form>
+            <p class="mb-4 text-lg font-medium">Profile Photo</p>
+            <div class="mb-6 flex flex-wrap items-center gap-5 xl:gap-10">
+              <img src="{% static 'dashboard/images/placeholder.png' %}" class="h-20 w-20 lg:h-auto lg:w-auto" alt="placeholder" />
+              <div class="flex gap-4">
+                <input type="file" name="photo" id="photo" class="hidden" />
+                <label for="photo" class="btn">Upload Photo</label>
+                <button class="btn-outline">Cancel</button>
+              </div>
+            </div>
+            <div class="mt-6 grid grid-cols-2 gap-4 xl:mt-8 xxxl:gap-6">
+              <div class="col-span-2">
+                <label for="name" class="mb-4 block font-medium md:text-lg">Account Holder Name</label>
+                <input type="text" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Enter Name" id="name" required />
+              </div>
+              <div class="col-span-2">
+                <label for="number" class="mb-4 block font-medium md:text-lg">Phone Number</label>
+                <input type="number" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Enter Number" id="number" required />
+              </div>
+              <div class="col-span-2">
+                <label for="currency" class="mb-4 block font-medium md:text-lg">Select Currency</label>
+                <select name="currency" class="nc-select full dark:!border-n500">
+                  <option value="usd">USD</option>
+                  <option value="gbp">GBP</option>
+                  <option value="yen">YEN</option>
+                  <option value="jpn">JPN</option>
+                </select>
+              </div>
+              <div class="col-span-2 md:col-span-1">
+                <label for="rate" class="mb-4 block font-medium md:text-lg">Interest Rate</label>
+                <input type="number" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Interest Rate %" id="rate" required />
+              </div>
+              <div class="col-span-2 md:col-span-1">
+                <label for="expire" class="mb-4 block font-medium md:text-lg">Expiry Date</label>
+                <div class="relative bg-secondary1/5 py-3 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl">
+                  <input id="date" class="border-none" placeholder="Select Date" autocomplete="off" />
+                  <i class="las la-calendar absolute ltr:right-4 rtl:left-4 top-1/2 -translate-y-1/2 cursor-pointer"></i>
+                </div>
+              </div>
+              <div class="col-span-2">
+                <label for="amount" class="mb-4 block font-medium md:text-lg">Amount</label>
+                <input type="number" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Enter Amount" id="amount" required />
+              </div>
+              <div class="col-span-2">
+                <label for="status" class="mb-4 block font-medium md:text-lg">Select Status</label>
+                <select name="currency" class="nc-select full dark:!border-n500">
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+              <div class="col-span-2 mt-4">
+                <button class="btn flex w-full justify-center" type="submit">Create Account</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#id_acc_number').on('input', function() {
+        var accNumber = $(this).val();
+        if (accNumber.length === 10) {
+          $.ajax({
+            url: '{% url 'search_user_by_acc_number' %}',
+            method: 'GET',
+            data: { acc_number: accNumber },
+            success: function(response) {
+              if (response.success) {
+                $('#id_acc_name').val(response.name);
+              } else {
+                $('#id_acc_name').val('');
+                alert('User with this account number does not exist.');
+              }
+            }
+          });
+        }
+      });
+    });
+  </script>
+
+  <!-- Make Payment modal -->
+  <div class="qt-modal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+        <div class="relative">
+          <button class="qt-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0"><i class="las la-times"></i></button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Quick Transfer</h4>
+          </div>
+          <form action="{% url 'search_user' %}" method="POST" class="flex-fill">
+            {% csrf_token %}
+            <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+              <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 spend order-1">
+                <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                  <p>Enter account number to search</p>
+                </div>
+                <div class="flex justify-between items-center font-medium">
+                  <input type="number" class="bg-transparent" name="acc_number" placeholder="ex: 1234567890" maxlength="10" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button class="btn flex justify-center w-full" type="submit">Search Now</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Make Payment modal -->
+  <div class="qt-modal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+        <div class="relative">
+          <button class="qt-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0"><i class="las la-times"></i></button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Quick Transfer</h4>
+          </div>
+
+          <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+            <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 spend order-1">
+              <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                <p>Spend</p>
+                <p>Balance : 10,000 USD</p>
+              </div>
+              <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                <p class="shrink-0">$ USD</p>
+              </div>
+            </div>
+            <button class="p-2 border order-2 border-n30 dark:border-n500 self-center -my-4 relative z-[2] rounded-lg bg-n0 dark:bg-bg4 text-primary changeOrderBtn"><i class="las la-exchange-alt rotate-90"></i></button>
+            <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 receive order-3">
+              <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                <p>Receive</p>
+                <p>Balance : 10,000 USD</p>
+              </div>
+              <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                <p class="shrink-0">€ EURO</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="text-lg font-medium mb-6">Payment Method</p>
+            <div class="border border-primary border-dashed bg-primary/5 rounded-lg p-3 flex items-center gap-4 mb-6 lg:mb-8">
+              <img src="{% static 'dashboard/images/card-sm-1.png' %}" width="60" height="40" alt="card" />
+              <div>
+                <p class="font-medium mb-1">John Snow - Metal</p>
+                <span class="text-xs">**4291 - Exp: 12/26</span>
+              </div>
+            </div>
+            <a href="#" class="btn flex justify-center w-full">Send Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

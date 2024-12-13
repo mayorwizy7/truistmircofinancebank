@@ -1,0 +1,740 @@
+ {% extends 'backend.html' %}
+ {% load static %}
+ {% load humanize %}
+ {% block title %}
+ <title> CTF - User Details</title>
+ {% endblock title %}
+ {% block content %}
+
+ <div class="content-page">
+     <div class="container-fluid">
+         <div class="row">
+             <div class="col-lg-4">
+                 <div class="card">
+                     <ul class="list-group list-group-flush">
+                         <li class="list-group-item">
+                             <div>
+                                 <ul class="list-style-1 mb-0">
+                                     <li class="list-item d-flex justify-content-start align-items-center">
+                                         <div class="avatar">
+                                             <img class="avatar avatar-img avatar-60 rounded-circle"
+                                                 src="{{ client.profile_pic.url }}" alt="01.jpg" />
+                                         </div>
+                                         <div class="list-style-detail ml-4 mr-2">
+                                             <h5 class="font-weight-bold">{{ client.first_name }} {{ client.last_name }}
+                                             </h5>
+                                             {% if client.allow_transfer == True %}
+                                             <p>Account Status: <span class="text-success">Active</span> </p>
+                                             {% else %}
+                                             <p>Account Status: <span class="text-danger">Frozen</span></p>
+                                             {% endif %}
+                                         </div>
+                                     </li>
+                                 </ul>
+                             </div>
+
+                         </li>
+                         <li class="list-group-item">
+                             <table class="table table-borderless mb-0">
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">Account Number</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ client.acc_number }}</p>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">Date of Birth</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ client.dob }}</p>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">Gender</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ client.gender }}</p>
+                                     </td>
+                                 </tr>
+
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">Email</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ client.email }}</p>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">Phone Number</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ client.phone }}</p>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">Address</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ client.address }}</p>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">Country</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ client.country }}</p>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">PIN</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ pin.pin }}</p>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">Date Created</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ client.date_joined }}</p>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-0">
+                                         <p class="mb-0 text-muted">Last Login</p>
+                                     </td>
+                                     <td>
+                                         <p class="mb-0 ">{{ client.last_login }}</p>
+                                     </td>
+                                 </tr>
+                             </table>
+                         </li>
+                         <li class="list-group-item">
+
+                             <div class="row mt-3">
+                                 <div class="col-12 text-center mb-2">
+                                     {% if client.allow_transfer %}
+
+                                     <div class="d-flex justify-content-center">
+                                         <form action="{% url 'countdown' client.id %}" method="POST">
+                                             {% csrf_token %}
+                                             <div class="form-group">
+                                                 <input style="display:none" type="checkbox" name="allow_transfer"
+                                                     step="0.01" class="form-control" id="exampleInputphone">
+
+                                             </div>
+                                             <button type="submit" class="btn btn-danger">Freeze Account</button>
+                                         </form>
+                                     </div>
+                                     {% else %}
+                                     <div class="d-flex justify-content-center">
+                                         <form action="{% url 'countdown' client.id %}" method="POST">
+                                             {% csrf_token %}
+                                             <div class="form-group">
+                                                 <input style="display:none" type="checkbox" name="allow_transfer"
+                                                     step="0.01" class="form-control" id="exampleInputphone" checked>
+
+                                             </div>
+                                             <button type="submit" class="btn btn-success">Activate Account</button>
+                                         </form>
+                                     </div>
+                                     {% endif %}
+                                 </div>
+
+                                 <div class="col-6 text-center">
+
+                                 </div>
+                             </div>
+                             <div class="row mt-3">
+                                 <div class="col-6 text-center mb-2">
+                                     <button class="btn btn-block btn-sm btn-danger">
+
+                                         <span class=""><a data-toggle="modal" data-target="#user_delete{{ client.id }}"
+                                                 data-placement="top" title="" data-original-title="Delete">Delete
+                                                 User</a></span>
+                                     </button>
+                                 </div>
+
+                                 <div class="col-6 text-center">
+                                     <button class="btn btn-block btn-sm btn-primary">
+                                         <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="20" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor">
+                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                 d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                         </svg>
+                                         <span class=""><a href="{% url 'edit_user' client.id %}" data-placement="top"
+                                                 title="" data-original-title="Delete" style="color:aliceblue;">Edit
+                                                 Profile</a></span>
+                                     </button>
+                                 </div>
+                             </div>
+
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+             <div class="col-lg-8">
+                 <div class="row">
+                     <div class="col-sm-6 col-lg-6">
+                         <div class="card card-block card-stretch card-height">
+                             <div class="card-body text-center">
+                                 <svg width="60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3cb72c"
+                                     class="w-6 h-6">
+                                     <path
+                                         d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
+                                     <path fill-rule="evenodd"
+                                         d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z"
+                                         clip-rule="evenodd" />
+                                 </svg>
+                                 <h2 class="mb-2 mt-3 text-success">${{ client.available_balance|intcomma}}</h2>
+                                 <h4>Account Balance</h4>
+                                 <button type="button" class="btn btn-primary rounded-pill mt-2" data-toggle="modal"
+                                     data-target=".available-balance-modal-sm{{ client.id }}">Update Balance</button>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-sm-6 col-lg-6">
+                         <div class="card card-block card-stretch card-height">
+                             <div class="card-body text-center">
+                                 <svg width="60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3378FF"
+                                     class="w-6 h-6">
+                                     <path
+                                         d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
+                                     <path fill-rule="evenodd"
+                                         d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z"
+                                         clip-rule="evenodd" />
+                                 </svg>
+
+                                 <h2 class="mb-2 mt-3 text-primary">${{ client.ledger_balance|intcomma }}</h2>
+                                 <h4>Ledger Balance</h4>
+
+                             </div>
+                         </div>
+                     </div>
+
+                 </div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-12">
+
+                 <div class="row">
+                     <div class="col-lg-12">
+                         <div class="card card-block card-stretch">
+                             <div class="card-body p-0">
+                                 <div class="d-flex justify-content-between align-items-center p-3">
+                                     <h5 class="font-weight-bold">{{ client.first_name }}'s Recent Transactions
+                                     </h5>
+                                 </div>
+                                 <div class="table-responsive">
+
+                                     <div
+                                         class="d-flex align-content-center  justify-content-between col-sm-2 col-lg-12 mb-4">
+
+                                         <button type="button" class="btn btn-primary mt-2 " data-toggle="modal"
+                                             data-target=".history-modal-sm{{ client.id }}">Add History</button>
+                                         <button type="button" class="btn btn-danger mt-2 " data-toggle="modal"
+                                             data-target=".reset-user-modal-sm{{ client.id }}">Reset User
+                                             Account</button>
+                                         <!-- {% if client.kyc_submitted %}
+                                         <a href="{% url 'kyc_details' client.id %}" type="button"
+                                             class="btn btn-success mt-2 ">View KYC</a>
+                                         {% else %}
+                                         <a href="#" type="button" class="btn btn-warning mt-2 ">KYC Not
+                                             Submitted</a>
+                                         {% endif %} -->
+                                     </div>
+                                     <table class="table data-table mb-0">
+                                         <thead class="table-color-heading">
+                                             <tr class="">
+
+                                                 <th scope="col">
+                                                     Ref Ccode
+                                                 </th>
+                                                 <th scope="col">
+                                                     Date
+                                                 </th>
+                                                 <th scope="col">
+                                                     Sender
+                                                 </th>
+                                                 <th scope="col">
+                                                     Receiver
+                                                 </th>
+                                                 <th scope="col">
+                                                     Amount
+                                                 </th>
+                                                 <th scope="col">
+                                                     Transaction Type
+                                                 </th>
+                                                 <th scope="col">
+                                                     Status
+                                                 </th>
+                                                 <th scope="col">
+                                                     Action
+                                                 </th>
+                                             </tr>
+                                         </thead>
+                                         <tbody>
+                                             {% for transaction in transactions %}
+
+                                             <tr class="white-space-no-wrap">
+                                                 <td>
+                                                     <a href="{% url 'update_history' transaction.id %}"
+                                                         class="text-primary ">
+                                                         {{ transaction.ref_code }}
+                                                     </a>
+                                                 </td>
+                                                 <td>
+                                                     {{ transaction.transaction_time }}
+                                                 </td>
+                                                 <td>
+                                                     {{ transaction.sender }}
+                                                 </td>
+                                                 <td>
+                                                     {{ transaction.receiver }}
+                                                 </td>
+                                                 <td>
+                                                     ${{ transaction.amount|intcomma }}
+                                                 </td>
+                                                 {% if transaction.transaction_type == 'Credit' %}
+                                                 <td class="text-center text-success">
+                                                     {{ transaction.transaction_type }}
+                                                    </td>
+                                                    
+                                                    {% elif transaction.transaction_type == 'Debit' %}
+                                                 <td class="text-center text-danger">
+                                                     {{ transaction.transaction_type }}
+                                                 </td>
+                                                 {% else %}
+                                                 <td class="text-center text-secondary">
+                                                     {{ transaction.transaction_type }}
+                                                 </td>
+                                                 {% endif %}
+                                                 {% if transaction.status == 'Success' %}
+                                                 <td class="text-">
+                                                     <p
+                                                         class="mb-0 text-success d-flex justify-content-start align-items-center">
+                                                         <a href="{% url 'update_history' transaction.id %}"
+                                                             class="text-success ">
+                                                             <small><svg class="mr-2" xmlns="http://www.w3.org/2000/svg"
+                                                                     width="18" viewBox="0 0 24 24" fill="none">
+                                                                     <circle cx="12" cy="12" r="8" fill="#3cb72c">
+                                                                     </circle>
+                                                                 </svg>
+                                                             </small> Completed
+                                                         </a>
+                                                     </p>
+                                                 </td>
+                                                 {% elif transaction.status == 'Pending' %}
+                                                 <td class="text-">
+                                                     <p
+                                                         class="mb-0 text-warning d-flex justify-content-start align-items-center">
+                                                         <a href="{% url 'update_history' transaction.id %}"
+                                                             class="text-warning ">
+                                                             <small><svg class="mr-2" xmlns="http://www.w3.org/2000/svg"
+                                                                     width="18" viewBox="0 0 24 24" fill="none">
+                                                                     <circle cx="12" cy="12" r="8" fill="#db7e06">
+                                                                     </circle>
+                                                                 </svg>
+                                                             </small>Pending
+                                                         </a>
+                                                     </p>
+                                                 </td>
+                                                 {% elif transaction.status == 'Failed' %}
+                                                 <td>
+                                                     <p
+                                                         class="mb-0 text-danger d-flex justify-content-start align-items-center">
+                                                         <a href="{% url 'update_history' transaction.id %}"
+                                                             class="text-danger ">
+                                                             <small><svg class="mr-2" xmlns="http://www.w3.org/2000/svg"
+                                                                     width="18" viewBox="0 0 24 24" fill="none">
+                                                                     <circle cx="12" cy="12" r="8" fill="#F42B3D">
+                                                                     </circle>
+                                                                 </svg>
+                                                             </small>Failed
+                                                         </a>
+                                                     </p>
+                                                 </td>
+                                                 {% endif %}
+                                                 <td>
+
+
+                                                     <button class="badge bg-danger" data-toggle="modal"
+                                                         data-target="#delete_history{{ transaction.id }}"
+                                                         data-placement="top" title="" data-original-title="Delete">
+                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="none"
+                                                             viewBox="0 0 24 24" stroke="currentColor">
+                                                             <path stroke-linecap="round" stroke-linejoin="round"
+                                                                 stroke-width="2"
+                                                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                         </svg>
+                                                     </button>
+                                                 </td>
+                                                </tr>
+                                                
+
+                                             {% endfor %}
+                                         </tbody>
+                                     </table>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+         </div>
+     </div>
+ </div>
+
+ <!-- PROFIT MODAL -->
+ <div class="modal fade add-bonus-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-sm">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Update Bonus</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <form action="{% url 'add_bonus' client.id %}" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group">
+                         <label for="exampleInputphone">Enter Amount</label>
+                         <input type="number" name="amount" step="0.01" class="form-control" id="exampleInputphone"
+                             placeholder="5,000">
+                     </div>
+                     <div class="d-flex justify-content-center" style="display: flex; gap: 20px;">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                         <button type="submit" class="btn btn-primary text-right">Update Bonus</button>
+
+                     </div>
+
+                 </form>
+             </div>
+             <div class="modal-footer">
+             </div>
+         </div>
+     </div>
+ </div>
+
+
+ <div class="modal fade" id="user_delete{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-md" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Delete User</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <p>Are you sure you want to DELETE <span class="text-danger">{{ client.first_name }}'s</span> account
+                     permanently?</p>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                 <a type="button" class="btn btn-danger" href="{% url 'delete_user' id=client.id %}">Delete</a>
+             </div>
+         </div>
+     </div>
+ </div>
+
+
+ <!-- PROFIT MODAL -->
+ <div class="modal fade update-profit-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-sm">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Update Profit</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <form action="{% url 'add_profit' client.id %}" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group">
+                         <label for="exampleInputphone">Enter Amount</label>
+                         <input type="number" name="amount" step="0.01" class="form-control" id="exampleInputphone"
+                             placeholder="5,000">
+                     </div>
+                     <div class="d-flex justify-content-center" style="display: flex; gap: 20px;">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                         <button type="submit" class="btn btn-primary text-right">Update Profit</button>
+
+                     </div>
+
+                 </form>
+             </div>
+             <div class="modal-footer">
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <!-- INVESTMENT MODAL -->
+ <div class="modal fade update-invest-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-md">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Update User Investment</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <form action="{% url 'investment' client.id %}" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group">
+                         <label for="exampleInputphone">Enter Amount</label>
+                         <input type="number" name="amount" step="0.01" class="form-control" id="exampleInputphone"
+                             placeholder="5,000">
+                     </div>
+                     <div class="d-flex justify-content-center " style="display: flex; gap: 20px;">
+
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                         <button type="submit" class="btn btn-primary ">Update Investement</button>
+                     </div>
+
+                 </form>
+             </div>
+             <div class="modal-footer">
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <!-- AVAILABLE MODAL -->
+ <div class="modal fade available-balance-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-md">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Update {{client.first_name}} Withdrawable Balance</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <form action="{% url 'available' client.id %}" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group">
+                         <label for="exampleInputphone">Enter Amount</label>
+                         <input type="number" name="amount" step="0.01" class="form-control" id="exampleInputphone"
+                             value="{{client.balance}}">
+                     </div>
+                     <div class="d-flex justify-content-center" style="display: flex; gap: 20px;">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                         <button type="submit" class="btn btn-primary text-right">Update Available Bal. </button>
+                     </div>
+
+                 </form>
+             </div>
+             <div class="modal-footer">
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <!-- COUNTDOWN MODAL -->
+ <div class="modal fade countdown-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-md">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Update {{client.first_name}}'s Countdown</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <form action="{% url 'countdown' client.id %}" method="POST">
+                     {% csrf_token %}
+                     <div class="form-check form-check-inline">
+                         <div class="custom-control custom-checkbox custom-control-inline">
+                             <input type="checkbox" class="custom-control-input m-0" name="on_timer"
+                                 id="inlineCheckbox3">
+                             <label class="custom-control-label" for="inlineCheckbox3">Turn On Trade</label>
+                         </div>
+                     </div>
+                     <div class="form-group position-relative">
+                         <br>
+                         <br>
+                         {% comment %} <label for="date"
+                             class="form-label font-weight-bold text-muted text-uppercase">Withdrawal {% endcomment %}
+                             {% comment %} Date</label>
+                         <input type="text" class="form-control vanila-datepicker" placeholder="Select a date"
+                             id="Text7" name="withdrawal_date" autocomplete="off"> {% endcomment %}
+                     </div>
+                     <div class="d-flex justify-content-center" style="display: flex; gap: 20px;">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                         <button type="submit" class="btn btn-primary text-right">Turn On Trade</button>
+                     </div>
+
+                 </form>
+             </div>
+             <div class="modal-footer">
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <!-- ADD NEW TRANSACTIONAL HISTORY MODAL -->
+ <div class="modal fade history-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-md">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Update {{client.first_name}}'s history</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <form action="{% url 'add_transaction' client.id %}" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group position-relative">
+                         {{ trans_form }}
+                     </div>
+
+                     <div class="d-flex justify-content-center" style="display: flex; gap: 20px;">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                         <button type="submit" class="btn btn-primary text-right">Update History</button>
+                     </div>
+
+                 </form>
+             </div>
+             <div class="modal-footer">
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <!-- TRANSACTIONAL HISTORY UPDATE MODAL -->
+ <div class="modal fade update-history-modal-sm{{ transaction.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-md">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Update {{client.first_name}}'s history</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <form action="{% url 'add_transaction' client.id %}" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group position-relative">
+                         {{ trans_form }}
+                     </div>
+
+                     <div class="d-flex justify-content-center" style="display: flex; gap: 20px;">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                         <button type="submit" class="btn btn-primary text-right">Update History</button>
+                     </div>
+
+                 </form>
+             </div>
+             <div class="modal-footer">
+             </div>
+         </div>
+     </div>
+ </div>
+
+
+ <!-- AUTO RESET USER MODAL -->
+ <div class="modal fade reset-user-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-sm">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">Update Profit</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <h5>
+                     Are you sure you want to RESET {{ client.first_name }} account?
+                 </h5>
+                 <form action="{% url 'clear_user' client.id %}" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group">
+
+                         <input style="display:none" type="number" class="form-control" id="Text7" name="amount"
+                             value="1">
+                     </div>
+                     <div class="d-flex justify-content-center justify-content-between">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                         <button type="submit" class="btn btn-danger">Reset User Account</button>
+                     </div>
+                 </form>
+             </div>
+             <div class="modal-footer">
+             </div>
+         </div>
+     </div>
+ </div>
+
+
+ {% for transaction in transactions %}
+ <div class="modal fade" id="delete_history{{ transaction.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog modal-md" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title">Delete Transaction History</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       </div>
+       <div class="modal-body">
+         <p>
+           Are you sure you want to DELETE transaction history with ref code: <span class="text-danger">{{ transaction.ref_code }}</span>
+           permanently?
+         </p>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+         <a type="button" class="btn btn-danger" href="{% url 'delete_history' transaction.id %}">Delete</a>
+       </div>
+     </div>
+   </div>
+ </div>
+{% endfor %}
+
+
+ <script>
+     // Function to copy the wallet value to clipboard
+     function copyToClipboard() {
+         const walletParagraph = document.getElementById("walletValue");
+         const walletValue = walletParagraph.textContent;
+
+         // Create a temporary input element to copy the text to clipboard
+         const tempInput = document.createElement("input");
+         tempInput.value = walletValue;
+         document.body.appendChild(tempInput);
+         tempInput.select();
+         document.execCommand("copy");
+         document.body.removeChild(tempInput);
+
+         walletParagraph.textContent = "Copied";
+
+         setTimeout(() => {
+             walletParagraph.textContent = walletValue;
+         }, 1000); // Change back to original value after 1000ms (1 second)
+
+
+     }
+
+     // Attach the click event to the <p> element
+     const walletParagraph = document.getElementById("walletValue");
+     walletParagraph.addEventListener("click", copyToClipboard);
+ </script>
+
+
+ {% endblock content %}

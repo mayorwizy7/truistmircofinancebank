@@ -1,0 +1,486 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="page-banner-area position-relative overflow-hidden"
+        style="background-image: url({% static 'assets/images/hero/hero-image-2.svg' %})">
+        <div class="container">
+            <div class="page-banner-content">
+                <h1>About Us</h1>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li>About Us</li>
+                </ul>
+            </div>
+        </div>
+        <div class="shape-image">
+            <img class="page-banner-shape-1 moveHorizontal_reverse" alt="shape"
+                data-cfsrc="{% static 'assets/images/shape/page-banner-shape-1.png' %}"
+                style="display:none;visibility:hidden;"><img
+                    class="page-banner-shape-1 moveHorizontal_reverse" src="{% static 'assets/images/shape/page-banner-shape-1.png' %}"
+                    alt="shape">
+            <img class="page-banner-shape-2 moveVertical" alt="shape"
+                data-cfsrc="{% static 'assets/images/shape/page-banner-shape-2.png' %}"
+                style="display:none;visibility:hidden;"><img class="page-banner-shape-2 moveVertical"
+                    src="{% static 'assets/images/shape/page-banner-shape-2.png' %}" alt="shape">
+        </div>
+    </div>
+
+
+    <div class="about-area two ptb-120">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12" data-cues="slideInDown" data-duration="800">
+                    <div class="about-us-content position-relative">
+                        <div class="section-heading">
+                            <span class="sub-title two bg-color-9edd05 rounded-pill">ABOUT Truist Mircofinance Bank</span>
+                            <h2>Your Right Path To Smart Financial Decisions</h2>
+                            <p>We empower our clients with a robust suite of products, ranging from digital banking and payment processing to wealth management and blockchain applications.</p>
+                        </div>
+                        <ul class="check">
+                            <li>
+                                <i class="ri-check-line"></i> Pay Bills On Time Without Missing A Beat
+                            </li>
+                            <li>
+                                <i class="ri-check-line"></i> Create And Send Invoices In Seconds
+                            </li>
+                            <li>
+                                <i class="ri-check-line"></i> Control Your Cash Flow On Demand
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12" data-cues="slideInUp" data-duration="800">
+                    <div class="about-image position-relative">
+                        <img class="radius-30" src="{% static 'assets/images/about/about-image-4.jpg' %}" alt="Truist Mircofinance Bank Office">
+                        <img class="about-image-5 radius-20 bounce" src="{% static 'assets/images/about/about-image-5.jpg' %}" alt="Team Collaboration">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="partner-area pb-120">
+        <div class="container">
+            <div class="partner-items pt-0 pb-0 border-0">
+                <div class="swiper partner-slide">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-6.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-6.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-7.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-7.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-8.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-8.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-9.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-9.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-10.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-10.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-6.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-6.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-7.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-7.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-8.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-8.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-9.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-9.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-logo">
+                                <img alt="image" data-cfsrc="{% static 'assets/images/partner/partner-logo-10.png' %}"
+                                    style="display:none;visibility:hidden;"><img
+                                        src="{% static 'assets/images/partner/partner-logo-10.png' %}" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="choose-card-area about-choose bg-color-edf1ee ptb-120">
+        <div class="container">
+            <div class="section-title">
+                <p>DISCOVER POWERFUL FEATURES FOR FINANCIAL SUCCESS</p>
+            </div>
+            <div class="row g-4 justify-content-center" data-cues="slideInUp" data-duration="800">
+                <div class="col-lg-4 col-md-6">
+                    <div class="choose-card bg-color-ffffff radius-30">
+                        <i class="flaticon-money-5 rounded-circle"></i>
+                        <h3>Financial Solutions</h3>
+                        <p class="mb-0">Explore a robust suite of products, from digital banking to payment processing.</p>
+                        <span>01</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="choose-card bg-color-ffffff radius-30">
+                        <i class="flaticon-dollar-symbol-1 rounded-circle"></i>
+                        <h3>Expert Guidance</h3>
+                        <p class="mb-0">Receive professional advice tailored to your financial needs.</p>
+                        <span>02</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="choose-card bg-color-ffffff radius-30">
+                        <i class="flaticon-tablet rounded-circle"></i>
+                        <h3>Innovation in Finance</h3>
+                        <p class="mb-0">Stay ahead with cutting-edge solutions that redefine financial management.</p>
+                        <span>03</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="choose-us-area ptb-120 overflow-hidden">
+        <div class="container">
+            <div class="about-top mb-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 col-md-7">
+                        <div class="section-heading mb-0">
+                            <span class="sub-title two bg-color-9edd05 rounded-pill">WHY CHOOSE US</span>
+                            <h2 class="mb-0">Commitment to Exceptional Services and Solutions</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5">
+                        <div class="content">
+                            <p>By integrating advanced technology with financial expertise, we offer a comprehensive suite of services tailored for both individuals and businesses.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="choose-items position-relative">
+                        <div class="swiper choose-slide">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="innovation">
+                                        <span>Innovation</span>
+                                        <h2>Your Financial Support, Our Passion</h2>
+                                        <p>From digital banking and seamless payment processing to sophisticated investment tools and personalized financial management, our offerings are designed to empower you.</p>
+                                        <a href="{% url 'contact' %}" class="default-btn">Contact Us <i class="ri-arrow-right-up-line"></i></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="innovation">
+                                        <span>Brainchild</span>
+                                        <h2>Support Tailored to Your Financial Needs</h2>
+                                        <p>We combine digital banking and payment processing with advanced investment strategies to ensure your financial success.</p>
+                                        <a href="{% url 'contact' %}" class="default-btn">Contact Us <i class="ri-arrow-right-up-line"></i></a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="innovation">
+                                        <span>Designing</span>
+                                        <h2>Exceptional Services and Solutions</h2>
+                                        <p>Our comprehensive suite of products, including wealth management and blockchain applications, is designed to help you navigate financial complexities with confidence.</p>
+                                        <a href="{% url 'contact' %}" class="default-btn">Contact Us <i class="ri-arrow-right-up-line"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination-btn">
+                            <div class="choose-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6" data-cues="slideInRight" data-duration="800">
+                    <div class="choose-us-image position-relative">
+                        <img class="radius-30" alt="image" data-cfsrc="{% static 'assets/images/about/about-image-6.jpg' %}" style="display:none;visibility:hidden;">
+                        <img class="radius-30" src="{% static 'assets/images/about/about-image-6.jpg' %}" alt="image">
+                        <img class="about-image-7 radius-20" alt="image" data-cfsrc="{% static 'assets/images/about/about-image-7.jpg' %}" style="display:none;visibility:hidden;">
+                        <img class="about-image-7 radius-20" src="{% static 'assets/images/about/about-image-7.jpg' %}" alt="image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="advice-revenue-area bg-color-edf1ee pt-120 pb-5">
+        <div class="container-fluid">
+            <div class="advice-content">
+                <ul>
+                    <li>grow your revenue _ Global Payments</li>
+                    <li>grow your revenue _ Global Payments</li>
+                    <li>grow your revenue _ Global Payments</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="advice-revenue-area two bg-color-edf1ee pb-120">
+        <div class="container-fluid">
+            <div class="advice-content">
+                <ul>
+                    <li>Mobile Transaction _ Online Banking</li>
+                    <li>Mobile Transaction _ Online Banking</li>
+                    <li>Mobile Transaction _ Online Banking</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="fun-fact-area pb-120">
+        <div class="container">
+            <div class="row g-4" data-cues="slideInUp" data-duration="800">
+                <div class="col-lg-3 col-md-6">
+                    <div class="fun-fact-card">
+                        <div class="d-flex align-items-center">
+                            <h2 class="counter">1</h2>
+                            <h2>M+</h2>
+                            <p class="ps-3 mb-0">Total <span></span> Customers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="fun-fact-card">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <h2 class="counter">80</h2>
+                            <h2>+</h2>
+                            <p class="ps-3 mb-0">Country <span></span> Provide Served</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="fun-fact-card">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <h2>$</h2>
+                            <h2 class="counter">64</h2>
+                            <p class="ps-3 mb-0">Total <span></span> Funding</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="fun-fact-card">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <h2 class="counter">30</h2>
+                            <h2>+</h2>
+                            <p class="ps-3 mb-0">Years <span></span> Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="testimonials-area bg-color-edf1ee ptb-120 overflow-hidden">
+        <div class="container">
+            <div class="about-top mb-5">
+                <div class="row align-items-center" data-cues="slideInLeft" data-duration="800">
+                    <div class="col-lg-5 col-md-7">
+                        <div class="section-heading mb-0">
+                            <span class="sub-title">TESTIMONIALS</span>
+                            <h2 class="mb-0">Hear What Our Clients Say About Us</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-5">
+                        <div class="content">
+                            <p>By integrating advanced technology with financial expertise, we offer a comprehensive suite of services tailored for both individuals and businesses.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6" data-cues="slideInUp" data-duration="800">
+                    <div class="testimonials-image bg-color-9edd05 radius-30 position-relative">
+                        <img class="about-image-3" alt="Testimonials" data-cfsrc="{% static 'assets/images/about/about-image-3.png' %}" style="display:none;visibility:hidden;">
+                        <img class="about-image-3" src="{% static 'assets/images/about/about-image-3.png' %}" alt="Testimonials">
+                        <img class="feature-shape-1 rotate" alt="Decorative Shape" data-cfsrc="{% static 'assets/images/shape/feature-shape-1.png' %}" style="display:none;visibility:hidden;">
+                        <img class="feature-shape-1 rotate" src="{% static 'assets/images/shape/feature-shape-1.png' %}" alt="Decorative Shape">
+                        <img class="feature-shape-2 rotate" alt="Decorative Shape" data-cfsrc="{% static 'assets/images/shape/feature-shape-1.png' %}" style="display:none;visibility:hidden;">
+                        <img class="feature-shape-2 rotate" src="{% static 'assets/images/shape/feature-shape-1.png' %}" alt="Decorative Shape">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="testimonials-content" data-cues="slideInUp" data-duration="800">
+                        <div class="testimonials-card bg-color-ffffff radius-30 border-bx mb-4">
+                            <ul>
+                                <li>
+                                    <i class="flaticon-star-2"></i>
+                                    <i class="flaticon-star-2"></i>
+                                    <i class="flaticon-star-2"></i>
+                                    <i class="flaticon-star-2"></i>
+                                    <i class="flaticon-star-2"></i>
+                                </li>
+                            </ul>
+                            <p>“We are revolutionizing the financial landscape with cutting-edge fintech solutions. Our mission is to bridge the gap between traditional banking and modern technology, providing innovative and seamless financial services tailored to the evolving needs of individuals.”</p>
+                            <div class="flex-warp d-flex align-items-center justify-content-between">
+                                <div class="d-flex gap-4 align-items-center">
+                                    <img class="user-image-4 rounded-circle" alt="Steven H. Britten" data-cfsrc="{% static 'assets/images/user/user-image-4.jpg' %}" style="display:none;visibility:hidden;">
+                                    <img class="user-image-4 rounded-circle" src="{% static 'assets/images/user/user-image-4.jpg' %}" alt="Steven H. Britten">
+                                    <div>
+                                        <h3>Steven H. Britten</h3>
+                                        {% comment %} <span>CEO & Founder</span> {% endcomment %}
+                                    </div>
+                                </div>
+                                <img class="right-quote" src="{% static 'assets/images/svg/right-quote.svg' %}" alt="Quote">
+                            </div>
+                        </div>
+                        <div class="testimonials-card bg-color-ffffff radius-30 border-bx">
+                            <ul>
+                                <li>
+                                    <i class="flaticon-star-2"></i>
+                                    <i class="flaticon-star-2"></i>
+                                    <i class="flaticon-star-2"></i>
+                                    <i class="flaticon-star-2"></i>
+                                    <i class="flaticon-star-2"></i>
+                                </li>
+                            </ul>
+                            <p>“We are at the forefront of revolutionizing the financial landscape through cutting-edge fintech solutions. Our mission is to bridge the gap between traditional banking and modern technology, offering innovative and seamless financial services that cater to the evolving needs of individuals.”</p>
+                            <div class="flex-warp d-flex align-items-center justify-content-between">
+                                <div class="d-flex gap-4 align-items-center">
+                                    <img class="user-image-4 rounded-circle" alt="Kevin M. Rueda" data-cfsrc="{% static 'assets/images/user/user-image-5.jpg' %}" style="display:none;visibility:hidden;">
+                                    <img class="user-image-4 rounded-circle" src="{% static 'assets/images/user/user-image-5.jpg' %}" alt="Kevin M. Rueda">
+                                    <div>
+                                        <h3>Kevin M. Rueda</h3>
+                                        {% comment %} <span>Businessman</span> {% endcomment %}
+                                    </div>
+                                </div>
+                                <img class="right-quote" src="{% static 'assets/images/svg/right-quote.svg' %}" alt="Quote">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="faq-area two ptb-120">
+        <div class="container">
+            <div class="section-title">
+                <span class="sub-title two bg-color-9edd05 rounded-pill">FAQ</span>
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-content">
+                <div class="accordion" id="accordionShould">
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse20" aria-expanded="false" aria-controls="collapse20">
+                            1. Why should I care about financial planning?
+                        </button>
+                        <div id="collapse20" class="accordion-collapse collapse show" data-bs-parent="#accordionShould">
+                            <div class="accordion-body">
+                                <p>Financial planning is essential for securing your future. It helps you set goals, manage your expenses, and prepare for unexpected events, ensuring financial stability for both individuals and businesses.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse21" aria-expanded="false" aria-controls="collapse21">
+                            2. What are the different types of investments?
+                        </button>
+                        <div id="collapse21" class="accordion-collapse collapse" data-bs-parent="#accordionShould">
+                            <div class="accordion-body">
+                                <p>Investments can be categorized into various types including stocks, bonds, mutual funds, real estate, and more. Each type has its own risk and return profile, allowing you to diversify your portfolio according to your financial goals.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
+                            3. How can I start saving for retirement?
+                        </button>
+                        <div id="collapse22" class="accordion-collapse collapse" data-bs-parent="#accordionShould">
+                            <div class="accordion-body">
+                                <p>Starting a retirement fund can begin with contributing to employer-sponsored plans like 401(k)s or opening an Individual Retirement Account (IRA). It's crucial to start early and consistently contribute to maximize growth over time.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse23" aria-expanded="false" aria-controls="collapse23">
+                            4. What is the importance of emergency funds?
+                        </button>
+                        <div id="collapse23" class="accordion-collapse collapse" data-bs-parent="#accordionShould">
+                            <div class="accordion-body">
+                                <p>Emergency funds are crucial for financial security. They provide a safety net for unexpected expenses like medical bills or job loss, allowing you to maintain your financial stability without resorting to high-interest loans.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse24" aria-expanded="false" aria-controls="collapse24">
+                            5. What can I use a personal loan for?
+                        </button>
+                        <div id="collapse24" class="accordion-collapse collapse" data-bs-parent="#accordionShould">
+                            <div class="accordion-body">
+                                <p>Personal loans can be used for various purposes, including debt consolidation, home improvements, medical expenses, and education costs. They offer flexibility, but it's important to assess your repayment capacity.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse25" aria-expanded="false" aria-controls="collapse25">
+                            6. What credit score is needed for a personal loan?
+                        </button>
+                        <div id="collapse25" class="accordion-collapse collapse" data-bs-parent="#accordionShould">
+                            <div class="accordion-body">
+                                <p>While requirements vary by lender, a credit score of 650 or higher is generally preferred for personal loans. A higher score may result in better interest rates and loan terms.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'modals/baseModal.html' %}
+
+<!-- Modal class  -->
+{% block close-modal %}close-modal{% endblock close-modal %}
+
+<!-- Modal ID -->
+{% block modal-id %}id="transfer"{% endblock modal-id %}
+
+
+
+<!-- Modals Title  -->
+{% block modal-title %}
+{% include 'includes/alert.html' %}
+<i class="fas fa-exchange-alt"></i></i>&nbsp;&nbsp; Tranfers
+{% endblock modal-title %}
+
+<!-- Modals Body -->
+{% block form %}
+<form class="was-validated" action="{% url 'transfer' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="modal-body">
+        <div class="txt-sm">
+            <h3 style="text-align:center;">Internal Bank Transfer</h3>
+        </div>
+        <div class="invalid-feedback txt-sm">Required</div>
+        <div class="mb-3">
+            <select class="form-select txt-sm" id="email-subject" name="acc_number" required>
+                <option value="">Select Source Account</option>
+                <option class="form-select txt-sm" value="{{ user.acc_number }}">{{ user.acc_number }}</option>
+            </select>
+            <div class="invalid-feedback txt-sm">Required</div>
+        </div>
+        <div class="form-group mb-3">
+            <input class="form-control txt-sm" type="number" name="receiver" placeholder="Destination Account Number"
+                required>
+            <div class="invalid-feedback txt-sm">Required</div>
+        </div>
+
+        <div class="form-group mb-3">
+            <input class="form-control txt-sm" type="number" min="0.00" max="100000000000.00" step="0.01" name="amount"
+                placeholder="Amount in Dollars ($)" required>
+            <div class="invalid-feedback txt-sm">Required</div>
+        </div>
+        <div class="form-group mb-3">
+            <input class="form-control txt-sm" type="text" name="remark" placeholder="Transaction Description" required>
+            <div class="invalid-feedback txt-sm">Required</div>
+        </div>
+        <p>By clicking on the <strong>TRANSFER</strong> button, you agree to the <a href="#">Terms
+                and Conditions</a> of
+            amount transfer</p>. <br>
+        <div class="mb-3" style="float: right;">
+            <a class="btn btn-secondary btn-sm btn-modal txt-sm" data-bs-dismiss="modal">Cancel</a>
+            <input type="submit" name="submit" class="btn btn-outline-success btn-sm btn-modal send-email txt-sm mb-3"
+                value="Transfer">
+        </div>
+    </div>
+</form>
+{% endblock form %}
+
+<!-- Modals BTN denied -->
+{% block close %}{% endblock close %}

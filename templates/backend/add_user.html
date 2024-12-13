@@ -1,0 +1,434 @@
+{% extends 'backend.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+<title> CTF - Add User</title>
+{% endblock title %}
+{% block content %}
+
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="card card-block p-card">
+                    <div class="profile-box">
+                        <div class="profile-card rounded">
+                            <img src="{{ client.profile.profile_pic.url }}" alt="profile-bg"
+                                class="avatar-100 rounded d-block mx-auto img-fluid mb-3">
+                            <h3 class="font-600 text-white text-center mb-0">{{ client.first_name }}
+                                {{ client.last_name }}</h3>
+                            <p class="text-white text-center mb-5">{{ client.balances.package }}</p>
+                        </div>
+                        <div class="pro-content rounded">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="p-icon mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-primary" width="20" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
+                                    </svg>
+                                </div>
+                                <p class="mb-0 eml">{{ client.email }}</p>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="p-icon mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-primary" width="20" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 8l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M5 3a2 2 0 00-2 2v1c0 8.284 6.716 15 15 15h1a2 2 0 002-2v-3.28a1 1 0 00-.684-.948l-4.493-1.498a1 1 0 00-1.21.502l-1.13 2.257a11.042 11.042 0 01-5.516-5.517l2.257-1.128a1 1 0 00.502-1.21L9.228 3.683A1 1 0 008.279 3H5z" />
+                                    </svg>
+                                </div>
+                                <p class="mb-0">{{ client.phone_number }}</p>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="p-icon mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-primary" width="20" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <p class="mb-0">{{ client.country }}</p>
+                            </div>
+                            {% if client.timer.on_timer %}
+                            <div class="d-flex justify-content-center">
+                                <p> <span class="text-success" id="days"></span>,
+                                    <span class="text-success" id="hours"></span>,
+                                    <span class="text-success" id="minutes"></span>,
+                                    <span class="text-success" id="seconds"></span>.</p>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <form action="{% url 'countdown' client.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input style="display:none" type="checkbox" name="on_timer" step="0.01"
+                                            class="form-control" id="exampleInputphone">
+                                        <input style="display:none" type="date" class="form-control" id="Text7"
+                                            name="withdrawal_date">
+                                    </div>
+                                    <button type="submit" class="btn btn-danger">Off Timer</button>
+                                </form>
+                            </div>
+                            {% else %}
+                            <div class="d-flex justify-content-center">
+
+                                <button type="button" class="btn btn-primary mt-2 " data-toggle="modal"
+                                    data-target=".countdown-modal-sm{{ client.id }}">Turn On Timer</button>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-sm-4 col-lg-6">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body text-center">
+                                <svg width="60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3378FF"
+                                    class="w-6 h-6">
+                                    <path
+                                        d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
+                                    <path fill-rule="evenodd"
+                                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z"
+                                        clip-rule="evenodd" />
+                                </svg>
+
+                                <h2 class="mb-2 mt-3 text-primary">${{ client.balances.balance|intcomma }}</h2>
+                                <h4>Total Balance</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-6">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body text-center">
+                                <svg width="60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3378FF"
+                                    class="w-6 h-6">
+                                    <path
+                                        d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
+                                    <path fill-rule="evenodd"
+                                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z"
+                                        clip-rule="evenodd" />
+                                </svg>
+
+                                <h2 class="mb-2 mt-3 text-primary">${{ client.balances.available|intcomma }}</h2>
+                                <h4>Available Balance</h4>
+                                <button type="button" class="btn btn-primary rounded-pill mt-2" data-toggle="modal"
+                                    data-target=".available-balance-modal-sm{{ client.id }}">Update
+                                    Withdrawable Balance</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-6">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body text-center">
+                                <svg width="60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3cb72c">
+                                    <path fill-rule="evenodd"
+                                        d="M6.32 1.827a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V19.5a3 3 0 01-3 3H6.75a3 3 0 01-3-3V4.757c0-1.47 1.073-2.756 2.57-2.93zM7.5 11.25a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H8.25a.75.75 0 01-.75-.75v-.008zm.75 1.5a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H8.25zm-.75 3a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H8.25a.75.75 0 01-.75-.75v-.008zm.75 1.5a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V18a.75.75 0 00-.75-.75H8.25zm1.748-6a.75.75 0 01.75-.75h.007a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.007a.75.75 0 01-.75-.75v-.008zm.75 1.5a.75.75 0 00-.75.75v.008c0 .414.335.75.75.75h.007a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75h-.007zm-.75 3a.75.75 0 01.75-.75h.007a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.007a.75.75 0 01-.75-.75v-.008zm.75 1.5a.75.75 0 00-.75.75v.008c0 .414.335.75.75.75h.007a.75.75 0 00.75-.75V18a.75.75 0 00-.75-.75h-.007zm1.754-6a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008zm.75 1.5a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75h-.008zm-.75 3a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008zm.75 1.5a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V18a.75.75 0 00-.75-.75h-.008zm1.748-6a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008zm.75 1.5a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75h-.008zm-8.25-6A.75.75 0 018.25 6h7.5a.75.75 0 01.75.75v.75a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-.75zm9 9a.75.75 0 00-1.5 0V18a.75.75 0 001.5 0v-2.25z"
+                                        clip-rule="evenodd" />
+                                </svg>
+
+                                <h2 class="mb-2 mt-3 text-success">${{ client.balances.profit|intcomma }} </h2>
+                                <h4>Total Profit</h4>
+                                <button type="button" class="btn btn-success rounded-pill mt-2" data-toggle="modal"
+                                    data-target=".update-profit-modal-sm{{ client.id }}">Update
+                                    Profit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-6">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body text-center">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M35.3676 11.2517C34.8398 11.2372 34.3256 11.3198 33.8438 11.4898V7.03125C33.8438 4.70503 31.9512 2.8125 29.625 2.8125C29.0759 2.8125 28.5517 2.91909 28.0701 3.11072C27.5821 1.32047 25.9428 0 24 0C22.0572 0 20.4179 1.32047 19.9299 3.11072C19.4483 2.91909 18.9241 2.8125 18.375 2.8125C16.0488 2.8125 14.1562 4.70503 14.1562 7.03125V11.4895C13.6747 11.3198 13.1607 11.2372 12.6324 11.2517C10.3711 11.3136 8.53125 13.2316 8.53125 15.5272V48H36.6562V41.2395L38.5637 36.4704C39.1643 34.9689 39.4688 33.3877 39.4688 31.7705V15.5272C39.4688 13.2316 37.6289 11.3136 35.3676 11.2517V11.2517ZM11.3438 45.1875V42.375H33.8438V45.1875H11.3438ZM36.6562 31.7705C36.6562 33.0283 36.4194 34.2581 35.9523 35.4261L34.2979 39.5625H11.3438V15.5272C11.3438 14.7405 11.9564 14.0837 12.7095 14.0631C13.0926 14.0504 13.4561 14.1937 13.7305 14.4607C14.0051 14.7278 14.1563 15.0858 14.1563 15.4687V21.9843H16.9688V7.03125C16.9688 6.25584 17.5997 5.625 18.3751 5.625C19.1505 5.625 19.7813 6.25584 19.7813 7.03125V21.9844H22.5938V4.21875C22.5938 3.44334 23.2247 2.8125 24.0001 2.8125C24.7755 2.8125 25.4063 3.44334 25.4063 4.21875V21.9844H28.2188V7.03125C28.2188 6.25584 28.8497 5.625 29.6251 5.625C30.4005 5.625 31.0313 6.25584 31.0313 7.03125V24.1714C24.712 24.8732 19.7812 30.2467 19.7812 36.75H22.5938C22.5938 31.3222 27.0097 26.9062 32.4375 26.9062H33.8438V15.4688C33.8438 15.0859 33.995 14.7278 34.2696 14.4608C34.544 14.1938 34.9067 14.0508 35.2906 14.0632C36.0436 14.0838 36.6562 14.7406 36.6562 15.5273V31.7705Z"
+                                        fill="#db7e06" />
+                                </svg>
+                                <h2 class="mb-2 mt-3 text-warning">${{ client.balances.invested|intcomma }}</h2>
+                                <h4>Total Invested</h4>
+                                <button type="button" class="btn btn-warning rounded-pill mt-2" data-toggle="modal"
+                                    data-target=".update-invest-modal-sm{{ client.id }}">Update
+                                    Investement</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-block card-stretch">
+                            <div class="card-body p-0">
+                                <div class="d-flex justify-content-between align-items-center p-3">
+                                    <h5 class="font-weight-bold">{{ client.first_name }}'s Recent Transactions</h5>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table data-table mb-0">
+                                        <thead class="table-color-heading">
+                                            <tr class="">
+
+                                                <th scope="col">
+                                                    Ref Ccode
+                                                </th>
+                                                <th scope="col">
+                                                    Date
+                                                </th>
+                                                <th scope="col">
+                                                    Client Name
+                                                </th>
+                                                <th scope="col">
+                                                    Transaction Type
+                                                </th>
+                                                <th scope="col">
+                                                    Amount
+                                                </th>
+                                                <th scope="col">
+                                                    Remark
+                                                </th>
+                                                <th scope="col">
+                                                    Status
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for transaction in transactions %}
+                                            <tr class="white-space-no-wrap">
+
+                                                <td>
+                                                    {{ transaction.ref_code }}
+                                                </td>
+                                                <td>
+                                                    {{ transaction.transaction_time }}
+                                                </td>
+                                                <td>
+                                                    {{ transaction.account }}
+                                                </td>
+                                                <td>
+                                                    {{ transaction.transaction_type }}
+                                                </td>
+                                                <td>
+                                                    ${{ transaction.amount|intcomma }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ transaction.remark }}
+                                                </td>
+                                                {% if transaction.status == 'Success' %}
+                                                <td class="text-">
+                                                    <p
+                                                class="mb-0 text-success d-flex justify-content-start align-items-center">
+                                                <small><svg class="mr-2" xmlns="http://www.w3.org/2000/svg"
+                                                        width="18" viewBox="0 0 24 24" fill="none">
+                                                        <circle cx="12" cy="12" r="8" fill="#3cb72c"></circle>
+                                                    </svg>
+                                                </small> Completed
+                                            </p>
+                                                </td>
+                                                {% elif transaction.status == 'Pending'%}
+                                                <td class="text-">
+                                                    <p
+                                                class="mb-0 text-warning d-flex justify-content-start align-items-center">
+                                                <small><svg class="mr-2" xmlns="http://www.w3.org/2000/svg"
+                                                        width="18" viewBox="0 0 24 24" fill="none">
+                                                        <circle cx="12" cy="12" r="8" fill="#db7e06"></circle>
+                                                    </svg>
+                                                </small>Pending
+                                            </p>
+                                                </td>
+                                                {% else%}
+                                                <td>
+                                                    <p
+                                                        class="mb-0 text-danger d-flex justify-content-start align-items-center">
+                                                        <small><svg class="mr-2" xmlns="http://www.w3.org/2000/svg"
+                                                                width="18" viewBox="0 0 24 24" fill="none">
+                                                                <circle cx="12" cy="12" r="8" fill="#F42B3D"></circle>
+                                                            </svg>
+                                                        </small>Cancelled
+                                                    </p>
+                                                </td>
+                                                {% endif %}
+                                            </tr>
+
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROFIT MODAL -->
+<div class="modal fade update-profit-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Profit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'add_profit' client.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputphone">Enter Amount</label>
+                        <input type="number" name="amount" step="0.01" class="form-control" id="exampleInputphone"
+                            placeholder="$5,000">
+                    </div>
+                    <div class="d-flex justify-content-center" style="display: flex; gap: 20px;" >
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary text-right">Update Profit</button>
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- INVESTMENT MODAL -->
+<div class="modal fade update-invest-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update User Investment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'investment' client.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputphone">Enter Amount</label>
+                        <input type="number" name="amount" step="0.01" class="form-control" id="exampleInputphone"
+                            placeholder="$5,000">
+                    </div>
+                    <div class="d-flex justify-content-center " style="display: flex; gap: 20px;">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary ">Update Investement</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AVAILABLE MODAL -->
+<div class="modal fade available-balance-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update {{client.first_name}} Withdrawable Balance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'available' client.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputphone">Enter Amount</label>
+                        <input type="number" name="amount" step="0.01" class="form-control" id="exampleInputphone"
+                            value="{{client.balance}}">
+                    </div>
+                    <div class="d-flex justify-content-center" style="display: flex; gap: 20px;" >
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary text-right">Update Available Bal. </button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- COUNTDOWN MODAL -->
+<div class="modal fade countdown-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update {{client.first_name}}'s Countdown</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'countdown' client.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group position-relative">
+                    <label for="exampleInputphone">Turn On Timer</label>
+                    <input type="checkbox" name="on_timer" step="0.01" class="form-control" id="exampleInputphone">
+                    </div>
+                    <br>
+                    <div class="form-group position-relative">
+                        <label for="date" class="form-label font-weight-bold text-muted text-uppercase">Withdrawal
+                            Date</label>
+                        <input type="text" class="form-control vanila-datepicker" placeholder="Select a date" id="Text7" name="date" autocomplete="off">
+                    </div>
+                    <div class="d-flex justify-content-center" style="display: flex; gap: 20px;" >
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary text-right">Update Countdown</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function makeTimer() {
+       var endTime=new Date({{ client.timer.date|date:"U" }} * 1000);
+        endTime = (Date.parse(endTime) / 1000);
+    
+            var now = new Date();
+            now = (Date.parse(now) / 1000);
+    
+            var timeLeft = endTime - now;
+    
+            var days = Math.floor(timeLeft / 86400);
+            var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+            var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+            var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+    
+            if (hours < "10") { hours = "0" + hours; }
+            if (minutes < "10") { minutes = "0" + minutes; }
+            if (seconds < "10") { seconds = "0" + seconds; }
+    
+            $("#days").html(days + "<span>D</span>");
+            $("#hours").html(hours + "<span>H</span>");
+            $("#minutes").html(minutes + "<span>M</span>");
+            $("#seconds").html(seconds + "<span>S</span>");
+    
+    }
+    
+    setInterval(function() { makeTimer(); }, 1000);
+</script>
+{% endblock content %}

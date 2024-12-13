@@ -1,0 +1,128 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block title %}
+    <title> Truist Mircofinance Bank - Admin</title>
+    {% endblock title %}
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'backend/assets/css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'backend/assets/css/backend.css' %}">
+    {% comment %}
+    <link rel="stylesheet" href="https://127.0.0.1:62221/stylesheet?id=D4BuCVN1xx7LE-XK"> {% endcomment %}
+    <!-- Alertify CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!--Alertify Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+</head>
+
+<body class="  ">
+    <!-- loader Start -->
+    <div id="loading">
+        <div id="loading-center">
+        </div>
+    </div>
+    <!-- loader END -->
+
+    <div class="wrapper">
+        {% block nav %}
+        {% include "includes/navbar_3.html" %}
+        {% endblock nav %}
+
+        {% block content %}
+
+
+        {% endblock content %}
+
+        {% block footer %}
+        {% include "includes/footer_3.html" %}
+        {% endblock footer %}
+        
+        <!-- Backend Bundle JavaScript -->
+        <script src="{% static 'backend/assets/js/backend-bundle.min.js' %}"></script>
+        <!-- Chart Custom JavaScript -->
+        <script src="{% static 'backend/assets/js/customizer.js' %}"></script>
+
+        <script src="{% static 'backend/assets/js/sidebar.js' %}"></script>
+
+        <!-- Flextree Javascript-->
+        <script src="{% static 'backend/assets/js/flex-tree.min.js' %}"></script>
+        <script src="{% static 'backend/assets/js/tree.js' %}"></script>
+
+        <!-- Table Treeview JavaScript -->
+        <script src="{% static 'backend/assets/js/table-treeview.js' %}"></script>
+
+        <!-- SweetAlert JavaScript -->
+        <script src="{% static 'backend/assets/js/sweetalert.js' %}"></script>
+
+        <!-- Vectoe Map JavaScript -->
+        <script src="{% static 'backend/assets/js/vector-map-custom.js' %}"></script>
+
+        <!-- Chart Custom JavaScript -->
+        <script src="{% static 'backend/assets/js/chart-custom.js' %}"></script>
+        <script src="{% static 'backend/assets/js/charts/01.js' %}"></script>
+        <script src="{% static 'backend/assets/js/charts/02.js' %}"></script>
+
+        <!-- slider JavaScript -->
+        <script src="{% static 'backend/assets/js/slider.js' %}"></script>
+
+        <!-- Emoji picker -->
+        <script src="{% static 'backend/assets/vendor/emoji-picker-element/index.js' %}" type="module"></script>
+
+
+        <!-- app JavaScript -->
+        <script src="{% static 'backend/assets/js/app.js' %}"></script>
+
+        <!-- Alertify JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script>
+    {% if messages %}
+
+    {% for message in messages %}
+    alertify.set('notifier','position', 'top-right');
+    {% if message.tags %}
+    alertify.{{ message.tags }}('{{ message }}');
+    {% endif %}
+    {% endfor %}
+
+    {% endif %}
+</script>
+
+
+<script>
+    function makeTimer() {
+       var endTime=new Date({{ client.withdrawal_date|date:"U" }} * 1000);
+        endTime = (Date.parse(endTime) / 1000);
+    
+            var now = new Date();
+            now = (Date.parse(now) / 1000);
+    
+            var timeLeft = endTime - now;
+    
+            var days = Math.floor(timeLeft / 86400);
+            var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+            var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+            var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+    
+            if (hours < "10") { hours = "0" + hours; }
+            if (minutes < "10") { minutes = "0" + minutes; }
+            if (seconds < "10") { seconds = "0" + seconds; }
+    
+            $("#days").html( days + "<span>D</span>");
+            $("#hours").html( hours + "<span>H</span>");
+            $("#minutes").html( minutes + "<span>M</span>");
+            $("#seconds").html( seconds + "<span>S</span>");
+    
+    }
+    
+    setInterval(function() { makeTimer(); }, 1000);
+    </script>
+</body>
+
+</html>

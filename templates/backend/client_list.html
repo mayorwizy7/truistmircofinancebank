@@ -1,0 +1,239 @@
+{% extends 'backend.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+<title> CTF - All Users</title>
+{% endblock title %}
+{% block content %}
+<div class="content-page">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="d-flex flex-wrap align-items-center justify-content-between my-schedule mb-4">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="font-weight-bold">Customer</h4>
+                    </div>
+                    <div class="create-workform">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between">
+                            <div class="modal-product-search d-flex">
+                                <div class="d-flex justify-content-center">
+                                    <button type="button" class="btn btn-primary mt-2 " data-toggle="modal"
+                                        data-target=".add-user-modal-sm">Add Customer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-block card-stretch">
+                            <div class="card-body p-0">
+                                <div class="d-flex justify-content-between align-items-center p-3">
+                                    <h5 class="font-weight-bold">Customer List</h5>
+                                   
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table data-table mb-0">
+                                        <thead class="table-color-heading">
+                                            <tr class="">
+                                                <th scope="col">
+                                                    Acount Name
+                                                </th>
+                                                <th scope="col">
+                                                    Account Number
+                                                </th>
+                                                <th scope="col">
+                                                    Account Balance
+                                                </th>
+                                                <th scope="col">
+                                                    Account Status
+                                                </th>
+                                                <th scope="col" class="">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for client in clients %}
+                                            <tr class="white-space-no-wrap">
+                                                <td class="">
+                                                    <a href="{% url 'user_profile' client.id %}">
+                                                        <div class="active-project-1 d-flex align-items-center mt-0 ">
+                                                            <div class="h-avatar is-medium">
+                                                                <img class="avatar rounded-circle" alt="user-icon"
+                                                                    src="{{ client.profile_pic.url }}">
+                                                            </div>
+                                                            <div class="data-content">
+                                                                <div>
+                                                                    <span
+                                                                        class="font-weight-bold">{{ client.first_name }}
+                                                                        {{ client.last_name }}</span>
+                                                                </div>
+                                                                <p class="m-0 text-secondary small">
+                                                                    {{ client.email }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>{{ client.acc_number }}</td>
+                                                <td>
+                                                    ${{ client.available_balance|intcomma }}
+                                                </td>
+                                                <td>
+                                                    {% if client.allow_transfer == True %}
+                                                    <p class="text-success">Active </p>
+                                                    {% else %}
+                                                    <p class="text-danger">Frozen </p>
+                                                    {% endif %}
+
+                                                </td>
+                                                <td>
+                                
+                                                    <a class="" data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="View"
+                                                        href="{% url 'user_profile' client.id %}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="text-secondary" width="20" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                        </svg>
+                                                    </a>
+                                                    <button class="badge bg-danger" data-toggle="modal" data-target="#delete_user{{ client.id }}" 
+                                                        data-placement="top" title="" data-original-title="Delete">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </button> 
+                                            </td>
+
+                                            <div class="modal fade" id="delete_user{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Delete User</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Are you sure you want to DELETE <span class="text-danger">{{ client.first_name }}'s</span> account permanently?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <a type="button" class="btn btn-danger" href="{% url 'delete_user' id=client.id %}">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+<div class="modal fade" id="client_delete{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to DELETE {{ client.first_name }}?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a type="button" class="btn btn-danger" href="#">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- REGITRATION MODAL -->
+<div class="modal fade add-user-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'add_user' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group position-relative">
+                    {{ reg_form }}
+                    </div>
+                   
+                    <div class="d-flex justify-content-center" style="display: flex; gap: 20px;" >
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary text-right">Add User</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AUTO PROFIT MODAL -->
+<div class="modal fade auto_add_profit-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Profit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>
+                    Are you sure you want to UPDATE the Trade Profit for all active traders?
+                </h5>
+                <form action="{% url 'auto_add_profit' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <br>
+                        <input type="number" name="amount" style="display:none" step="0.01" class="form-control" id="exampleInputphone"
+                            value="200.34">
+                    </div>
+                    <div class="d-flex justify-content-center" style="display: flex; gap: 20px;" >
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary text-right">Update</button>
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

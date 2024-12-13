@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-banner-area position-relative overflow-hidden"
+    style="background-image: url({% static 'assets/images/hero/hero-image-2.svg' %})">
+    <div class="container">
+        <div class="page-banner-content">
+            <h1>My Account</h1>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li>My Account</li>
+            </ul>
+        </div>
+    </div>
+    <div class="shape-image">
+        <img class="page-banner-shape-1 moveHorizontal_reverse"
+            src="{% static 'assets/images/shape/page-banner-shape-1.png' %}" alt="shape">
+        <img class="page-banner-shape-2 moveVertical" src="{% static 'assets/images/shape/page-banner-shape-2.png' %}"
+            alt="shape">
+    </div>
+</div>
+
+
+<div class="my-account-page ptb-120 overflow-hidden">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-12" data-cues="slideInLeft" data-duration="800">
+                <form class="login-form bg-color-fffaeb radius-30" action="{% url 'register' %}" method="POST">
+                    {% csrf_token %}
+                    <h3>Create An Account</h3>
+                    {{ form.first_name }}
+                    {{ form.last_name }}
+                    {{ form.email }}
+                    {{ form.phone }}
+                    {{ form.country }}
+                    {{ form.currency }}
+                    {{ form.password }}
+                    {{ form.confirm_password }}
+                    <button type="submit" class="default-btn w-100 text-center mb-4">Register Now</button>
+                    <p>Already Have An Account? <a href="{% url 'login' %}">Login</a></p>
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-12" data-cues="slideInRight" data-duration="800">
+                <form class="login-form bg-color-fffaeb radius-30" method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <h3>Log In To Your Account</h3>
+                    <input class="form-control" placeholder="Account Number" type="number" name="acc_number">
+                    <input type="text" class="form-control" placeholder="Password" name="password">
+                    <i class="las la-eye" style="display: none;"></i>
+                    <i class="las la-eye-slash"></i>
+                    <div class="d-flex login-warp gap-4 align-items-center justify-content-between">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Keep Me Logged In
+                            </label>
+                        </div>
+                        <div>
+                            <a href="{% url 'forgotPassword' %}" class="password">Forgot Your Password?</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="default-btn w-100 text-center">Log In</button>
+                    <div class="underline position-relative"><span>OR</span></div>
+                    <a href="#!" target="_blank" class="default-btn facebook w-100 text-center mb-4">Log In With
+                        Facebook</a>
+                    <a href="#!" target="_blank" class="default-btn facebook google w-100 text-center mb-4">Log In With
+                        Google</a>
+                    <p>Don’t Have An Account? <a href="{% url "register" %}">Create</a></p>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

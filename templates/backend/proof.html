@@ -1,0 +1,71 @@
+{% extends 'backend.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+<title> CTF - Proof Of Deposit</title>
+{% endblock title %}
+
+{% block content %}
+<div class="content-page">
+
+    <div class="container-fluid">
+        <div class="row">
+            {% for proof in payment_proof %}
+            <div class="col-sm-4 col-md-4 col-lg-2">
+                <div class="card">
+                    {% if proof.proof and proof.proof.url %}
+                    <img src="{{ proof.proof.url }}" class="card-img-top" alt="#">
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{ proof.client }}</h4>
+                        <p class="card-text">Amount: ${{ proof.amount|intcomma }}</p>
+                        <p class="card-text">Date: {{ proof.date}}</p>
+                        <a href="{% url 'user_profile' proof.client.id %}" class="btn btn-primary">Go To Profile</a>
+                        <hr>
+                        <a href="{% url 'delete_proof' proof.id %}" class="btn btn-danger">Delete Proof</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- AUTO PROFIT MODAL -->
+<div class="modal fade auto_add_profit-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Profit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>
+                    Are you sure you want to UPDATE the Mined profit of all active users?
+                </h5>
+                <form action="{% url 'auto_add_profit' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <br>
+                        <input type="number" name="amount" style="display:none" step="0.01" class="form-control"
+                            id="exampleInputphone" value="14.29">
+                    </div>
+                    <div class="d-flex justify-content-center" style="display: flex; gap: 20px;">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary text-right">Update All Active Miners
+                            Profit</button>
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

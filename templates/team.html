@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Start Page Title Area -->
+<div class="page-title-area item-bg2 jarallax" data-jarallax='{"speed": 0.3}'>
+    <div class="container">
+        <div class="page-title-content">
+            <h2>Team</h2>
+            <p>Meet our team</p>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Team Area -->
+<section class="team-area ptb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="single-team-member">
+                    <div class="member-image">
+                        <img data-cf src="{% static 'assets/img/currency-transfer-provider/team/team1.jpg' %}" alt="image" ><noscript><img src="{% static 'assets/img/team-img1.jpg' %}" alt="image"></noscript>
+
+                        <ul class="social">
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="member-content">
+                        <h3>Robert H</h3>
+                            <span>Chairman</span>
+                        <p>Robert H. - Chairman, providing strategic guidance and fostering long-term success at Truist Mircofinance Bank.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="single-team-member">
+                    <div class="member-image">
+                        <img data-cf src="{% static 'assets/img/currency-transfer-provider/team/team2.jpg' %}" alt="image" ><noscript><img src="{% static 'assets/img/team-img2.jpg' %}" alt="image"></noscript>
+
+                        <ul class="social">
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="member-content">
+                        <h3>Jennifer L.</h3>
+                        <span>Chief Executive Officer</span>
+                        <p>Jennifer L. - Chief Executive Officer, providing visionary leadership and driving excellence at Truist Mircofinance Bank.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="single-team-member">
+                    <div class="member-image">
+                        <img data-cf src="{% static 'assets/img/currency-transfer-provider/team/team3.jpg' %}" alt="image" ><noscript><img src="{% static 'assets/img/team-img3.jpg' %}" alt="image"></noscript>
+
+                        <ul class="social">
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="member-content">
+                        <h3>Mark S.</h3>
+                        <span>Director of Operations</span>
+                        <p>Mark S. - Director of Operations, driving efficient coordination and operational excellence to enhance customer experience at Truist Mircofinance Bank.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="single-team-member">
+                    <div class="member-image">
+                        <img data-cf src="{% static 'assets/img/currency-transfer-provider/team/team4.jpg' %}" alt="image" ><noscript><img src="{% static 'assets/img/team-img4.jpg' %}" alt="image"></noscript>
+
+                        <ul class="social">
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="member-content">
+                        <h3>Emily W.</h3>
+                        <span>Head of Compliance</span>
+                        <p>Emily W. - Head of Compliance, ensuring regulatory compliance and upholding integrity at Truist Mircofinance Bank.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Team Area -->
+
+<!-- Start Account Create Area -->
+<section class="account-create-area">
+    <div class="container">
+        <div class="account-create-content">
+            <h2>Apply for an account in minutes</h2>
+            <p>Get your Truist Mircofinance Bank account today!</p>
+            <a href="{% url 'register' %}" class="btn btn-primary">Get Your Truist Mircofinance Bankn Account</a>
+        </div>
+    </div>
+</section>
+<!-- End Account Create Area -->
+
+{% endblock content %}

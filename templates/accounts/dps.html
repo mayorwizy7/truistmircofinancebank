@@ -1,0 +1,67 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y" style="min-height:84vh">
+
+    {% if request.GET.command == 'verification' %}
+
+    <div class="container mx-auto alert alert-info text-center" role="alert"
+        style="max-width:1024px; margin-top:100px;">
+        <h6>Registration initiated.</h6>
+        <br>
+        <p> We have sent you a verification mail to your email address ({{ request.GET.email }})</p>
+        <br><br>
+        <p>Already verified? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+    {% else %}
+    <!-- ============================ COMPONENT LOGIN   ================================= -->
+    
+<!-- inner hero start -->
+<section class="inner-hero bg_img overlay--one"
+style="background-image: url('{% static 'assets/images/frontend/breadcrumb/6202070d0a0191644300045.png' %}');">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+            <h2 class="page-title text-white">DPS Application</h2>
+
+        </div>
+    </div>
+</div>
+</section>
+
+    <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+        {% include 'includes/alert.html' %}
+        <div class="card-body">
+            <h4 class="card-title mb-4 info">Choose DPS Plan</h4>
+            <form method="POST" action="{% url 'dps' %}">
+                {% csrf_token %}
+                
+                <div class="row g-3">
+                    <div class="col-12">
+                        <!-- <label for="FRD">Choose FDR Plan</label> -->
+                        {{ form.as_p }}
+                    </div>
+                    
+                    <div class="col-12">
+                        <button class="btn btn-primary w-100 py-3" type="submit">Apply</button>
+                    </div>
+                    <div class="form-group">
+                        <a href="{% url 'dashboard' %}" class="float-right">Cancel</a>
+    
+                    </div> <!-- form-group form-check .// -->
+                </div>
+
+            </form>
+        </div> <!-- card-body.// -->
+    </div> <!-- card .// -->
+    <br><br>
+    <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    {% endif %}
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+{% endblock %}

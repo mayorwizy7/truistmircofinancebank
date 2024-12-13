@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<!-- Start Page Title Area -->
+<div class="page-title-area item-bg1 jarallax" data-jarallax='{"speed": 0.3}'>
+    <div class="container">
+        <div class="page-title-content">
+            <h2>FAQ</h2>
+            <p>Frequently Asked Questions</p>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start FAQ Area -->
+<section class="faq-area ptb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-12">
+                <div class="faq-content">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="bar"></div>
+                    <p>Here are some of the frequently asked questions by our customers</p>
+
+                    <div class="faq-image">
+                        <img data-cf src="{% static 'assets/img/faq.png' %}" alt="image" ><noscript><img src="{% static 'assets/img/faq.png' %}" alt="image"></noscript>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7 col-md-12">
+                <div class="faq-accordion">
+                    <ul class="accordion">
+                        <li class="accordion-item">
+                            <a class="accordion-title active" href="javascript:void(0)">
+                                        <i class="fas fa-plus"></i>
+                                        How do I open an account with Truist Mircofinance Bank?
+                                    </a>
+
+                            <p class="accordion-content show">To open an account with Truist Mircofinance Bank, you can visit our website and follow the easy-to-use online account opening process. Alternatively, you can visit one of our branches and our friendly staff will guide you through the account opening procedure, ensuring a smooth and hassle-free experience.</p>
+                        </li>
+
+                        <li class="accordion-item">
+                            <a class="accordion-title" href="javascript:void(0)">
+                                        <i class="fas fa-plus"></i>
+                                        What documents do I need to open a personal account?
+                                    </a>
+
+                            <p class="accordion-content">To open a personal account, you will typically need to provide identification documents such as a valid passport or national ID card, proof of address (such as a utility bill or bank statement), and any additional documents specific to your country's regulations. Our customer service team will be happy to provide you with detailed information and assist you throughout the account opening process.</p>
+                        </li>
+
+                        <li class="accordion-item">
+                            <a class="accordion-title" href="javascript:void(0)">
+                                        <i class="fas fa-plus"></i>
+                                        How can I access my accounts online?
+                                    </a>
+
+                            <p class="accordion-content">Truist Mircofinance Bank provides a secure and user-friendly online banking platform. Simply visit our website and click on the "Online Banking" or "Login" button. Enter your login credentials, such as your username and password, to access your accounts. If you haven't registered for online banking yet, you can easily sign up on our website or contact our customer service for assistance.</p>
+                        </li>
+
+                        <li class="accordion-item">
+                            <a class="accordion-title" href="javascript:void(0)">
+                                        <i class="fas fa-plus"></i>
+                                        What if I forget my online banking password?</a>
+
+                            <p class="accordion-content">If you forget your online banking password, you can click on the "Forgot Password" or "Reset Password" option on the login page. Follow the instructions provided to reset your password securely. If you encounter any difficulties, our customer service team will be available to assist you in recovering your account access.</p>
+                        </li>
+
+                        <li class="accordion-item">
+                            <a class="accordion-title" href="javascript:void(0)">
+                                        <i class="fas fa-plus"></i>
+                                        How can I contact customer support?
+                                    </a>
+
+                            <p class="accordion-content">You can contact our customer support team by phone at [phone number] or via email at support@assuredtrustbank.com. Our dedicated team is available to assist you with any inquiries, concerns, or support you may need regarding your banking relationship with Truist Mircofinance Bank.</p>
+                        </li>
+
+                        <li class="accordion-item">
+                            <a class="accordion-title" href="javascript:void(0)">
+                                        <i class="fas fa-plus"></i>
+                                        What are the fees associated with certain transactions or services?
+                                    </a>
+
+                            <p class="accordion-content">The fees associated with specific transactions or services may vary. We strive to maintain transparent and competitive pricing, and our fee schedule is available on our website or can be obtained from our branches. We encourage you to review the fee schedule or reach out to our customer service for detailed information on specific fees.</p>
+                        </li>
+
+                        <li class="accordion-item">
+                            <a class="accordion-title" href="javascript:void(0)">
+                                        <i class="fas fa-plus"></i>
+                                        Can I apply for a loan or credit card online?
+                                    </a>
+
+                            <p class="accordion-content">Yes, you can apply for a loan or credit card online through our website. We provide a user-friendly online application process that allows you to submit your application securely. Alternatively, you can also visit one of our branches to apply in person. Our loan and credit card offerings are subject to eligibility criteria and approval.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-contact">
+            <div class="section-title">
+                <h2>Do You Have Any Questions</h2>
+                <div class="bar"></div>
+                <p>Drop a quick message bellow and one of our customer service agents will reach out to you.</p>
+            </div>
+
+            <div class="faq-contact-form">
+                <form id="#" method="POST" action="{% url 'contact' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" required data-error="Please enter your name" placeholder="Name">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <input type="email" name="email"  class="form-control" required data-error="Please enter your email" placeholder="Email">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="phone" required data-error="Please enter your number" class="form-control" placeholder="Phone">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="subject" class="form-control" required data-error="Please enter your subject" placeholder="Subject">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <textarea name="message" class="form-control" cols="30" rows="6" required data-error="Write your message" placeholder="Your Message"></textarea>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            {% comment %} <div id="msgSubmit" class="h3 text-center hidden"></div> {% endcomment %}
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End FAQ Area -->
+
+<!-- Start Account Create Area -->
+<section class="account-create-area">
+    <div class="container">
+        <div class="account-create-content">
+            <h2>Apply for an account in minutes</h2>
+            <p>Get your Truist Mircofinance Bankn account today!</p>
+            <a href="{% url 'register' %}" class="btn btn-primary">Get Your Truist Mircofinance Bankn Account</a>
+        </div>
+    </div>
+</section>
+<!-- End Account Create Area -->
+
+{% endblock content %}

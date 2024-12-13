@@ -1,0 +1,85 @@
+{% extends 'base2.html' %}
+{% load custom_filters %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<main class="main-content has-sidebar">
+  <div class="main-inner">
+    <div class="grid grid-cols-12 gap-4 xxl:gap-6">
+      <div
+        class="box modal-inner absolute left-1/2 my-10 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+        <div class="relative">
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Transaction Details</h4>
+          </div>
+          <div class="py-3 px-6 bg-secondary1/5 flex items-center gap-4 mb-6 lg:mb-8">
+            <!-- <img src="{{ transaction.receiver.account.profile_pic.url }}" width="56" height="56" alt="paypal icon" /> -->
+            <div>
+              <p class="xm:text-xl font-medium mb-2">{{  transaction.transaction_type }} Transaction</p>
+              {% if transaction.status == 'Success' %}
+              <span>Transaction Status:</span> <span class="font-medium"><span class="text-primary">{{ transaction.status }}</span></span>
+              {% elif transaction.status == 'Pending' %}
+              <span>Transaction Status:</span> <span class="font-medium"><span class="text-secondary3">{{ transaction.status }}</span></span>
+              {% elif transaction.status == 'Failed' %}
+              <span>Transaction Status:</span> <span class="font-medium"><span class="text-secondary2">{{ transaction.status }}</span></span>
+              {% endif %}
+            </div>
+          </div>
+          <ul class="flex flex-col gap-4 bb-dashed border-secondary1/20 pb-4 mb-4 lg:mb-6 lg:pb-6">
+            <li class="flex justify-between">
+              <span>Ref:</span> <span class="font-medium">{{ transaction.ref_code }}</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Receipient:</span> <span class="font-medium">{{ transaction.receiver_name }} - {{ transaction.receiver }}</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Bank:</span> <span class="font-medium">{{ transaction.receiver_bank_name }}</span>
+            </li>
+            {% comment %} <li class="flex justify-between">
+              <span>Bank Account:</span> <span class="font-medium">Wadk6265dlkd565</span>
+            </li> {% endcomment %}
+            <li class="flex justify-between">
+              <span>Date:</span> <span class="font-medium">{{ transaction.transaction_time|date:"d-M-Y" }}</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Time:</span> <span class="font-medium">{{ transaction.transaction_time|time:"h:i A" }}</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Amount:</span> <span class="font-medium">{{ transaction.amount|intcomma }} USD</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Fee:</span> <span class="font-medium">{{ transaction.fee }} </span>
+            </li>
+            <li class="flex justify-between">
+              <span>Transfer Type:</span> <span class="font-medium">{{ transaction.transfer_type }} </span>
+            </li>
+            <li class="flex justify-between">
+              <span>Remark:</span> <span class="font-medium">{{ transaction.remark }} </span>
+            </li>
+          
+          </ul>
+
+          <div class="flex justify-center gap-4 flex-wrap lg:gap-6">
+            <a href="{% url 'dashboard' %}" class="flex btn-outline items-center gap-2">
+              <i class="las la-angle-double-left border border-n30 dark:border-n500 rounded-full bg-primary/5"></i>
+              <span>Dashboard</span>
+            </a>
+            <a href="{% url 'add_beneficiary' %}" class="flex btn-outline items-center gap-2">
+              <i class="las la-user border border-n30 dark:border-n500 rounded-full bg-primary/5 "></i>
+              <span>Add To Beneficciary</span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

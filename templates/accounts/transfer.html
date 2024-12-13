@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+{% block navbar %}{% endblock navbar %}
+
+<!-- account section start -->
+<section class="account-section">
+    <div class="acc-left bg_img"
+        style="background-image: url('{% static 'assets/images/frontend/login/6201e746464201644291910.jpg' %}');">
+        <div class="account-logo">
+            <a href="{% url 'home' %}"><img src="{% static 'assets_2/images/resources/logo-1.png' %}" alt="image"></a>
+        </div>
+        <div class="acc-left-inner">
+            <h2 class="text-white mb-2">Tranfer Form</h2>
+            <p class="text-white">You must be 18 years of age or older to open an account with the Bank.</p>
+            <p class="text-white">You are responsible for maintaining the security of your account and any
+                account-related activities.</p>
+            <p class="text-white">You must provide accurate and complete information when opening an account and keep
+                your contact information up to date.</p>
+            <p class="text-white">The Bank reserves the right to close or freeze an account if suspicious activity is
+                detected.</p>
+        </div>
+        <div class="acc-left-footer d-lg-block d-none">
+            <p class="text-white">Copyright &copy; <script>document.write(new Date().getFullYear())</script> Wealth Wave Bank. All rights reserved</p>
+        </div>
+    </div>
+    <div class="acc-right">
+        <div class="acc-right-bg bg_img"
+            style="background-image: url('{% static 'assets/templates/default/images/auth-bg.png' %}')"></div>
+        <div class="acc-right__inner">
+            <div class="text-center mb-lg-5 mb-4">
+                <h3 class="text-center text-white mb-2">Internal Bank Transfer</h3>
+                <p class="text-white">Kindly ensure correct details</p>
+            </div>
+            {% include 'includes/alert.html' %}
+            <form method="POST" action="{% url 'transfer' %}" class="verify-gcaptcha">
+                {% csrf_token %}
+                <div class="form-group">
+                    <select class="form-select txt-sm" id="email-subject" name="acc_number" required>
+                        <option value="">Select Source Account</option>
+                        <option class="form-select txt-sm" value="{{ user.acc_number }}">{{ user.acc_number }} (${{ user.available_balance|intcomma }})</option>
+                    </select>
+                    
+                    <br>
+                    <br>
+                    <div class="form-group mb-3">
+                        <input class="form-control txt-sm" type="number" name="receiver"
+                            placeholder="Destination Account Number" maxlength="10" required>
+                        
+                    </div>
+                    <br>
+
+                    <div class="form-group mb-3">
+                        <input class="form-control txt-sm" type="number" min="0.00" max="100000000000.00" step="0.01"
+                            name="amount" placeholder="Amount in Dollars ($)" required>
+                        
+                    </div>
+                    <br>
+                    <div class="form-group mb-3">
+                        <input class="form-control txt-sm" type="text" name="remark"
+                            placeholder="Transaction Description" maxlength="10" required>
+                        
+                    </div>
+                    <br>
+                    <div class="form-group mb-3">
+                        <label for="pin">Enter Transaction Pin.</label>
+                        <input class="form-control txt-sm" type="password" name="pin"
+                            placeholder="Enter Your Transaction Pin" maxlength="4" inputmode="numeric" required>
+                        <div class="invalid-feedback txt-sm">Required</div>
+                    </div>
+                    <div>
+                        <p style="color: #fff">By clicking on the <strong>TRANSFER</strong> button, you agree to the <a
+                                href="{% url 'terms' %}">Terms and Conditions</a>transfer</p> <br>
+                    </div>
+                    <div>
+                        <a class="btn btn--base w-10 mt-4" href="{% url 'dashboard' %}" style="background-color:#ff0000">Cancel Transfer</a> <br>
+                    </div>
+                        <button type="submit" class="btn btn--base w-100 mt-4" style="background-color:#00683f">Transfer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- account section end -->
+
+{% block footer %}{% endblock footer %}
+
+{% endblock content %}

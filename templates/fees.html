@@ -1,0 +1,493 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- banner-section start -->
+    <section class="banner-section inner-pages fees">
+        <div class="overlay">
+            <div class="banner-content pb-120">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-10">
+                            <div class="main-content">
+                                <h1>Fees</h1>
+                                <div class="breadcrumb-area">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb d-flex align-items-center">
+                                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript:void(0)">Pages</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Fees</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="banner-bottom-area pb-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 cus-z">
+                        <div class="top-area">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10">
+                                    <h2 class="text-uppercase">Fees for other transactions</h2>
+                                    <p>Select your country and local currency to see fees</p>
+                                    <div class="select-area">
+                                        <select>
+                                            <option>Country</option>
+                                            <option>United kingdom</option>
+                                            <option>United State</option>
+                                            <option>France</option>
+                                            <option>Denmark</option>
+                                        </select>
+                                        <select>
+                                            <option>Currency</option>
+                                            <option>GBP (Pound sterling)</option>
+                                            <option>USD (United States dollar)</option>
+                                            <option>EUR (European euro)</option>
+                                            <option>DKK (Danish krone)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- banner-section end -->
+
+    <!-- Fess Content In start -->
+    <section class="fees-content">
+        <div class="overlay pb-120">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="deposit-tab" data-bs-toggle="tab" data-bs-target="#deposit" type="button" role="tab" aria-controls="deposit" aria-selected="true">
+                                    <span class="icon d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'assets/img/fees-icon-1.png' %}" alt="icon">
+                                    </span>
+                                    <span class="title-area">Deposit funds</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="withdraw-tab" data-bs-toggle="tab" data-bs-target="#withdraw" type="button" role="tab" aria-controls="withdraw" aria-selected="false">
+                                    <span class="icon d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'assets/img/fees-icon-2.png' %}" alt="icon">
+                                    </span>
+                                    <span class="title-area">Withdraw funds</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="account" aria-selected="false">
+                                    <span class="icon d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'assets/img/fees-icon-3.png' %}" alt="icon">
+                                    </span>
+                                    <span class="title-area">Account level fees</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="send-receive-money-tab" data-bs-toggle="tab" data-bs-target="#send-receive-money" type="button" role="tab" aria-controls="send-receive-money" aria-selected="false">
+                                    <span class="icon d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'assets/img/fees-icon-4.png' %}" alt="icon">
+                                    </span>
+                                    <span class="title-area">Send money, receive money</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="currency-conversion-tab" data-bs-toggle="tab" data-bs-target="#currency-conversion" type="button" role="tab" aria-controls="currency-conversion" aria-selected="false">
+                                    <span class="icon d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'assets/img/fees-icon-5.png' %}" alt="icon">
+                                    </span>
+                                    <span class="title-area">Currency conversion</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="keep-paylio-tab" data-bs-toggle="tab" data-bs-target="#keep-paylio" type="button" role="tab" aria-controls="keep-paylio" aria-selected="false">
+                                    <span class="icon d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'assets/img/fees-icon-6.png' %}" alt="icon">
+                                    </span>
+                                    <span class="title-area">Keep US Merit Bank</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="prepaid-card-tab" data-bs-toggle="tab" data-bs-target="#prepaid-card" type="button" role="tab" aria-controls="prepaid-card" aria-selected="false">
+                                    <span class="icon d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'assets/img/fees-icon-7.png' %}" alt="icon">
+                                    </span>
+                                    <span class="title-area">Prepaid card</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="buy-sell-tab" data-bs-toggle="tab" data-bs-target="#buy-sell" type="button" role="tab" aria-controls="buy-sell" aria-selected="false">
+                                    <span class="icon d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'assets/img/fees-icon-8.png' %}" alt="icon">
+                                    </span>
+                                    <span class="title-area">Buy & sell cryptocurrency</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="administration-tab" data-bs-toggle="tab" data-bs-target="#administration" type="button" role="tab" aria-controls="administration" aria-selected="false">
+                                    <span class="icon d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'assets/img/fees-icon-9.png' %}" alt="icon">
+                                    </span>
+                                    <span class="title-area">Administration fees</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="deposit" role="tabpanel" aria-labelledby="deposit-tab">
+                                <div class="deposit-area">
+                                    <div class="single-item d-flex justify-content-between">
+                                        <div class="icon-side">
+                                            <h5>Local payment methods</h5>
+                                            <div class="icon-area d-flex align-items-center">
+                                                <div class="icon"><img src="{% static 'assets/img/local-pay-icon-1.png' %}" alt="icon">
+                                                </div>
+                                                <div class="icon"><img src="{% static 'assets/img/local-pay-icon-2.png' %}" alt="icon">
+                                                </div>
+                                                <div class="icon"><img src="{% static 'assets/img/local-pay-icon-3.png' %}" alt="icon">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-area">
+                                            <h6>Fee: 1.00 %</h6>
+                                        </div>
+                                    </div>
+                                    <div class="single-item d-flex justify-content-between">
+                                        <div class="icon-side">
+                                            <h5>Global payment methods</h5>
+                                            <div class="icon-area d-flex align-items-center">
+                                                <div class="icon"><img src="{% static 'assets/img/online-pay-icon-1.png' %}" alt="icon"></div>
+                                                <div class="icon"><img src="{% static 'assets/img/online-pay-icon-2.png' %}" alt="icon"></div>
+                                                <div class="icon"><img src="{% static 'assets/img/online-pay-icon-3.png' %}" alt="icon"></div>
+                                            </div>
+                                        </div>
+                                        <div class="text-area">
+                                            <h6>Fee: 1.00 %</h6>
+                                        </div>
+                                    </div>
+                                    <div class="create-account">
+                                        <p>Please note that if you use your credit card for gambling purposes your issuer may charge a ‘cash advance' fee. This fee is outside US Merit Bank’s control, and we receive no part of it.</p>
+                                        <a href="register-2.html" class="cmn-btn">Open a free account</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="withdraw" role="tabpanel" aria-labelledby="withdraw-tab">
+                                <div class="withdraw-area">
+                                    <div class="single-item">
+                                        <h5>Local payment methods</h5>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="icon-area d-flex align-items-center">
+                                                <div class="icon"><img src="{% static 'assets/img/local-pay-icon-4.png' %}" alt="icon">
+                                                </div>
+                                                <h6>Crypto Wallet</h6>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>Fee: 1.00 %</h6>
+                                            </div>
+                                        </div>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="icon-area d-flex align-items-center">
+                                                <div class="icon"><img src="{% static 'assets/img/local-pay-icon-5.png' %}" alt="icon">
+                                                </div>
+                                                <h6>NETELLER</h6>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>Fee: 3.49 %</h6>
+                                            </div>
+                                        </div>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="icon-area d-flex align-items-center">
+                                                <div class="icon"><img src="{% static 'assets/img/local-pay-icon-1.png' %}" alt="icon">
+                                                </div>
+                                                <h6>Bank Transfer</h6>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>Fee: GBP 4.71</h6>
+                                            </div>
+                                        </div>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="icon-area d-flex align-items-center">
+                                                <div class="icon"><img src="{% static 'assets/img/local-pay-icon-6.png' %}" alt="icon">
+                                                </div>
+                                                <h6>Credit Card Visa</h6>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>Fee: 7.50 %</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-item">
+                                        <h5>Global payment methods</h5>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="icon-area d-flex align-items-center">
+                                                <div class="icon"><img src="{% static 'assets/img/global-payment-1.png' %}" alt="icon">
+                                                </div>
+                                                <h6>Swift</h6>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>Fee: GBP 4.71</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="create-account">
+                                        <a href="register-2.html" class="cmn-btn">Open a free account</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
+                                <div class="account-area">
+                                    <div class="single-item">
+                                        <h5>Understanding the account level fees:</h5>
+                                        <div class="single d-flex justify-content-between align-items-center">
+                                            <h6 class="left-head">US Merit Bank Money Transfer fee</h6>
+
+                                            <div class="right-item d-flex align-items-center justify-content-center justify-content-md-end">
+                                                <div class="right-single">
+                                                    <span class="smr">US Merit Bank Standard</span>
+                                                    <div class="text-area">
+                                                        <h6>2.99%</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="right-single">
+                                                    <span class="smr">US Merit Bank Standard</span>
+                                                    <div class="text-area">
+                                                        <h6>Free</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="create-account">
+                                        <p>For more information on how to become a True US Merit Bank and receive FREE benefits for the rest of your US Merit Bank life, <a href="javascript:void(0)">click here.</a></p>
+                                        <a href="register.html" class="cmn-btn">Open a free account</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="send-receive-money" role="tabpanel" aria-labelledby="send-receive-money-tab">
+                                <div class="send-receive-money">
+                                    <div class="single-item">
+                                        <h4>US Merit Bank Money Transfer</h4>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="left-area">
+                                                <h5>International Transfer</h5>
+                                                <p>Send money by debit card, Manual Bank transfer, Bank transfer via Sofort/Klarna
+                                                </p>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>Free</h6>
+                                            </div>
+                                        </div>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="left-area">
+                                                <h5>International Transfer</h5>
+                                                <p>Send money by credit card</p>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>up to <br> 2.99%</h6>
+                                            </div>
+                                        </div>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="left-area">
+                                                <h5>send and receive currency only</h5>
+                                                <p>Send money fee per transaction.</p>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>up to <br> 4.99%</h6>
+                                            </div>
+                                        </div>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="left-area">
+                                                <h5>International transfer exchange rate mark-up</h5>
+                                                <p>Exchange rate mark-up fee per transaction.</p>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>up to <br> 4.99%</h6>
+                                            </div>
+                                        </div>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="left-area">
+                                                <h5>Domestic Transfer</h5>
+                                                <p>Domestic fee per transaction.</p>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>up to <br> 2.00%</h6>
+                                            </div>
+                                        </div>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="left-area">
+                                                <h5>Receive money</h5>
+                                                <p>US Merit Bank Money Transfer does not charge recipients any fee to receive
+                                                </p>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>up to <br> 2.00%</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-item local-trans">
+                                        <h4>US Merit Bank to US Merit Bank</h4>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="left-area">
+                                                <h5>Send money</h5>
+                                                <p>Sending money to other US Merit Bank</p>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>2.99%</h6>
+                                            </div>
+                                        </div>
+                                        <div class="single d-flex justify-content-between">
+                                            <div class="left-area">
+                                                <h5>Receive money</h5>
+                                                <p>Receiving money is always free of charge</p>
+                                            </div>
+                                            <div class="text-area">
+                                                <h6>Free</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="create-account">
+                                        <p>You will see the applicable fee before you complete your transaction.</p>
+                                        <a href="register-2.html" class="cmn-btn">Open a free account</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="currency-conversion" role="tabpanel" aria-labelledby="currency-conversion-tab">
+                                <div class="currency-conversion">
+                                    <div class="create-account">
+                                        <h4>Currency conversion </h4>
+                                        <p>For transactions involving currency conversion US Merit Bank adds a fee of 3.99% to our wholesale exchange rates. The exchange rates vary and will be applied immediately without notice to you.</p>
+                                        <p>If your US Merit Bank Account is denominated in a currency other than Euro, your Cryptocurrency Transactions will be subject to currency conversions. In this case, we will apply foreign exchange fee of 1.5%.</p>
+                                        <a href="register-2.html" class="cmn-btn">Open a free account</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="keep-paylio" role="tabpanel" aria-labelledby="keep-paylio-tab">
+                                <div class="keep-paylio currency-conversion">
+                                    <div class="create-account">
+                                        <h4>Keep US Merit Bank</h4>
+                                        <p>Your US Merit Bank account is free for personal use as long as you log in or make a transaction at least every 6 months.</p>
+                                        <p>Otherwise a service fee of EUR 5.00 (or equivalent) will be deducted monthly from your account.</p>
+                                        <a href="register-2.html" class="cmn-btn">Open a free account</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="prepaid-card" role="tabpanel" aria-labelledby="prepaid-card-tab">
+                                <div class="prepaid-card currency-conversion">
+                                    <div class="create-account">
+                                        <h4>Prepaid card</h4>
+                                        <p>Our fees are transparent, so you always know where you stand. Here are the fees we charge for using our US Merit Bank Prepaid Mastercard:</p>
+                                        <ul>
+                                            <li>— 10 EUR card application</li>
+                                            <li>— 10 EUR annual fee</li>
+                                            <li>— 1.75 % ATM fee</li>
+                                            <li>— POS transactions are free</li>
+                                            <li>— US Merit Bank virtual card application – first is free, any subsequent card is 2.5 EUR.</li>
+                                        </ul>
+                                        <a href="register-2.html" class="cmn-btn">Open a free account</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="buy-sell" role="tabpanel" aria-labelledby="buy-sell-tab">
+                                <div class="buy-sell">
+                                    <h4>Simple and transparent fees</h4>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Crypto Buy / Crypto Sell</th>
+                                                    <th scope="col">Fee:</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Transactions up to EUR 19.99</th>
+                                                    <td>EUR 0.99 per transaction</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Transactions between EUR 20 – EUR 99.99</th>
+                                                    <td>EUR 1.99 per transaction</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Transactions above EUR 100</th>
+                                                    <td>1.50 % per transaction</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Crypto P2P</th>
+                                                    <td>Fee: 0.50 % per transaction</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="create-account">
+                                        <p>Your use of the US Merit Bank Cryptocurrency Service is subject to the <a href="{% url 'terms' %}">Cryptocurrency Terms of Use.</a></p>
+                                        <a href="register-2.html" class="cmn-btn">Open a free account</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="administration" role="tabpanel" aria-labelledby="administration-tab">
+                                <div class="administration buy-sell">
+                                    <h4>In accordance with the Skrill Account Terms of Use</h4>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Provision of inaccurate (s. 4.5)</th>
+                                                    <td>up to EUR 150</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Chargeback fee (s. 8.3)</th>
+                                                    <td>EUR 25 per chargeback</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Attempted cash upload fee (s. 8.12)</th>
+                                                    <td>EUR 10 per upload</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Prohibited Transactions fees (s. 11)</th>
+                                                    <td>up to EUR 150 per instance</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Reversal of a wrong transaction fee</th>
+                                                    <td>up to EUR 25 per reversal attempt</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="create-account">
+                                        <p>Your use of the US Merit Bank Cryptocurrency Service is subject to the <a href="{% url 'terms' %}">Cryptocurrency Terms of Use.</a></p>
+                                        {% if user.is_authenticated %}
+                                        <a href="{% url 'dashboard' %}" class="cmn-btn">Open a free account</a>
+                                        {% else %}
+                                        <a href="{% url 'register' %}" class="cmn-btn">Open a free account</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fees Content In end -->
+
+{% endblock content %}

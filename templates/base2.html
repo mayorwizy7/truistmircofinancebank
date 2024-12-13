@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+    <link rel="stylesheet" href="{% static 'dashboard/third-party/nice-select2.css' %}" />
+    <link rel="stylesheet" href="{% static 'dashboard/css/jsvectormap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'dashboard/css/dist/style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/dist/datepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/dist/swiper-bundle.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'dashboard/css/dist/quill.snow.css' %}">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" /> -->
+    <link rel="stylesheet" href="{% static 'dashboard/third-party/line-awesome/css/line-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}" />
+    <meta name="description" content="Truist Mircofinance Bank - At Truist Mircofinance Bank, we are known for our unwavering commitment to trust, honesty, and exceptional customer support. We believe in serving our customers with integrity and dedication.">
+    <title>Truist Mircofinance Bank User Dashboard</title>
+
+    <!-- Alertify CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Alertify Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <!-- END CSS STYLES -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+        <!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+    var _smartsupp = _smartsupp || {};
+    _smartsupp.key = 'a6f15fa11b81cb3aad5bc695b4705f7d44045524';
+    window.smartsupp||(function(d) {
+      var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+      s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+      c.type='text/javascript';c.charset='utf-8';c.async=true;
+      c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+    })(document);
+    </script>
+</head>
+
+<body class="vertical bg-secondary1/5 dark:bg-bg3 hidden " >
+    <!-- Loader -->
+   
+
+    {% block navbar %}
+    {% include 'includes/navbar2.html' %}
+    {% endblock navbar %}
+
+    {% block content %}
+
+    {% endblock content %}
+
+
+    {% block footer %}
+    {% include 'includes/footer2.html' %}
+    {% endblock footer %}
+
+    <!-- Alertify JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script>
+        {% if messages %}
+        {% for message in messages %}
+        alertify.set('notifier','position', 'top-right');
+        {% if message.tags %}
+        alertify.{{ message.tags }}('{{ message }}');
+        {% endif %}
+        {% endfor %}
+
+        {% endif %}
+    </script>
+
+     <!-- Theme Customizer  -->
+     <script src="{% static 'dashboard/js/main.js' %}"></script>
+     {% comment %} <div id="customizer-container" class="z-[60] w-full"></div> {% endcomment %}
+     <script src="{% static 'dashboard/third-party/nice-select2.js' %}"></script>
+     <script src="{% static 'dashboard/js/datepicker.min.js' %}"></script>
+     <script src="{% static 'dashboard/js/apexcharts.min.js' %}"></script>
+     <script src="{% static 'dashboard/js/customizer.js' %}"></script>
+     <script src="{% static 'dashboard/js/charts.js' %}"></script>
+
+
+
+
+     
+      {% comment %} <!-- Add New card modal -->
+      <div class="chnage-currency-modal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+        <div class="overflow-y-auto">
+            <div
+                class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+                <!-- { "translate-y-0 scale-100 opacity-100 my-10": open } -->
+                <div class="relative">
+                    <button class="add-card-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0">
+                        <i class="las la-times"></i>
+                    </button>
+                    <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+                        <h4 class="h4">Change Currency</h4>
+                    </div>
+                    <form action="{% url 'profile' %}" method="POST">
+                      {% csrf_token %}
+                        <div class="mt-6 xl:mt-8 grid grid-cols-2 gap-4 xxxl:gap-6">
+                            <div class="col-span-2">
+                                <label for="card-number" class="md:text-lg font-medium block mb-4">
+                                    Select Currency
+                                </label>
+                                <div
+                                    class="bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl relative">
+                                    {{ user_form.currency }}
+                                </div>
+                            </div>
+                            
+                            <div class="col-span-2 mt-4">
+                                <button class="btn flex w-full justify-center" type="submit">
+                                    Add Card
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+</body>
+
+</html>

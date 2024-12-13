@@ -1,0 +1,194 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+<style>
+    .btn-custom {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff4d4d;
+        border: 1px solid #fff;
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-custom:hover {
+        background-color: #fff;
+        color: #ff4d4d;
+        border-color: #ff4d4d
+    }
+</style>
+  <!-- Main Content -->
+  <main class="main-content has-sidebar">
+    <div class="main-inner">
+
+      <div class="flex flex-col gap-4 xxl:gap-6">
+        <!-- Make Payment modal -->
+        <div class="fixed inset-0 z-[99]">
+          <div class="overflow-y-auto">
+            <div class="absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+              <div class="relative">
+                <div class="bb-dashed mb-4 flex items-center justify-between  pb-4 lg:mb-6 lg:pb-6" >
+                  <h4 style="text-align:center;" class="h4">Confirm Payment</h4>
+                </div>
+
+                <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+                    <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 spend order-1">
+                    <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                      <p>Send</p>
+                      <p>Sender : {{ user.first_name }}</p>
+                    </div>
+                    <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                      <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="{{ form.amount.value|intcomma }}" />
+                      <p class="shrink-0">$ USD</p>
+                    </div>
+                  </div>
+                  <button class="p-2 border order-2 border-n30 dark:border-n500 self-center -my-4 relative z-[2] rounded-lg bg-n0 dark:bg-bg4 text-primary changeOrderBtn"><i class="las la-exchange-alt rotate-90"></i></button>
+                  <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 receive order-3">
+                    <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                      <p>Receives</p>
+                      <p>Receiver : {{ destination.first_name }} {{ destination.last_name }}</p>
+                    </div>
+                    <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                      {% comment %} <input type="number" class="w-20 bg-transparnt p-0 border-none" placeholder="{{ form.amount.value|intcomma }}" /> {% endcomment %}
+                      <h6 class="shrink-0">{{ form.amount.value|intcomma }}</h6>
+                      <p class="shrink-0">$ USD</p>
+                    </div>
+                  </div>
+                </div> 
+                  <div>
+                    {% comment %} <p class="text-lg font-medium mb-6">Click Next Procceed</p> {% endcomment %}
+                    
+                    <a href="{% url 'search_user' %}" class="btn btn-custom justify-left " >Cancel</a>
+                    <button class="btn ac-modal-btn transferMod " id="transferMod" style="position: absolute; right: 0;">
+                        Make Payment
+                    </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+<!-- open Account modal -->
+<div class="ac-modal-overlay fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+        <div
+            class="modal box modal-inner absolute left-1/2 my-10 max-h-[90vh] w-[70%] max-w-[710px] duration-300 -translate-x-1/2 overflow-y-auto xl:p-8">
+            <!-- { "translate-y-0 scale-100 opacity-100 my-10": open } -->
+            <div class="relative">
+                <button class="ac-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0">
+                    <i class="las la-times"></i>
+                </button>
+                <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+                    <h4 class="h4">PIN Confirmation</h4>
+                </div>
+                <form method="POST" action="{% url 'transfer' %}">
+                    {% csrf_token %}
+                    <div style="display:none ;">
+                        <input class="xxlr" name="acc_number" value="{{ form.acc_number.value }}" type="number">
+                        <input class="xxlr" name="receiver" value="{{ form.receiver.value }}" type="number">
+                        <input class="xxlr" name="amount" value="{{ form.amount.value }}" type="number">
+                        <input class="xxlr" name="remark" value="{{ form.remark.value }}" type="text">
+                    </div>
+                    <div class="mt-6 grid grid-cols-2 gap-4 xl:mt-8 xxxl:gap-6">
+                        <div class="col-span-2">
+                            <label for="name" class="mb-4 block font-medium md:text-lg">
+                                Transaction PIN<i class="fa fa-pinterest" aria-hidden="true"></i>
+                            </label>
+                            <input type="password" type="number"
+                                class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3"
+                                placeholder="0000" name="pin" maxlength="4"  required />
+                        </div>
+                    <div class="col-span-2 mt-4">
+                        <button class="btn flex w-full justify-center" type="submit">
+                            Confirm
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Make Payment modal -->
+<div class="qt-modal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500 transferMod" id="#transferMod">
+    <div class="overflow-y-auto">
+        <div
+            class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+            <div class="relative">
+                <button class="qt-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0">
+                    <i class="las la-times"></i>
+                </button>
+                <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+                    <h4 class="h4">Quick Transfer</h4>
+                </div>
+
+                <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+                    <div
+                        class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 spend order-1">
+                        <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                            <p>Spend</p>
+                            <p>Balance : 10,000 USD</p>
+                        </div>
+                        <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                            <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                            <p class="shrink-0">$ USD</p>
+                        </div>
+                    </div>
+                    <button
+                        class="p-2 border order-2 border-n30 dark:border-n500 self-center -my-4 relative z-[2] rounded-lg bg-n0 dark:bg-bg4 text-primary changeOrderBtn">
+                        <i class="las la-exchange-alt rotate-90"></i>
+                    </button>
+                    <div
+                        class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 receive order-3">
+                        <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                            <p>Receive</p>
+                            <p>Balance : 10,000 USD</p>
+                        </div>
+                        <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                            <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                            <p class="shrink-0">€ EURO</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-lg font-medium mb-6">Payment Method</p>
+                    <div
+                        class="border border-primary border-dashed bg-primary/5 rounded-lg p-3 flex items-center gap-4 mb-6 lg:mb-8">
+                        <img src="{% static 'dashboard/images/card-sm-1.png' %}" width="60" height="40" alt="card" />
+                        <div>
+                            <p class="font-medium mb-1">John Snow - Metal</p>
+                            <span class="text-xs">**4291 - Exp: 12/26</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn flex justify-center w-full">
+                        Send Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+{% block footer %}
+
+{% endblock footer %}

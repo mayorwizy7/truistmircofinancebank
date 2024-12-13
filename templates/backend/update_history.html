@@ -1,0 +1,45 @@
+{% extends 'backend.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+<title> CTF - Update History</title>
+{% endblock title %}
+{% block content %}
+
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="">
+<!-- TRANSACTIONAL UPDATE MODAL -->
+<div class="justify-content-center align-items-center">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <small class="modal-title">Update {{transaction.account.first_name}}'s {{transaction.transaction_type}} history</small>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'update_history' transaction.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group position-relative">
+                    {{ form }}
+                    </div>
+                   
+                    <div class="d-flex justify-content-center" style="display: flex; gap: 20px;" >
+                        <a href="{% url 'admin_dashboard' %}" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
+                        <button type="submit" class="btn btn-primary text-right">Update</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

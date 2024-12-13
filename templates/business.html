@@ -1,0 +1,406 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Start Page Banner Area -->
+<div class="ctp-page-banner-area" data-jarallax='{"speed": 0.3}'>
+    <div class="container">
+        <div class="ctp-page-banner-content">
+            <h3>Business</h3>
+            <ul class="list">
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>Business</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Banner Area -->
+
+<div class="currency-transfer-provider-with-background-color">
+
+    <!-- Start Currency Area -->
+    <div class="ctp-currency-area ptb-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="ctp-currency-image"></div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="ctp-currency-content">
+                        <h3>Business Currency Transfers</h3>
+                        <p>Assured Trust Bank specializes in business currency transfers, providing efficient and reliable solutions for international transactions. Whether you need to pay overseas suppliers, receive payments from global clients, or manage foreign currency accounts, our dedicated team and robust infrastructure ensure seamless and secure business currency transfers. With competitive exchange rates, transparent fees, and personalized service, we make it easy for businesses to navigate the complexities of foreign exchange and optimize their international financial operations.</p>
+                        <p>Our business currency transfer services offer flexibility and convenience, allowing you to manage your global transactions with ease. Whether you require one-time transfers or regular payment arrangements, we provide tailored solutions to meet your unique business needs. With our intuitive online platform, you can monitor exchange rates, execute transactions, and track your payment history effortlessly. Assured Trust Bank understands the importance of efficient and cost-effective international transactions for businesses, and we are committed to helping you navigate the global marketplace with confidence and success.</p>
+                        <ul class="list">
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Receive Foreign Payments
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Budget Effectively
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Manage Currency Risk
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Highly Competitive Exchange Rates
+                            </li>
+                        </ul>
+                        <div class="currency-btn">
+                            <a href="sign-up.html" class="btn btn-primary">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Currency Area -->
+
+    <!-- Start Money Transfer Area -->
+    <div class="ctp-money-transfer-area pb-75">
+        <div class="container">
+            <div class="section-title ctp-title">
+                <h2>How it works</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="ctp-money-transfer-card">
+                        <h3>Create a free account</h3>
+                        <div class="image">
+                            <img data-cf src="{% static 'assets/img/currency-transfer-provider/money-transfer/customer.png' %}" alt="image" ><noscript><img src="{% static 'assets/img/currency-transfer-provider/money-transfer/customer.png' %}" alt="image"></noscript>
+                            <div class="number">01</div>
+                        </div>
+                        <p>Join our platform today and unlock the benefits of a free account. It's quick, easy, and hassle-free!</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="ctp-money-transfer-card">
+                        <h3>Send your funds</h3>
+                        <div class="image">
+                            <img data-cf src="{% static 'assets/img/currency-transfer-provider/money-transfer/profits.png' %}" alt="image" ><noscript><img src="{% static 'assets/img/currency-transfer-provider/money-transfer/profits.png' %}" alt="image"></noscript>
+                            <div class="number">02</div>
+                        </div>
+                        <p>Effortlessly send and receive funds securely with our reliable money transfer services.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="ctp-money-transfer-card">
+                        <h3>Track your transfer</h3>
+                        <div class="image">
+                            <img data-cf src="{% static 'assets/img/currency-transfer-provider/money-transfer/data.png' %}" alt="image" ><noscript><img src="{% static 'assets/img/currency-transfer-provider/money-transfer/data.png' %}" alt="image"></noscript>
+                            <div class="number">03</div>
+                        </div>
+                        <p>Stay informed about the progress of your transfer with our convenient tracking system, ensuring peace of mind.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Money Transfer Area -->
+
+    <!-- Start Key Features Area -->
+    <div class="ctp-key-features-area ptb-100">
+        <div class="container">
+            <div class="section-title ctp-title">
+                <h2>Money Transfer Company Key Features</h2>
+            </div>
+
+            <div class="ctp-key-features-tabs">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="security-tab" data-bs-toggle="tab" href="#security" role="tab" aria-controls="security">Security</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="cost-tab" data-bs-toggle="tab" href="#cost" role="tab" aria-controls="cost">Cost</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="speed-tab" data-bs-toggle="tab" href="#speed" role="tab" aria-controls="speed">Speed</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="accessibility-tab" data-bs-toggle="tab" href="#accessibility" role="tab" aria-controls="accessibility">Accessibility</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="security" role="tabpanel">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-12">
+                                <div class="ctp-key-features-image"></div>
+                            </div>
+                            <div class="col-lg-7 col-md-12">
+                                <div class="ctp-key-features-content">
+                                    <p>At Assured Trust Bank, we place the utmost importance on the security of your financial information. We employ state-of-the-art security measures to protect your data from unauthorized access, ensuring the confidentiality and integrity of your sensitive information. Our robust encryption protocols, multi-factor authentication, and advanced fraud detection systems are designed to safeguard your accounts and transactions. We regularly update our security systems to stay ahead of evolving threats and maintain the highest standards of data protection. Your peace of mind and trust are our top priorities.</p>
+                                    <p>Our commitment to security goes beyond technological measures. We have a dedicated team of security professionals who continuously monitor and assess potential risks, ensuring proactive identification and mitigation of any vulnerabilities. We adhere to strict regulatory guidelines and industry best practices to ensure compliance with data protection and privacy laws. Moreover, we conduct regular audits and assessments to maintain the integrity and effectiveness of our security protocols. With Assured Trust Bank, you can trust that we spare no effort in safeguarding your financial assets and providing you with a secure banking experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="cost" role="tabpanel">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-12">
+                                <div class="ctp-key-features-image"></div>
+                            </div>
+                            <div class="col-lg-7 col-md-12">
+                                <div class="ctp-key-features-content">
+                                    <p>At Assured Trust Bank, we understand the importance of transparent and competitive pricing. We strive to offer cost-effective solutions, ensuring that our fees and charges are fair and reasonable. Whether it's maintaining an account, transferring funds, or accessing additional services, we aim to provide value for your money. We believe in keeping our costs transparent, so you can have a clear understanding of the fees associated with our various products and services. With Assured Trust Bank, you can trust that your financial transactions are conducted with integrity and without any hidden costs.</p>
+                                    <p>Choosing Assured Trust Bank not only ensures transparency in costs but also offers numerous cost-saving benefits. From competitive interest rates on loans and credit cards to low fees on transactions and account maintenance, we prioritize providing you with cost-efficient solutions. Additionally, our online and mobile banking platforms empower you to conveniently manage your finances from anywhere, saving you time and reducing the need for physical visits to branches. We constantly evaluate and update our offerings to maximize cost savings for our customers, so you can focus on achieving your financial goals without unnecessary financial burdens.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="speed" role="tabpanel">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-12">
+                                <div class="ctp-key-features-image"></div>
+                            </div>
+                            <div class="col-lg-7 col-md-12">
+                                <div class="ctp-key-features-content">
+                                    <p>At Assured Trust Bank, we understand the value of time, which is why we prioritize delivering fast and efficient service. Our streamlined processes, advanced technology, and dedicated staff work together to ensure quick response times and minimize any unnecessary delays. Whether it's opening an account, processing transactions, or resolving inquiries, we strive to provide prompt assistance to meet your banking needs with speed and efficiency.</p>
+                                    <p>We recognize that your time is precious, and we aim to make banking as convenient and time-saving as possible. With our user-friendly online and mobile banking platforms, you can access your accounts, make transactions, and manage your finances on the go, saving you valuable time and eliminating the need for physical visits to branches. Additionally, our automated services, such as bill payments and fund transfers, streamline repetitive tasks, enabling you to complete them quickly and conveniently. At Assured Trust Bank, we are committed to ensuring a fast and hassle-free banking experience, allowing you to focus on what matters most to you.                                    </p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="accessibility" role="tabpanel">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-12">
+                                <div class="ctp-key-features-image"></div>
+                            </div>
+                            <div class="col-lg-7 col-md-12">
+                                <div class="ctp-key-features-content">
+                                    <p>Assured Trust Bank is committed to providing accessible banking services to all our customers. We understand the importance of inclusivity and strive to ensure that our products and services are accessible to individuals of diverse backgrounds and abilities. Our branches are designed to be accessible, adhering to relevant accessibility guidelines and regulations. We also offer alternative channels, such as online and mobile banking, to ensure that you can conveniently access your accounts and perform transactions anytime, anywhere.</p>
+                                    <p>We believe in equal access to financial services, which is why we offer a wide range of services that cater to the diverse needs of our customers. From personalized assistance for individuals with disabilities to multilingual customer support, we strive to create an inclusive and welcoming environment. Our online platforms are designed with accessibility features, ensuring compatibility with assistive technologies for individuals with visual or hearing impairments. At Assured Trust Bank, we are dedicated to providing accessible and inclusive banking services, empowering all individuals to manage their finances with ease and confidence.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Key Features Area -->
+
+    <!-- Start Protec Area -->
+    <div class="ctp-protec-area pt-100 pb-75">
+        <div class="container">
+            <div class="section-title ctp-title">
+                <h2>How We Can Help</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="ctp-protec-card">
+                        <div class="content">
+                            <div class="number">
+                                <span>01</span>
+                            </div>
+                            <h3>Incoming payments</h3>
+                            <p>Incoming payments: Effortlessly receive funds with our seamless and efficient process, ensuring timely and convenient transaction handling.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="ctp-protec-card">
+                        <div class="content">
+                            <div class="number color-two">
+                                <span>02</span>
+                            </div>
+                            <h3>Outgoing payments</h3>
+                            <p>Outgoing payments: Make payments easily and securely with our streamlined process, ensuring efficient and reliable transfers to your intended recipients.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="ctp-protec-card">
+                        <div class="content">
+                            <div class="number color-two">
+                                <span>03</span>
+                            </div>
+                            <h3>Risk management solutions</h3>
+                            <p>Risk management solutions: Mitigate risks effectively with our comprehensive suite of tools and strategies, empowering you to proactively protect your assets and navigate uncertainties.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="ctp-protec-card">
+                        <div class="content">
+                            <div class="number">
+                                <span>04</span>
+                            </div>
+                            <h3>Online sellers</h3>
+                            <p>Online sellers: Unlock your business potential with our tailored banking solutions designed to support and optimize your online selling operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Protec Area -->
+
+    <!-- Start Send Money Online Area -->
+    <div class="ctp-send-money-online-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-7 col-md-12">
+                    <div class="ctp-send-money-online-content">
+                        <h1>There are only a few steps you can take to send money online</h1>
+                        <ul class="ctp-list">
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Move money on-the-go
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Currency wallets
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Set rate alerts
+                            </li>
+                        </ul>
+                        <div class="video-view">
+                            <a href="#" class="video-btn popup-youtube">
+                                        <i class="fas fa-play"></i> 
+                                        <span>See how it works</span>
+                                    </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-12">
+                    <form class="ctp-send-money-online-form">
+                        <div class="form-header">
+                            <span>Exchange Rate</span>
+                            <h3>1 GBP = 1.29356 USD</h3>
+                        </div>
+                        <div class="form-content">
+                            <div class="form-group">
+                                <label>Delivery Method</label>
+                                <select>
+                                            <option>Bank Transfer</option>
+                                            <option>Send Money</option>
+                                            <option>Interest Money</option>
+                                            <option>Invest Money</option>
+                                        </select>
+                            </div>
+                            <div class="form-group">
+                                <label>You Transfer</label>
+                                <input type="text" class="form-control" autocomplete="off" value="100">
+                                <div class="amount-currency-select">
+                                    <select>
+                                                <option>GBP</option>
+                                                <option>USD</option>
+                                                <option>EUR</option>
+                                                <option>BRL</option>
+                                            </select>
+                                </div>
+                            </div>
+                            <div class="form-group zero">
+                                <label>Recipient Gets</label>
+                                <input type="text" class="form-control" autocomplete="off" value="129.35">
+                                <div class="amount-currency-select">
+                                    <select>
+                                                <option>USD</option>
+                                                <option>GBP</option>
+                                                <option>EUR</option>
+                                                <option>BRL</option>
+                                            </select>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <p><span>Delivery Time:</span> 1 Working Days</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Send Money Online Area -->
+
+    <!-- Start FAQ Area -->
+    <div class="ctp-faq-area ptb-100">
+        <div class="container">
+            <div class="section-title ctp-title">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+
+            <div class="ctp-faq-accordion">
+                <div class="accordion" id="FaqAccordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            How do I open an account with Assured Trust Bank?
+                                </button>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#FaqAccordion">
+                            <div class="accordion-body">
+                                <p>Opening an account with Assured Trust Bank is simple and convenient. You can visit our website and follow the easy-to-use online account opening process. Alternatively, you can visit one of our branches and our friendly staff will guide you through the account opening procedure, ensuring a smooth and hassle-free experience.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            What documents do I need to open a personal account?
+                                </button>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#FaqAccordion">
+                            <div class="accordion-body">
+                                <p>To open a personal account, you will typically need to provide identification documents such as a valid passport or national ID card, proof of address (such as a utility bill or bank statement), and any additional documents specific to your country's regulations. Our customer service team will be happy to provide you with detailed information and assist you throughout the account opening process.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            How can I access my accounts online?
+                                </button>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#FaqAccordion">
+                            <div class="accordion-body">
+                                <p>Assured Trust Bank provides a secure and user-friendly online banking platform. Simply visit our website and click on the "Online Banking" or "Login" button. Enter your login credentials, such as your username and password, to access your accounts. If you haven't registered for online banking yet, you can easily sign up on our website or contact our customer service for assistance.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            What if I forget my online banking password?
+                                </button>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#FaqAccordion">
+                            <div class="accordion-body">
+                                <p>If you forget your online banking password, you can click on the "Forgot Password" or "Reset Password" option on the login page. Follow the instructions provided to reset your password securely. If you encounter any difficulties, our customer service team will be available to assist you in recovering your account access.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    How does Assured Trust Bank protect your money?
+                                </button>
+                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#FaqAccordion">
+                            <div class="accordion-body">
+                                <p>Assured Trust Bank prioritizes the protection of your money through robust encryption, advanced security technologies, strict internal controls, and partnerships with reputable institutions. Your funds are safeguarded with utmost care and diligence.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End FAQ Area -->
+
+</div>
+
+
+{% endblock content %}

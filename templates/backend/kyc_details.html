@@ -1,0 +1,223 @@
+{% extends 'backend.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+<title> CTF - User Details</title>
+{% endblock title %}
+{% block content %}
+
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="card card-block p-card">
+                    <div class="profile-box">
+                        <div class="profile-card rounded">
+                            {% if client.profile_pic %}
+                              
+                            <img src="{{ client.profile_pic.url }}" alt="profile-bg"
+                                class="avatar-100 rounded d-block mx-auto img-fluid mb-5">
+                            {% endif %}
+                            <div class="d-flex justify-content-center">
+                                {% if client.kyc %}
+                                <h4 class="text-success">Approved!</h4>
+                                {% else %}
+                                <h4 class="text-danger">Not Approved!</p>
+                                    {% endif %}
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a href="{% url 'user_profile' client.id %}" type="button"
+                                    class="btn btn-success mt-2 ">View
+                                    Client Profile</a>
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>First Name:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.first_name }}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>Last Name:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.last_name }}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>Email:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.email }}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>Phone Number:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.phone_number }}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>Date of Birth:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.dob }}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>Gender:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.gender }}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>Marital Status:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.marital_status }}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>Address:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.address }}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>City/Town:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.city }}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class=" mr-3">
+                                    <h6>Country:</h6>
+                                </div>
+                                <p class="mb-0 eml">{{ client.country }}</p>
+                            </div>
+                            <hr>
+
+                            <div class="d-flex justify-content-center">
+                                {% if client.kyc %}
+                                <h4 class="text-success">Approved!</h4>
+                                {% else %}
+                                <h4 class="text-danger">Not Approved!</p>
+                                    {% endif %}
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                {% if client.kyc %}
+                                <button type="button" class="btn btn-danger mt-2 " data-toggle="modal"
+                                    data-target=".countdown-modal-sm{{ client.id }}">Cancel KYC</button>
+                                {% else %}
+                                <button type="button" class="btn btn-success mt-2 " data-toggle="modal"
+                                    data-target=".countdown-modal-sm{{ client.id }}">Approve KYC</button>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-sm-4 col-lg-6">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body text-center">
+                                {% if client.id_front%}
+                                <img src="{{ client.id_front.url }}" alt="profile-bg"
+                                    class=" rounded d-block mx-auto img-fluid mb-2">
+                                {% endif %}
+                                <h5>ID Front</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-6">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body text-center">
+                                {% if client.id_back %}
+                                <img src="{{ client.id_back.url }}" alt="profile-bg"
+                                    class=" rounded d-block mx-auto img-fluid mb-2">
+                                {% endif %}
+                                <h5>ID Back</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- COUNTDOWN MODAL -->
+<div class="modal fade countdown-modal-sm{{ client.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update {{client.first_name}}'s KYC Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'kyc_update' client.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-check form-check-inline mb-5">
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input m-0" name="kyc" id="inlineCheckbox3">
+                            <label class="custom-control-label" for="inlineCheckbox3">Approve KYC</label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center" style="display: flex; gap: 20px;">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success text-right">Approve</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to copy the wallet value to clipboard
+    function copyToClipboard() {
+        const walletParagraph = document.getElementById("walletValue");
+        const walletValue = walletParagraph.textContent;
+
+        // Create a temporary input element to copy the text to clipboard
+        const tempInput = document.createElement("input");
+        tempInput.value = walletValue;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+
+        walletParagraph.textContent = "Copied";
+
+        setTimeout(() => {
+            walletParagraph.textContent = walletValue;
+        }, 1000); // Change back to original value after 1000ms (1 second)
+
+
+    }
+
+    // Attach the click event to the <p> element
+    const walletParagraph = document.getElementById("walletValue");
+    walletParagraph.addEventListener("click", copyToClipboard);
+</script>
+
+
+{% endblock content %}

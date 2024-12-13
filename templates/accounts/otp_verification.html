@@ -1,0 +1,40 @@
+{% extends 'base2.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+  <style>
+    .main-inner {
+      display: flex;
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+      min-height: 50vh; /* Ensure the form is centered on the entire viewport height */
+    }
+    
+    .form-container {
+      width: 100%; /* Ensure the form takes up the available width */
+      max-width: 400px; /* Adjust this value as needed */
+    }
+  </style>
+  <main class="main-content has-sidebar">
+    <div class="main-inner">
+      <div class="box mb-4 mb-6">
+        <form class="form-container" action="{% url 'otp_verification' %}" method="POST">
+          {% csrf_token %}
+
+          <div class="col-span-2 md:col-span-1">
+            <label for="remark" class="mb-4 md:text-lg font-medium block">Enter OTP  For Verification</label>
+            <input name="otp" placeholder="OTP" type="number" required="required" class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3" />
+          </div>
+
+          <div class="col-span-2 flex gap-4 md:gap-6 mt-4">
+            <button class="btn qt-modal-btn" type="submit">Verify</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

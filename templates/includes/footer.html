@@ -1,0 +1,141 @@
+{% load static %}
+<div class="footer-area bg-color-0c3a30 pt-120">
+    <div class="container">
+        <div class="row" data-cues="slideInUp" data-duration="800">
+            <div class="col-xl-4 col-lg-9 col-md-6">
+                <div class="footer-weight">
+                    <h2 class="text-white">Subscribe Newsletter</h2>
+                    <form class="footer-form position-relative">
+                        <input type="email" class="form-control" placeholder="Enter Your Email">
+                        <button type="submit" class="default-btn">Subscribe <i
+                                class="ri-arrow-right-up-line"></i></button>
+                    </form>
+                    <ul class="social">
+                        <li><span>Follow Us:</span></li>
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank">
+                                <i class="ri-facebook-fill"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.twitter.com/" target="_blank">
+                                <i class="ri-twitter-x-line"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank">
+                                <i class="ri-instagram-line"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/" target="_blank">
+                                <i class="ri-linkedin-fill"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-4 col-md-6">
+                <div class="footer-weight part-two ps-5">
+                    <h3 class="text-white">Quick Links</h3>
+                    <ul class="service-link">
+                        <li>
+                            <a href="{% url 'terms' %}">Terms & Conditions</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'services' %}">Services</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'about' %}">Why Choose Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="footer-weight part-three ps-5">
+                    <h3 class="text-white">Our Services</h3>
+                    <ul class="service-link">
+                        <li>
+                            <a href="{% url 'services' %}">Mobile Banking</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'services' %}">Advanced Security</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'services' %}">Digital Wallet</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'services' %}">Budgeting Tools</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'services' %}">Making Transactions</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="footer-weight ps-5">
+                    <h3 class="text-white">Get In Touch</h3>
+                    <ul class="get-touch">
+                        <li>
+                            <img src="{% static 'assets/images/svg/map.svg' %}" alt="image">
+                            <span class="text-white"><b>Location:</b></span>
+                            <a href="https://www.google.com/maps/search/18+Tanglewood+Lane+Gulfport/@30.4216847,-89.1511032,12z/data=!3m1!4b1?entry=ttu"
+                                target="_blank">18 Tanglewood Lane Gulfport</a>
+                        </li>
+                        <li>
+                            <img class="phone" src="{% static 'assets/images/svg/mail.svg' %}" alt="image">
+                            <span class="text-white"><b>Email:</b></span>
+                            <a href="#!"><span
+                                    class="__cf_email__"
+                                    data-cfemail="cfa7aaa3a3a08fa9a6a1bba0e1aca0a2">support@wealthwave.cc</span></a>
+                        </li>
+                        <li>
+                            <img class="phone" src="{% static 'assets/images/svg/phone.svg' %}" alt="image">
+                            <span class="text-white"><b>Phone:</b></span>
+                            <a href="tel:0018085550148">+001 (808) 5550148</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="copyright-area bg-color-0c3a30">
+    <div class="container">
+        <div class="copyright-border">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-4 col-md-6">
+                    <p>© <script>document.write(new Date().getFullYear())</script> <span>Wealth Wave Bank</span> </p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="copy-image" data-cues="zoomIn" data-duration="700">
+                        <a href="{% url 'home' %}" class="d-block">
+                            <img src="{% static 'assets/images/white-logo.png' %}" alt="image">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <ul>
+                        <li>
+                            <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'terms' %}">Terms & Conditions</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="go-top">
+    <i class="ri-arrow-up-fill"></i>
+</div>

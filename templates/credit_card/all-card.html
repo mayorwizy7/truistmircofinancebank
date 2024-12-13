@@ -1,0 +1,124 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+  <style>
+    .btn-custom {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff4d4d;
+      border: 1px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-custom:hover {
+      background-color: #fff;
+      color: #ff4d4d;
+      border-color: #ff4d4d;
+    }
+  </style>
+  <!-- Main Content -->
+  <main class="main-content has-sidebar">
+    <div class="main-inner">
+      <div class="flex flex-col gap-4 xxl:gap-6">
+        <!-- Make Payment modal -->
+        <div class="fixed inset-0 z-[99]">
+          <div class="overflow-y-auto">
+            <div class="absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+              <div class="relative box">
+                <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+                  <h4 style="text-align:center;" class="h4">Cards</h4>
+                </div>
+
+                <div>
+                    <div class="grid  ">
+                        {% for card in credit_card %}
+                          {% if card %}
+                            <a href="{% url 'card-detail' card.card_id %}" class="col-span-12 text-n0 sm:col-span-6 lg:col-span-4 4xl:col-span-3 rounded-xl p-5 relative overflow-hidden after:absolute after:rounded-full after:w-[300px] after:h-[300px] after:bg-[#FFC861] after:top-[45%] after:ltr:left-[60%] after:rtl:right-[60%] bg-secondary1">
+                              <div class="mb-3 sm:mb-6 flex justify-between items-center">
+                                <div>
+                                  <p class="text-xs mb-1">Deposits Balance</p>
+                                  <h4 class="h4">${{ card.amount|intcomma }}</h4>
+                                </div>
+                                <img src="{% static 'dashboard/images/visa-sm.png' %}" width="36" height="13" class="mb-1" alt="visa" />
+                              </div>
+                              <div>
+                                <img src="{% static 'dashboard/images/mastercard.png' %}" width="45" height="45" class="mb-1" alt="visa" />
+                                <div class="flex justify-between items-center">
+                                  <div>
+                                    <p class="text-sm font-semibold mb-1">{{ card.name }}</p>
+                                    <p class="text-xs">{{ card.number }}</p>
+                                  </div>
+                                  <span class="text-n700 relative z-[1]">{{ card.expiry }}</span>
+                                </div>
+                              </div>
+                            </a>
+                          {% else %}
+                          <div class="mb-3 sm:mb-6 flex justify-between items-center">
+                            <div>
+                              <p class="text-xs mb-1">Deposits Balance</p>
+                              <h4 class="h4">${{ card.amount|intcomma }}</h4>
+                            </div>
+                            <img src="{% static 'dashboard/images/visa-sm.png' %}" width="36" height="13" class="mb-1" alt="visa" />
+                          </div>
+                          <div>
+                            <img src="{% static 'dashboard/images/mastercard.png' %}" width="45" height="45" class="mb-1" alt="visa" />
+                            <div class="flex justify-between items-center">
+                              <div>
+                                <p class="text-sm font-semibold mb-1">{{ card.name }}</p>
+                                <p class="text-xs">{{ card.number }}</p>
+                              </div>
+                              <span class="text-n700 relative z-[1]">{{ card.expiry }}</span>
+                            </div>
+                          </div>
+                          <div class=" grid-cols-12  xxl:gap-6 add-card-btn">
+                            <div class="col-span-12 sm:col-span-6 lg:col-span-4 4xl:col-span-3 border border-dashed self-stretch max-xxxl:py-14 w-full rounded-2xl border-primary bg-primary/10 flex flex-col justify-center items-center text-center h-full">
+                              <button class="bg-primary text-n0 p-2 rounded-full mb-3 mt-3"> <i class="las la-plus"></i> </button>
+                              <p class="font-medium mb-2">Add New Credit Card</p>
+                              <button class="text-sm text-primary ">
+                                  Add Now
+                              </button>
+                            </div>
+                          </div>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                </div>
+                {% comment %} <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+                  <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 spend order-1">
+                    <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                      <p>Spend</p>
+                      <p>Balance : 10,000 USD</p>
+                    </div>
+                    <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                      <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                      <p class="shrink-0">$ USD</p>
+                    </div>
+                  </div>
+                  <button class="p-2 border order-2 border-n30 dark:border-n500 self-center -my-4 relative z-[2] rounded-lg bg-n0 dark:bg-bg4 text-primary changeOrderBtn"><i class="las la-exchange-alt rotate-90"></i></button>
+                  <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 receive order-3">
+                    <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                      <p>Receive</p>
+                      <p>Balance : 10,000 USD</p>
+                    </div>
+                    <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                      <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                      <p class="shrink-0">€ EURO</p>
+                    </div>
+                  </div>
+                </div> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+ 
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

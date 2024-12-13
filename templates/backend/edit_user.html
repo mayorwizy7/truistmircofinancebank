@@ -1,0 +1,80 @@
+{% extends 'backend.html' %}
+{% load static %}
+{% load humanize %}
+
+
+
+{% block content %}
+
+<div class="content-page">
+    <div class="container-fluid ui-elements">
+        <form class="row" action="{% url 'edit_user' user_to_edit.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div  class="col-sm-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Update {{ user_to_edit.first_name }}'s Profile</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div  class="row">
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label for="exampleInputText1">First Name</label>
+                            {{ user_form.first_name }}
+                            
+                        </div>
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label for="exampleInputEmail2">Last Name</label>
+                            
+                            {{ user_form.last_name }}
+                        </div>
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label for="exampleInputText1">Date of Birth</label>
+                            {{ user_form.dob }}
+                            
+                        </div>
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label for="exampleInputEmail2">Gender</label>
+                            
+                            {{ user_form.gender }}
+                        </div>
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label for="exampleInputText1">Phone Number</label>
+                            {{ user_form.phone }}
+                            
+                        </div>
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label for="exampleInputText1">Email</label>
+                            {{ user_form.email }}
+                            
+                        </div>
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label for="exampleInputEmail2">Address</label>
+                            
+                            {{ user_form.address }}
+                        </div>
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label for="exampleInputEmail2">Country</label>
+                            
+                            {{ user_form.country }}
+                        </div>
+                        
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label for="exampleInputEmail2">Profile Photo</label>
+                            {{ user_form.profile_pic }}
+                        </div>
+                        <button type="submit" class="btn btn-success mt-2 col-sm-12 col-lg-12" data-placement="right"
+                        title="Tooltip on left">
+                        Update
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+{% block footer %}{% endblock footer %}

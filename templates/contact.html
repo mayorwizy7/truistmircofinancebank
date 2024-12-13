@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<div class="page-banner-area position-relative overflow-hidden"
+    style="background-image: url({% static 'assets/images/hero/hero-image-2.svg' %})">
+    <div class="container">
+        <div class="page-banner-content">
+            <h1>Contact Us</h1>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li>Contact Us</li>
+            </ul>
+        </div>
+    </div>
+    <div class="shape-image">
+        <img class="page-banner-shape-1 moveHorizontal_reverse" alt="shape"
+            data-cfsrc="{% static 'assets/images/shape/page-banner-shape-1.png' %}"
+            style="display:none;visibility:hidden;"><img class="page-banner-shape-1 moveHorizontal_reverse"
+            src="{% static 'assets/images/shape/page-banner-shape-1.png' %}" alt="shape">
+        <img class="page-banner-shape-2 moveVertical" alt="shape"
+            data-cfsrc="{% static 'assets/images/shape/page-banner-shape-2.png' %}"
+            style="display:none;visibility:hidden;"><img class="page-banner-shape-2 moveVertical"
+            src="{% static 'assets/images/shape/page-banner-shape-2.png' %}" alt="shape">
+    </div>
+</div>
+
+
+<div class="contact-address-area ptb-120 overflow-hidden">
+    <div class="container">
+        <div class="address-container bg-color-0c3a30 radius-20">
+            <div class="contact-warp d-flex align-items-center justify-content-between" data-cues="slideInDown"
+                data-duration="700">
+                <div class="location position-relative">
+                    <i class="flaticon-phone-call call-icon"></i>
+                    <span>Phone Number</span>
+                    <a href="tel:000946862091">+000 946 (862) 091</a>
+                </div>
+                <div class="location position-relative">
+                    <i class="flaticon-email-1 call-icon"></i>
+                    <span>Email Address</span>
+                    <a href="#"><span class="__cf_email__"
+                            data-cfemail="8be3eee7e7e4cbede2e5ffe4a5e8e4e6">[email&#160;protected]</span></a>
+                </div>
+                <div class="location position-relative">
+                    <i class="flaticon-maps-and-flags call-icon"></i>
+                    <span>Visit Our Office</span>
+                    <a href="https://www.google.com/maps/place/90+Greene+St,+New+York,+NY+10012,+USA/@40.7240112,-74.0026355,17z/data=!3m1!4b1!4m6!3m5!1s0x89c2598ea38acb7f:0x409e2155ddf4e393!8m2!3d40.7240072!4d-74.0000606!16s%2Fg%2F11c5p_8lws?entry=ttu&g_ep=EgoyMDI0MDgyMS4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank">90 Green Street, New York</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="contact-form-area pb-120">
+    <div class="container">
+        <div class="section-title" style="max-width: 665px;">
+            <span class="sub-title two bg-color-9edd05 rounded-pill">GET IN TOUCH</span>
+            <h2>Don’t Hesitate To Contact Us</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-8 col-md-12" data-cues="slideInUp" data-duration="800">
+                <form class="contact-form bg-color-fffaeb radius-30" method="POST" action="{% url 'contact' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <input type="text" class="form-control" placeholder="Name" name="name">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input type="text" class="form-control" placeholder="Email" name="email">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input type="text" class="form-control" placeholder="Phone" name="phone">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input type="text" class="form-control" placeholder="Subject" name="subject">
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <textarea class="form-control textarea" placeholder="Write A Message"
+                                name="message"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="default-btn">Send Message <i
+                            class="ri-arrow-right-up-line"></i></button>
+                </form>
+            </div>
+            <div class="col-lg-4 col-md-12" data-cues="slideInDown" data-duration="800">
+                <div class="contact-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12099.703300006831!2d-73.98999211564951!3d40.697631233315505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2594e613b2071%3A0x3bce69cdfa7d39a5!2sSP%2B%20Parking!5e0!3m2!1sen!2sbd!4v1724649743269!5m2!1sen!2sbd"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="app-area two pb-120 overflow-hidden">
+    <div class="container">
+        <div class="download-area bg-color-edf1ee radius-30">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6 col-md-12" data-cues="slideInRight" data-duration="800">
+                    <div class="app-image">
+                        <img class="radius-30" alt="App Preview" data-cfsrc="{% static 'assets/images/app/app-image-5.jpg' %}" style="display:none;visibility:hidden;">
+                        <img class="radius-30" src="{% static 'assets/images/app/app-image-5.jpg' %}" alt="App Preview">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12" data-cues="slideInLeft" data-duration="800">
+                    <div class="section-heading mb-0 ms-auto">
+                        <span class="sub-title two bg-color-9edd05 rounded-pill">Future Bank</span>
+                        <h2>Experience the Future of Banking</h2>
+                        <p class="mb-5">Explore our robust suite of products, from digital banking and payment processing to wealth management and blockchain applications.</p>
+                        <!-- Uncomment to add download buttons -->
+                        {% comment %}
+                        <div class="app-btn">
+                            <a href="https://play.google.com/store/apps/category/FAMILY?hl=en" target="_blank" class="me-3">
+                                <img class="rounded-3" alt="Google Play" data-cfsrc="{% static 'assets/images/app/app-image-2.jpg' %}" style="display:none;visibility:hidden;">
+                                <img class="rounded-3" src="{% static 'assets/images/app/app-image-2.jpg' %}" alt="Google Play">
+                            </a>
+                            <a href="https://www.apple.com/app-store/" target="_blank">
+                                <img class="rounded-3" alt="App Store" data-cfsrc="{% static 'assets/images/app/app-image-3.jpg' %}" style="display:none;visibility:hidden;">
+                                <img class="rounded-3" src="{% static 'assets/images/app/app-image-3.jpg' %}" alt="App Store">
+                            </a>
+                        </div>
+                        {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

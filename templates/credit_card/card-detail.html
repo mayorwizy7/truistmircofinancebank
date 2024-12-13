@@ -1,0 +1,140 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+  <main class="main-content has-sidebar">
+    <div class="main-inner">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4 lg:mb-8">
+        <h2 class="h2">Card Details</h2>
+       
+      </div>
+
+      <div class="grid grid-cols-12 gap-4 xxl:gap-6">
+        <div class="col-span-12 md:col-span-5 xxl:col-span-4">
+          <!-- Card Details -->
+          <div class="box mb-4 xxl:mb-6">
+            <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex justify-between items-center">
+              <h4 class="h4">Details</h4>
+              <select name="sort" class="nc-select green min-w-[120px]">
+                <option value="day">Visa</option>
+                <option value="week">Payoneer</option>
+                <option value="year">Mastercard</option>
+              </select>
+            </div>
+            <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+              <div class="bg-secondary1 p-4 lg:px-6 lg:py-5 rounded-xl text-n0 relative overflow-hidden after:absolute after:rounded-full after:w-[300px] after:h-[300px] after:bg-[#FFC861] after:top-[45%] after:ltr:left-[65%] after:rtl:right-[65%] mb-6 lg:mb-8">
+                <div class="flex justify-between items-start mb-3 sm:mb-4 lg:mb-8 xxxl:mb-14">
+                  <div>
+                    <p class="text-xs mb-1">Current Balance</p>
+                    <h4 class="h4">{{ credit_card.amount|intcomma }} USD</h4>
+                  </div>
+                  <img src="{% static 'dashboard/images/visa-sm.png' %}" width="45" height="16" alt="visa icon" />
+                </div>
+                <img src="{% static 'dashboard/images/mastercard.png' %}" width="45" height="45" alt="visa icon" />
+                <div class="flex justify-between items-end lg:mt-2">
+                  <div>
+                    <p class="mb-1">{{ credit_card.name|title }}</p>
+                    <p class="text-xs">{{ credit_card.number }}</p>
+                  </div>
+                  <p class="text-n700 relative z-[1]">{{ credit_card.expiry|date:'m' }}/{{ credit_card.expiry|date:'Y' }}</p>
+                </div>
+              </div>
+              <ul class="flex flex-col gap-4">
+                <li class="flex justify-between">
+                  <span>Card Type:</span> <span class="font-medium">{{ credit_card.card_type|upper }}</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Card Holder:</span> <span class="font-medium">{{ credit_card.name|upper }}</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Expires:</span> <span class="font-medium">{{ credit_card.expiry|date:'m' }}/{{ credit_card.expiry|date:'Y' }}</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Card Number:</span> <span class="font-medium">{{ credit_card.number }}</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Total Balance:</span> <span class="font-medium">{{ credit_card.amount }} USD</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Total Debt:</span> <span class="font-medium">0.00 USD</span>
+                </li>
+              </ul>
+            </div>
+            <div class="">
+              <a href="{% url 'delete_card' credit_card.card_id %}" class="reg btn btn-danger w-100 mb-2" style="background-color: #ff3333; border-color: #ff3333;">Delete Card</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 md:col-span-7 xxl:col-span-8">
+          <!-- Card Transactions -->
+          <div class="box overflow-x-hidden mb-4 xxl:mb-6">
+            <div class="flex flex-wrap justify-between items-center gap-3 pb-4 lg:pb-6 mb-4 lg:mb-6 bb-dashed">
+              <h4 class="h4">Fund Card</h4>
+            </div>
+            <form action="{% url 'fund-credit-card' credit_card.card_id %}" method="POST">
+              {% csrf_token %}
+              <div class="row justify-content-center">
+                <div class="col-span-2 md:col-span-1" style="display: none;">
+                  <div class="single-input">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" value="{{ credit_card.number }}" disabled class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3" />
+                  </div>
+                </div>
+                <div class="col-span-2 md:col-span-1" style="display: none;">
+                  <div class="single-input" class="mb-4 md:text-lg font-medium block">
+                    <label for="cardHolder">Card Holder</label>
+                    <input type="text" id="cardHolder" value="{{ credit_card.name|title }}" disabled class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3" />
+                  </div>
+                </div>
+                <div class="col-span-2 md:col-span-1" >
+                  <div class="single-input" class="mb-4 md:text-lg font-medium block">
+                    <label for="month">Main Available Balance</label>
+                    <input type="text" id="month" value="${{ account.available_balance|intcomma }}" disabled class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3" />
+                  </div>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                  <div class="single-input" class="mb-4 md:text-lg font-medium block">
+                    <label for="year">Enter Amount</label>
+                    <input type="number" name="funding_amount" id="amount" placeholder="$20" class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3" />
+                  </div>
+                </div>
+                <div class="col-span-2 md:col-span-1 mt-4">
+                  <div class="btn-border w-100">
+                    <button type="submit" class="btn w-100">Add Money to card</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="box overflow-x-hidden mb-4 xxl:mb-6">
+            <div class="flex flex-wrap justify-between items-center gap-3 pb-4 lg:pb-6 mb-4 lg:mb-6 bb-dashed">
+              <h4 class="h4">Withdraw From Card</h4>
+            </div>
+            <form action="{% url 'withdraw_fund' credit_card.card_id %}" method="POST">
+              {% csrf_token %}
+              <div class="row justify-content-center">
+                <div class="col-span-2 md:col-span-1" style="display: none;">
+                  <div class="single-input" class="mb-4 md:text-lg font-medium block">
+                    <label for="month">Card Available Balance</label>
+                    <input type="text" id="month" value="${{ credic_card.amount|intcomma }}" />
+                  </div>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                  <div class="single-input" class="mb-4 md:text-lg font-medium block">
+                    <label for="year">Enter Amount</label>
+                    <input type="number" name="amount" id="amount" placeholder="$20" class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3" />
+                  </div>
+                </div>
+                <div class="col-span-2 md:col-span-1 mt-4">
+                  <div class="btn-border w-100">
+                    <button type="submit" class="btn w-100">Withdraw</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

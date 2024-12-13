@@ -1,0 +1,316 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- Main Content -->
+  <main class="main-content has-sidebar">
+    <div class="main-inner">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4 lg:mb-8">
+        <h2 class="h2">Security</h2>
+      </div>
+
+      <div class="flex flex-col gap-4 xxl:gap-6">
+        <!-- Change Password -->
+        <div class="box xl:p-8 xxl:p-10">
+          <h4 class="h4 bb-dashed pb-4 mb-4 md:mb-6 md:pb-6">Change Password</h4>
+          <form class="mt-6 xl:mt-8 grid grid-cols-2 gap-4 xxxl:gap-6" action="{% url 'change_password' %}" method="POST" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="col-span-2">
+              <label for="password" class="md:text-lg font-medium block mb-4">Current Password</label>
+              <div class="bg-primary/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3 relative">
+                <input type="password" class="w-11/12 text-sm bg-transparent p-0 border-none" placeholder="Old Password" id="password3" required name="current_password" />
+                <span class="absolute eye-icon ltr:right-5 rtl:left-5 top-1/2 -translate-y-1/2 cursor-pointer" onclick="togglePassword('password3',this)">
+                  <i class="las la-eye" style="display: none;"></i>
+                  <i class="las la-eye-slash"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-span-2 md:col-span-1">
+              <label for="password" class="md:text-lg font-medium block mb-4">New Password</label>
+              <div class="bg-primary/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3 relative">
+                <input type="password" class="w-11/12 text-sm bg-transparent p-0 border-none" placeholder="New Password" id="password1" required name="new_password" />
+                <span class="absolute eye-icon ltr:right-5 rtl:left-5 top-1/2 -translate-y-1/2 cursor-pointer" onclick="togglePassword('password1',this)">
+                  <i class="las la-eye" style="display: none;"></i>
+                  <i class="las la-eye-slash"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-span-2 md:col-span-1">
+              <label for="password" class="md:text-lg font-medium block mb-4">Confirm New Password</label>
+              <div class="bg-primary/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3 relative">
+                <input type="password" class="w-11/12 text-sm bg-transparent p-0 border-none" placeholder="Confirm New Password" id="password2" required name="confirm_password" />
+                <span class="absolute eye-icon ltr:right-5 rtl:left-5 top-1/2 -translate-y-1/2 cursor-pointer" onclick="togglePassword('password2',this)">
+                  <i class="las la-eye" style="display: none;"></i>
+                  <i class="las la-eye-slash"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-span-2">
+              <p id="password-error" class="font-medium text-lg mb-4 text-red-500" style="display: none;">New password cannot be the same as the current password.</p>
+              <p class="font-medium text-lg mb-4">New password must contain :</p>
+              <ul class="marker:text-primary list-disc flex flex-col gap-3 list-inside">
+                <li>At least 8 characters</li>
+                <li>At least 1 lower letter (a-z)</li>
+                <li>At least 1 uppercase letter(A-Z)</li>
+                <li>At least 1 number (0-9)</li>
+                <li>At least 1 special characters</li>
+              </ul>
+            </div>
+            <div class="col-span-2 flex gap-4">
+              <button type="submit" class="btn px-5">Save Changes</button>
+            </div>
+          </form>
+        </div>
+        <!-- Change Password -->
+        <div class="box xl:p-8 xxl:p-10">
+          <h4 class="h4 bb-dashed pb-4 mb-4 md:mb-6 md:pb-6">Change PIN</h4>
+          <form class="mt-6 xl:mt-8 grid grid-cols-2 gap-4 xxxl:gap-6" action="{% url 'change_pin' %}" method="POST" onsubmit="return validatePinChangeForm()">
+            {% csrf_token %}
+            <div class="col-span-2">
+              <label for="current_pin" class="md:text-lg font-medium block mb-4">Current PIN</label>
+              <div class="bg-primary/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3 relative">
+                <input type="password" class="w-11/12 text-sm bg-transparent p-0 border-none" placeholder="Old PIN" id="current_pin" required name="current_pin" />
+                <span class="absolute eye-icon ltr:right-5 rtl:left-5 top-1/2 -translate-y-1/2 cursor-pointer" onclick="togglePassword('current_pin',this)">
+                  <i class="las la-eye" style="display: none;"></i>
+                  <i class="las la-eye-slash"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-span-2 md:col-span-1">
+              <label for="new_pin" class="md:text-lg font-medium block mb-4">New PIN</label>
+              <div class="bg-primary/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3 relative">
+                <input type="password" class="w-11/12 text-sm bg-transparent p-0 border-none" placeholder="New PIN" id="new_pin" required name="new_pin" />
+                <span class="absolute eye-icon ltr:right-5 rtl:left-5 top-1/2 -translate-y-1/2 cursor-pointer" onclick="togglePassword('new_pin',this)">
+                  <i class="las la-eye" style="display: none;"></i>
+                  <i class="las la-eye-slash"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-span-2 md:col-span-1">
+              <label for="confirm_pin" class="md:text-lg font-medium block mb-4">Confirm New PIN</label>
+              <div class="bg-primary/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3 relative">
+                <input type="password" class="w-11/12 text-sm bg-transparent p-0 border-none" placeholder="Confirm New PIN" id="confirm_pin" required name="confirm_pin" />
+                <span class="absolute eye-icon ltr:right-5 rtl:left-5 top-1/2 -translate-y-1/2 cursor-pointer" onclick="togglePassword('confirm_pin',this)">
+                  <i class="las la-eye" style="display: none;"></i>
+                  <i class="las la-eye-slash"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-span-2 flex gap-4">
+              <button type="submit" class="btn px-5">Save Changes</button>
+            </div>
+            <p id="pin-error" class="text-danger" style="display: none;"></p>
+          </form>
+        </div>
+        <!-- Two factor -->
+        {% comment %} <div class="box xl:p-8">
+          <div class="flex justify-between items-center bb-dashed mb-4 pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Two-Factor Authentication</h4>
+            <div class="relative">
+              <i class="las la-ellipsis-h horiz-option-btn cursor-pointer"></i>
+              <ul class="horiz-option hide absolute top-full z-[3] min-w-[122px] rounded-md bg-n0 p-3 shadow-[0px_6px_30px_0px_rgba(0,0,0,0.08)] duration-300 dark:bg-bg3 ltr:right-0 ltr:origin-top-right rtl:left-0 rtl:origin-top-left">
+                <li>
+                  <span class="block cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">Edit</span>
+                </li>
+                <li>
+                  <span class="block cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">Print</span>
+                </li>
+                <li>
+                  <span class="block cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">Share</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 md:divide-x rtl:md:divide-x-reverse max-md:gap-4 divide-dashed divide-primary">
+            <div class="col-span-2 md:col-span-1 md:ltr:pr-5 md:rtl:pl-5 flex flex-col gap-4 xxl:gap-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-medium text-base md:text-lg xl:text-xl mb-2">Authentication app</p>
+                  <span class="text-xs md:text-sm">Google auth app</span>
+                </div>
+                <div class="flex items-center justify-center">
+                  <label for="google" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                      <input type="checkbox" id="google" class="custom-checkbox sr-only" />
+                      <div class="block w-14 h-8 rounded-full bg bg-primary/20"></div>
+                      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-medium text-base md:text-lg xl:text-xl mb-2">Primary Email</p>
+                  <span class="text-xs md:text-sm">E-mail used to send notifications</span>
+                </div>
+                <div class="flex items-center justify-center">
+                  <label for="email" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                      <input type="checkbox" id="email" class="custom-checkbox sr-only" checked />
+                      <div class="block w-14 h-8 rounded-full bg bg-primary"></div>
+                      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition translate-x-full"></div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-medium text-base md:text-lg xl:text-xl mb-2">SMS Recovery</p>
+                  <span class="text-xs md:text-sm">Your phone number or something</span>
+                </div>
+                <div class="flex items-center justify-center">
+                  <label for="sms" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                      <input type="checkbox" id="sms" class="custom-checkbox sr-only" />
+                      <div class="block w-14 h-8 rounded-full bg bg-primary/20"></div>
+                      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-2 md:col-span-1 md:ltr:pl-5 md:rtl:pr-5 flex flex-col gap-4 xxl:gap-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-medium text-base md:text-lg xl:text-xl mb-2">Mobile Authenticator</p>
+                  <span class="text-xs md:text-sm">Enhance security with a mobile authentication app.</span>
+                </div>
+                <div class="flex items-center justify-center">
+                  <label for="mobile" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                      <input type="checkbox" id="mobile" class="custom-checkbox sr-only" checked />
+                      <div class="block w-14 h-8 rounded-full bg bg-primary"></div>
+                      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition translate-x-full"></div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-medium text-base md:text-lg xl:text-xl mb-2">Email Notifications</p>
+                  <span class="text-xs md:text-sm">Receive important notifications via your primary email.</span>
+                </div>
+                <div class="flex items-center justify-center">
+                  <label for="recovery" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                      <input type="checkbox" id="recovery" class="custom-checkbox sr-only" />
+                      <div class="block w-14 h-8 rounded-full bg bg-primary/20"></div>
+                      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-medium text-base md:text-lg xl:text-xl mb-2">SMS Account Recovery</p>
+                  <span class="text-xs md:text-sm">Enable SMS-based account recovery for added convenience.</span>
+                </div>
+                <div class="flex items-center justify-center">
+                  <label for="sms-account" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                      <input type="checkbox" id="sms-account" class="custom-checkbox sr-only" />
+                      <div class="block w-14 h-8 rounded-full bg bg-primary/20"></div>
+                      <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> {% endcomment %}
+      </div>
+    </div>
+  </main>
+
+<!--  PIN Validation --> 
+<script>
+  function validatePinChangeForm() {
+    var newPin = document.getElementById("new_pin").value;
+    var confirmPin = document.getElementById("confirm_pin").value;
+    var currentPin = document.getElementById("current_pin").value;
+
+    // Check if new PIN is same as current PIN
+    if (newPin === currentPin) {
+      document.getElementById("pin-error").innerText = "New PIN cannot be the same as the current PIN.";
+      document.getElementById("pin-error").style.display = "block";
+      return false;
+    }
+
+    // Check if new PIN matches the confirmation PIN
+    if (newPin !== confirmPin) {
+      document.getElementById("pin-error").innerText = "New PIN and confirmation PIN do not match.";
+      document.getElementById("pin-error").style.display = "block";
+      return false;
+    }
+
+    return true; // Return true if form is valid, false otherwise
+  }
+</script>
+
+
+
+<!--  Password Validation --> 
+  <script>
+    function validateForm() {
+      var newPassword = document.getElementById("password1").value;
+      var confirmPassword = document.getElementById("password2").value;
+      var currentPassword = document.getElementById("password3").value;
+  
+      // Check if new password is same as current password
+      if (newPassword === currentPassword) {
+        document.getElementById("password-error").innerText = "New password cannot be the same as the current password.";
+        document.getElementById("password-error").style.display = "block";
+        return false;
+      }
+  
+      // Check if new password meets the length requirement
+      if (newPassword.length < 8) {
+        document.getElementById("password-error").innerText = "New password must be at least 8 characters long.";
+        document.getElementById("password-error").style.display = "block";
+        return false;
+      }
+  
+      // Check if new password contains at least one lowercase letter
+      var lowerCaseLetters = /[a-z]/g;
+      if (!newPassword.match(lowerCaseLetters)) {
+        document.getElementById("password-error").innerText = "New password must contain at least one lowercase letter (a-z).";
+        document.getElementById("password-error").style.display = "block";
+        return false;
+      }
+  
+      // Check if new password contains at least one uppercase letter
+      var upperCaseLetters = /[A-Z]/g;
+      if (!newPassword.match(upperCaseLetters)) {
+        document.getElementById("password-error").innerText = "New password must contain at least one uppercase letter (A-Z).";
+        document.getElementById("password-error").style.display = "block";
+        return false;
+      }
+  
+      // Check if new password contains at least one number
+      var numbers = /[0-9]/g;
+      if (!newPassword.match(numbers)) {
+        document.getElementById("password-error").innerText = "New password must contain at least one number (0-9).";
+        document.getElementById("password-error").style.display = "block";
+        return false;
+      }
+  
+      // Check if new password contains at least one special character
+      var specialCharacters = /[!@#$%^&*(),.?":{}|<>]/g;
+      if (!newPassword.match(specialCharacters)) {
+        document.getElementById("password-error").innerText = "New password must contain at least one special character.";
+        document.getElementById("password-error").style.display = "block";
+        return false;
+      }
+  
+      // Check if new password matches the confirmation password
+      if (newPassword !== confirmPassword) {
+        document.getElementById("password-error").innerText = "New password and confirmation password do not match.";
+        document.getElementById("password-error").style.display = "block";
+        return false;
+      }
+  
+      return true; // Return true if form is valid, false otherwise
+    }
+  </script>
+  
+{% endblock %}

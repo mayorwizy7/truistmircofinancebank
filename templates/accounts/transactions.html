@@ -1,0 +1,345 @@
+{% extends 'base2.html' %}
+{% load custom_filters %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+  <!-- Main Content -->
+  <main class="main-content has-sidebar">
+    <div class="main-inner">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4 lg:mb-8">
+        <div>
+          <h4 class="h4 mb-1">{{ total_bal|intcomma }} USD</h4>
+          <p>
+            Total Balance from all accounts
+            <span class="font-semibold text-primary">USD</span>
+          </p>
+        </div>
+        <button class="btn ac-modal-btn">
+          <i class="las la-plus-circle text-base md:text-lg"></i>
+          Open an Account
+        </button>
+      </div>
+      <div class="grid grid-cols-12 gap-4 xxl:gap-6">
+
+
+        <!-- Latest Transactions -->
+        <div class="col-span-12">
+          <div class="box col-span-12 lg:col-span-6">
+            <div class="bb-dashed mb-4 flex flex-wrap items-center justify-between gap-4 pb-4 lg:mb-6 lg:pb-6">
+              <h4 class="h4">Latest Transaction</h4>
+              <div class="flex items-center gap-4">
+                <form class="bg-primary/5 dark:bg-bg3 border border-n30 dark:border-n500 flex gap-3 rounded-[30px] focus-within:border-primary p-1 items-center justify-between min-w-[200px] xxl:max-w-[319px] w-full">
+                  <input type="text" placeholder="Search" class="bg-transparent border-none text-sm ltr:pl-4 rtl:pr-4 py-1 w-full" />
+                  <button class="bg-primary shrink-0 rounded-full w-7 h-7 lg:w-8 lg:h-8 flex justify-center items-center text-n0"><i class="las la-search text-lg"></i></button>
+                </form>
+                <div class="flex items-center gap-3 whitespace-nowrap">
+                  <span>Sort By :</span>
+                  <select class="text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3">
+                    <option value="day">Last 15 Days</option>
+                    <option value="week">Last 1 Month</option>
+                    <option value="year">Last 6 Month</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full whitespace-nowrap " id="transactionTable">
+                <thead>
+                  <tr class="bg-secondary1/5 dark:bg-bg3">
+                    {% comment %} <th class="w-[50px] px-6 text-start">
+                      <input name="select-all" type="checkbox" id="selectAllCheckbox" class="accent-secondary1 focus:border-none focus:shadow-none focus:outline-none" />
+                    </th> {% endcomment %}
+                    <th class="min-w-[330px] cursor-pointer px-6 py-5 text-start">
+                      <div class="flex items-center gap-1">Account</div>
+                    </th>
+                    <th class="min-w-[120px] py-5 text-start">Date/Time</th>
+                    <th class="min-w-[120px] cursor-pointer py-5 text-start">
+                      <div class="flex items-center gap-1">Amount</div>
+                    </th>
+                    <th class="min-w-[120px] cursor-pointer py-5 text-start">
+                      <div class="flex items-center gap-1">Transaction Fee</div>
+                    </th>
+                    <th class="cursor-pointer py-5 text-start">
+                      <div class="flex items-center gap-1">Status</div>
+                    </th>
+                    <th class="cursor-pointer py-5 text-start">
+                      <div class="flex items-center gap-1">Action</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if not transactions %}
+                    <h3>No Transaction History Yet</h3>
+                  {% else %}
+                    {% for transaction in transactions %}
+                      <tr class="even:bg-secondary1/5 dark:even:bg-bg3 " >
+                        {% comment %} <td class="px-6 text-start">
+                          <input type="checkbox" class="accent-secondary1" name="checkbox1" /> 
+                        </td> {% endcomment %}
+                        {% if transaction.transaction_type == 'Debit' %}
+                        <a href="{% url 'transaction_detail' transaction.id %}">
+                          <td class="px-6 py-2">
+                                <p class="mb-1 font-medium">{{ transaction.receiver_name }} - {{ transaction.receiver }}</p>
+                                <span class="text-xs">{{ transaction.ref_code }}</span>
+                              </div>
+                            </div>
+                          </td>
+                        </a>
+                        {% else %}
+                          <td class="px-6 py-2">
+                                <p class="mb-1 font-medium">{{ transaction.sender }}</p>
+                                <span class="text-xs">{{ transaction.ref_code }}</span>
+                              </div>
+                            </div>
+                          </td>
+                        {% endif %}
+
+                        <td class="py-2">
+                          <div>
+                            <p class="mb-1 font-medium">{{ transaction.transaction_time|date:'Y-m-d' }}</p>
+                            <span class="text-xs">{{ transaction.transaction_time|time:'H:i:s' }}</span>
+                          </div>
+                        </td>
+                        <td class="py-2">
+                          <div>
+                            <p class="mb-1 font-medium">${{ transaction.amount|intcomma }}</p>
+                            {% if transaction.transaction_type == 'Debit' %}
+                              <span class="text-xs text-secondary2">Debit</span>
+                            {% else %}
+                              <span class="text-xs text-primary">Credit</span>
+                            {% endif %}
+                          </div>
+                        </td>
+                        {% if transaction.fee == 'Free' %}
+                          <td class="py-2">{{ transaction.fee }}</td>
+                        {% else %}
+                          <td class="py-2">${{ transaction.fee|intcomma }}</td>
+                        {% endif %}
+
+                        <td class="py-2">
+                          {% if transaction.status == 'Success' %}
+                            <span class="block text-xs w-28 xxl:w-36 text-center rounded-[30px] dark:border-n500 border border-n30 py-2 bg-primary/10 dark:bg-bg3 text-primary">{{ transaction.status }}</span>
+                          {% elif transaction.status == 'Pending' %}
+                            <span class="block w-28 rounded-[30px] border border-n30 bg-secondary3/10 py-2 text-center text-xs text-secondary3 dark:border-n500 dark:bg-bg3 xxl:w-36">{{ transaction.status }}</span>
+                          {% else %}
+                            <span class="block w-28 rounded-[30px] border border-n30 bg-secondary2/10 py-2 text-center text-xs text-secondary2 dark:border-n500 dark:bg-bg3 xxl:w-36">{{ transaction.status }}</span>
+                          {% endif %}
+                        </td>
+                        <td class="py-2">
+                          <div class="flex justify-center">
+                              <div class="relative">
+                                  <i class="las la-ellipsis-v horiz-option-btn cursor-pointer"></i>
+                                  <ul
+                                      class="horiz-option hide  top-full z-[3] min-w-[122px] rounded-md bg-n0 p-3 shadow-[0px_6px_30px_0px_rgba(0,0,0,0.08)] duration-300 dark:bg-bg3 ltr:right-0 ltr:origin-top-right rtl:left-0 rtl:origin-top-left">
+                                      <li>
+                                          <a  href="{% url 'transaction_detail' transaction.id %}"
+                                              class="block w-full text-start cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">
+                                              See Details
+                                          </a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </td>
+                      </tr>
+                    {% endfor %}
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+            <div class="flex col-span-12 gap-4 sm:justify-between justify-center items-center flex-wrap">
+              <p>
+                  Showing {{ transactions.start_index }} to {{ transactions.end_index }} of {{ transactions.paginator.count }} entries
+              </p>
+            
+              <ul class="flex gap-2 md:gap-3 flex-wrap md:font-semibold items-center">
+                {% if transactions.has_previous %}
+                <li>
+                  <a href="?page=1" class="hover:bg-primary text-primary rtl:rotate-180 hover:text-n0 border md:w-10 duration-300 md:h-10 w-8 h-8 flex items-center rounded-full justify-center border-primary">
+                    <i class="las la-angle-left text-lg"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="?page={{ transactions.previous_page_number }}" class="hover:bg-primary text-n0 bg-primary hover:text-n0 border md:w-10 duration-300 md:h-10 w-8 h-8 flex items-center rounded-full justify-center border-primary">
+                    {{ transactions.previous_page_number }}
+                  </a>
+                </li>
+                {% endif %}
+                <li>
+                  <span class="hover:bg-primary text-primary hover:text-n0 border md:w-10 duration-300 md:h-10 w-8 h-8 flex items-center rounded-full justify-center border-primary">
+                    {{ transactions.number }}
+                  </span>
+                </li>
+                {% if transactions.has_next %}
+                <li>
+                  <a href="?page={{ transactions.next_page_number }}" class="hover:bg-primary text-primary hover:text-n0 border md:w-10 duration-300 md:h-10 w-8 h-8 flex items-center rounded-full justify-center border-primary">
+                    {{ transactions.next_page_number }}
+                  </a>
+                </li>
+                <li>
+                  <a href="?page={{ transactions.paginator.num_pages }}" class="hover:bg-primary text-primary hover:text-n0 rtl:rotate-180 border md:w-10 duration-300 md:h-10 w-8 h-8 flex items-center rounded-full justify-center border-primary">
+                    <i class="las la-angle-right text-lg"></i>
+                  </a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+
+  <!-- open Account modal -->
+  <div class="ac-modal-overlay fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div class="modal box modal-inner absolute left-1/2 my-10 max-h-[90vh] w-[95%] max-w-[710px] duration-300 -translate-x-1/2 overflow-y-auto xl:p-8">
+        <!-- { "translate-y-0 scale-100 opacity-100 my-10": open } -->
+        <div class="relative">
+          <button class="ac-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0"><i class="las la-times"></i></button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Create Bank Account</h4>
+          </div>
+          <form>
+            <p class="mb-4 text-lg font-medium">Profile Photo</p>
+            <div class="mb-6 flex flex-wrap items-center gap-5 xl:gap-10">
+              <img src="{% static 'dashboard/images/placeholder.png' %}" class="h-20 w-20 lg:h-auto lg:w-auto" alt="placeholder" />
+              <div class="flex gap-4">
+                <input type="file" name="photo" id="photo" class="hidden" />
+                <label for="photo" class="btn">Upload Photo</label>
+                <button class="btn-outline">Cancel</button>
+              </div>
+            </div>
+            <div class="mt-6 grid grid-cols-2 gap-4 xl:mt-8 xxxl:gap-6">
+              <div class="col-span-2">
+                <label for="name" class="mb-4 block font-medium md:text-lg">Account Holder Name</label>
+                <input type="text" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Enter Name" id="name" required />
+              </div>
+              <div class="col-span-2">
+                <label for="number" class="mb-4 block font-medium md:text-lg">Phone Number</label>
+                <input type="number" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Enter Number" id="number" required />
+              </div>
+              <div class="col-span-2">
+                <label for="currency" class="mb-4 block font-medium md:text-lg">Select Currency</label>
+                <select name="currency" class="nc-select full dark:!border-n500">
+                  <option value="usd">USD</option>
+                  <option value="gbp">GBP</option>
+                  <option value="yen">YEN</option>
+                  <option value="jpn">JPN</option>
+                </select>
+              </div>
+              <div class="col-span-2 md:col-span-1">
+                <label for="rate" class="mb-4 block font-medium md:text-lg">Interest Rate</label>
+                <input type="number" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Interest Rate %" id="rate" required />
+              </div>
+              <div class="col-span-2 md:col-span-1">
+                <label for="expire" class="mb-4 block font-medium md:text-lg">Expiry Date</label>
+                <div class="relative bg-secondary1/5 py-3 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl">
+                  <input id="date" class="border-none" placeholder="Select Date" autocomplete="off" />
+                  <i class="las la-calendar absolute ltr:right-4 rtl:left-4 top-1/2 -translate-y-1/2 cursor-pointer"></i>
+                </div>
+              </div>
+              <div class="col-span-2">
+                <label for="amount" class="mb-4 block font-medium md:text-lg">Amount</label>
+                <input type="number" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Enter Amount" id="amount" required />
+              </div>
+              <div class="col-span-2">
+                <label for="status" class="mb-4 block font-medium md:text-lg">Select Status</label>
+                <select name="currency" class="nc-select full dark:!border-n500">
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+              <div class="col-span-2 mt-4">
+                <button class="btn flex w-full justify-center" type="submit">Create Account</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Make Payment modal -->
+  <div class="qt-modal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+        <div class="relative">
+          <button class="qt-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0"><i class="las la-times"></i></button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Quick Transfer</h4>
+          </div>
+          <form action="{% url 'search_user' %}" method="POST" class="flex-fill">
+            {% csrf_token %}
+            <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+              <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 spend order-1">
+                <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                  <p>Enter account number to search</p>
+                </div>
+                <div class="flex justify-between items-center font-medium">
+                  <input type="number" class="bg-transparent" name="acc_number" placeholder="ex: 1234567890" maxlength="10" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button class="btn flex justify-center w-full" type="submit">Search Now</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Make Payment modal -->
+  <div class="qt-modal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+        <div class="relative">
+          <button class="qt-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0"><i class="las la-times"></i></button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Quick Transfer</h4>
+          </div>
+
+          <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+            <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 spend order-1">
+              <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                <p>Spend</p>
+                <p>Balance : 10,000 USD</p>
+              </div>
+              <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                <p class="shrink-0">$ USD</p>
+              </div>
+            </div>
+            <button class="p-2 border order-2 border-n30 dark:border-n500 self-center -my-4 relative z-[2] rounded-lg bg-n0 dark:bg-bg4 text-primary changeOrderBtn"><i class="las la-exchange-alt rotate-90"></i></button>
+            <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 receive order-3">
+              <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                <p>Receive</p>
+                <p>Balance : 10,000 USD</p>
+              </div>
+              <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                <p class="shrink-0">€ EURO</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="text-lg font-medium mb-6">Payment Method</p>
+            <div class="border border-primary border-dashed bg-primary/5 rounded-lg p-3 flex items-center gap-4 mb-6 lg:mb-8">
+              <img src="{% static 'dashboard/images/card-sm-1.png' %}" width="60" height="40" alt="card" />
+              <div>
+                <p class="font-medium mb-1">John Snow - Metal</p>
+                <span class="text-xs">**4291 - Exp: 12/26</span>
+              </div>
+            </div>
+            <a href="#" class="btn flex justify-center w-full">Send Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

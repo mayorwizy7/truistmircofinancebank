@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<div class="page-banner-area position-relative overflow-hidden"
+    style="background-image: url({% static 'assets/images/hero/hero-image-2.svg' %})">
+    <div class="container">
+        <div class="page-banner-content">
+            <h1>Our Services</h1>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li>Services</li>
+            </ul>
+        </div>
+    </div>
+    <div class="shape-image">
+        <img class="page-banner-shape-1 moveHorizontal_reverse" alt="shape"
+            data-cfsrc="{% static 'assets/images/shape/page-banner-shape-1.png' %}"
+            style="display:none;visibility:hidden;"><noscript><img class="page-banner-shape-1 moveHorizontal_reverse"
+                src="{% static 'assets/images/shape/page-banner-shape-1.png' %}" alt="shape"></noscript>
+        <img class="page-banner-shape-2 moveVertical" alt="shape"
+            data-cfsrc="{% static 'assets/images/shape/page-banner-shape-2.png' %}"
+            style="display:none;visibility:hidden;"><noscript><img class="page-banner-shape-2 moveVertical"
+                src="{% static 'assets/images/shape/page-banner-shape-2.png' %}" alt="shape"></noscript>
+    </div>
+</div>
+
+<div class="our-services-area ptb-120">
+    <div class="container">
+        <div class="section-title">
+            <span class="sub-title two bg-color-9edd05 rounded-pill">OUR SERVICES</span>
+            <h2>Get Started And Enjoy Full-Service Features</h2>
+        </div>
+        <div class="row g-4 justify-content-center" data-cues="slideInUp" data-duration="800">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-services-card bg-color-fffaeb radius-30">
+                    <h3>
+                        <a href="#!">Global Payments</a>
+                    </h3>
+                    <p>Seamless global payment solutions to facilitate your transactions anywhere in the world.</p>
+                    <div class="flex-warp d-flex align-items-center justify-content-between">
+                        <i class="flaticon-analysis mission"></i>
+                        <a href="#!" class="arrow-btn"><i class="ri-arrow-right-up-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-services-card bg-color-fffaeb radius-30">
+                    <h3>
+                        <a href="#!">Multiple Cards</a>
+                    </h3>
+                    <p>Manage your finances with various card options tailored to your needs.</p>
+                    <div class="flex-warp d-flex align-items-center justify-content-between">
+                        <i class="flaticon-mission mission"></i>
+                        <a href="#!" class="arrow-btn"><i class="ri-arrow-right-up-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-services-card bg-color-fffaeb radius-30">
+                    <h3>
+                        <a href="#!">Digital Wallet</a>
+                    </h3>
+                    <p>Your digital wallet for secure transactions and easy management of funds.</p>
+                    <div class="flex-warp d-flex align-items-center justify-content-between">
+                        <i class="flaticon-online-meeting mission"></i>
+                        <a href="#!" class="arrow-btn"><i class="ri-arrow-right-up-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-services-card bg-color-fffaeb radius-30">
+                    <h3>
+                        <a href="#!">Funding</a>
+                    </h3>
+                    <p>Access quick and flexible funding solutions tailored to your financial goals.</p>
+                    <div class="flex-warp d-flex align-items-center justify-content-between">
+                        <i class="flaticon-corporation mission"></i>
+                        <a href="#!" class="arrow-btn"><i class="ri-arrow-right-up-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-services-card bg-color-fffaeb radius-30">
+                    <h3>
+                        <a href="#!">Investment</a>
+                    </h3>
+                    <p>Explore investment opportunities designed to grow your wealth over time.</p>
+                    <div class="flex-warp d-flex align-items-center justify-content-between">
+                        <i class="flaticon-success mission"></i>
+                        <a href="#!" class="arrow-btn"><i class="ri-arrow-right-up-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-services-card bg-color-fffaeb radius-30">
+                    <h3>
+                        <a href="#!">Mobile Transaction</a>
+                    </h3>
+                    <p>Make transactions on the go with our secure mobile transaction services.</p>
+                    <div class="flex-warp d-flex align-items-center justify-content-between">
+                        <i class="flaticon-new-project mission"></i>
+                        <a href="#!" class="arrow-btn"><i class="ri-arrow-right-up-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-services-card bg-color-fffaeb radius-30">
+                    <h3>
+                        <a href="#!">Retail Banking</a>
+                    </h3>
+                    <p>Your trusted partner for all retail banking needs with personalized services.</p>
+                    <div class="flex-warp d-flex align-items-center justify-content-between">
+                        <i class="flaticon-business-reporting mission"></i>
+                        <a href="#!" class="arrow-btn"><i class="ri-arrow-right-up-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-services-card bg-color-fffaeb radius-30">
+                    <h3>
+                        <a href="#!">Online Banking</a>
+                    </h3>
+                    <p>Access your accounts anytime, anywhere with our user-friendly online banking platform.</p>
+                    <div class="flex-warp d-flex align-items-center justify-content-between">
+                        <i class="flaticon-pie-chart mission"></i>
+                        <a href="#!" class="arrow-btn"><i class="ri-arrow-right-up-line"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="service-pagination mt-5">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">
+                                <i class="ri-arrow-left-s-line"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link active" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">
+                                <i class="ri-arrow-right-s-line"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

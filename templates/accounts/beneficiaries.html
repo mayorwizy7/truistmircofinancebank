@@ -1,0 +1,341 @@
+{% extends 'base2.html' %}
+{% load custom_filters %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+  <!-- Main Content -->
+  <main class="main-content has-sidebar">
+    <div class="main-inner">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4 lg:mb-8">
+        <h2 class="h2">Beneficiaies</h2>
+        <a href="{% url 'add_account'%}"class="btn ac-modal-btn">
+          <i class="las la-plus-circle text-base md:text-lg"></i>
+          New Beneficiary
+        </a>
+      </div>
+
+      <!-- chat -->
+      <button class="md:hidden flex items-center gap-2 min-w-max py-2 px-3 relative z-[3] rounded-lg bg-primary text-n0 chatbtn"><i class="las la-user-friends shrink-0"></i> <span>beneficiaies</span></button>
+
+      <div class="rounded-2xl bg-n0 dark:bg-bg4 shadow-3 grid grid-cols-12 relative max-md:mt-3">
+        <div id="chat-sidebar" class="p-2 sm:p-4 duration-500 md:p-6 xl:p-8 max-md:w-[280px] max-md:max-h-[600px] max-md:overflow-y-auto max-md:rounded-xl max-md:absolute ltr:max-md:left-0 rtl:max-md:right-0 z-[3] max-md:bg-n0 max-md:dark:bg-bg4 max-md:top-0 md:col-span-5 xxl:col-span-4 md:border-r border-n30 dark:border-n500 chathide">
+          <form class="flex items-center p-2 border border-n30 dark:border-n500 bg-secondary1/5 dark:bg-bg3 rounded-full my-6">
+            <input type="text" id="search-input" placeholder="Search" class="w-full lg:px-6 bg-transparent border-0" />
+            <button type="button" class="grid place-content-center w-10 h-10 rounded-full border-0 bg-primary text-white shrink-0"><i class="las la-search"></i></button>
+          </form>
+          <div class="max-h-[600px] overflow-y-auto mt-5 md:mt-0" style="overflow-y: auto">
+            <ul class="flex flex-col gap-2" id="contact-list">
+              {% for beneficiary in beneficiaries %}
+              <li class="beneficiary-item" data-name="{{ beneficiary.acc_name }}" data-bank="{{ beneficiary.bank }}" data-acc-number="{{ beneficiary.acc_number }}" onclick="showContactDetails('{{ beneficiary.id }}', '{{ beneficiary.acc_name }}', '{{ beneficiary.bank }}', '{{ beneficiary.acc_number }}', '{{ beneficiary.image.url }}', '{{ beneficiary.rout_number }}', '{{ beneficiary.swift_code }}', '{{ beneficiary.type }}')">
+                <div class="flex flex-wrap items-center cursor-pointer gap-4 p-2 justify-center md:justify-start rounded-lg duration-300">
+                  {% if beneficiary.image.url %}
+                  <div class="md:w-11 md:h-11 w-8 h-8 relative z-[1] rounded-full shrink-0">
+                    <img width="44" height="44" src="{{ beneficiary.image.url }}" alt="image" class="w-full h-full object-fit-cover overflow-hidden rounded-full" />
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary3dark absolute right-1 bottom-1 z-[1]"></span>
+                  </div>
+                  {% endif %}
+                  <div class="flex-grow flex items-center justify-between gap-4">
+                    <div class="flex-grow">
+                      <p class="font-semibold mb-1">{{ beneficiary.acc_name }}</p>
+                      <span class="block text-xs">Bank: {{ beneficiary.bank }}</span>
+                      <span class="block text-xs">Account Number: {{ beneficiary.acc_number }}</span>
+                      {% comment %} <span class="block text-xs">Just ideas for next time</span> {% endcomment %}
+                    </div>
+                  </div>
+                </div>
+                <hr class="border-dashed" />
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-span-6 md:col-span-7 xxl:col-span-4">
+          <div class="chat-box__content-head p-4 md:p-6">
+            <input type="text" class="hidden" id="contact-id" name="id" />
+            <input type="text" class="hidden" id="contact-image-url" name="image" />
+            <form id="" action="{% url 'check_account' %}" method="POST" enctype="multipart/form">
+              {% csrf_token %}
+              <div class="flex items-center justify-between flex-wrap gap-4">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 md:w-14 md:h-14 relative z-[1] rounded-full shrink-0">
+                    <img id="contact-image" width="100" height="100" class="rounded-full" />
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary3dark absolute right-0.5 bottom-0.5 z-[1]"></span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <br>
+                <a id="profile-link" href="#" class=" btn block text-xs mb-4">Edit Beneficiary</a>
+                <label for="contact-name">Name:</label>
+                <input type="text" id="contact-name" name="acc_name" class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3 mb-4"  />
+                <br>
+                <label for="contact-bank">Type:</label>
+                <input type="text" id="contact-type" name="type" class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3  mb-4" />
+                <br>
+                <label for="contact-bank">Bank:</label>
+                <input type="text" id="contact-bank" name="bank" class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3  mb-4" />
+                <br />
+                <label for="contact-acc-number">Account Number:</label>
+                <input type="text" id="contact-acc-number" name="acc_number" class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3  mb-4" />
+                <br />
+                <label for="contact-rout-number">Rout Number:</label>
+                <input type="text" id="contact-rout-number" name="rout_number" class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3  mb-4" />
+                <br />
+                <label for="contact-swift-code">Swift Code:</label>
+                <input type="text" id="contact-swift-code" name="swift_code" class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3  mb-4" />
+                
+                
+              </div>
+            </div>
+              <div></div>
+              <div class="col-span-2">
+                <div class="flex mt-6 xxl:mt-10 gap-4">
+                  <button type="submit" class="btn px-5 w-full  justify-center">Proceed</button>
+                  <!-- <button class="btn-outline px-5">Cancel</button> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        
+        </div>
+        
+        <script>
+          function showContactDetails(id, name, bank, accNumber, imageUrl, routNumber, swiftCode, type) {
+            document.getElementById("contact-id").value = id;
+            document.getElementById("contact-image").src = imageUrl;
+            document.getElementById("contact-image-url").value = imageUrl;
+            document.getElementById("contact-name").value = name;
+            document.getElementById("contact-bank").value = bank;
+            document.getElementById("contact-acc-number").value = accNumber;
+            document.getElementById("contact-rout-number").value = routNumber;
+            document.getElementById("contact-swift-code").value = swiftCode;
+            document.getElementById("contact-type").value = type;
+        
+            // Construct the URL with the beneficiary ID
+            var profileUrl = "{% url 'edit_beneficiary' 999 %}".replace('999', id);
+            console.log("Profile URL:", profileUrl); // Check the constructed URL
+            document.getElementById("profile-link").href = profileUrl;
+          }
+        
+          // Optional: You can also add an event listener to the form to handle form submission
+          document.getElementById("contact-details-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Handle form submission here (e.g., send data to server using AJAX)
+            console.log("Form submitted!");
+          });
+        </script>
+        <script>
+          function CalculateBalance(){
+              let available_balance = "{{ user.available_balance }}" // Get users current account balance 
+              let new_balance = document.getElementById("new_balance")
+              let sendAmount_input = document.getElementById("amount-send")
+              let sendAmount = sendAmount_input.value
+              let errorDiv = document.getElementById("error-div")
+              let total_to_pay = document.getElementById("total-to-pay")
+      
+              let errors = []
+      
+              new_bal = available_balance - sendAmount
+              console.log(new_bal);
+      
+              // new_balance.innerHTML = `New Balance $${new_bal.toString().replace(/\B(?))}`
+              new_balance.innerHTML = `New Balance <b> $${new_bal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </b>`;
+              total_to_pay.innerHTML = `USD <b> $${sendAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </b>`;
+      
+              if (new_bal < 0){
+                  new_balance.style.color = "red"
+                  alert("You can only send $" + available_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+              } else {
+                  new_balance.style.color = "#20b757"
+      
+              }
+          
+          }
+          
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const searchInput = document.getElementById("search-input");
+          const beneficiaryItems = document.querySelectorAll(".beneficiary-item");
+        
+          searchInput.addEventListener("input", function(event) {
+            const query = event.target.value.toLowerCase().trim();
+        
+            beneficiaryItems.forEach(function(item) {
+              const name = item.dataset.name.toLowerCase();
+              const bank = item.dataset.bank.toLowerCase();
+              const accNumber = item.dataset.accNumber.toLowerCase();
+              const containsQuery = name.includes(query) || bank.includes(query) || accNumber.includes(query);
+        
+              if (containsQuery) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
+              }
+            });
+          });
+        });
+        
+      </script>
+      </div>
+    </div>
+  </main>
+
+
+
+  <!-- open Account modal -->
+  <div class="ac-modal-overlay fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div class="modal box modal-inner absolute left-1/2 my-10 max-h-[90vh] w-[95%] max-w-[710px] duration-300 -translate-x-1/2 overflow-y-auto xl:p-8">
+        <!-- { "translate-y-0 scale-100 opacity-100 my-10": open } -->
+        <div class="relative">
+          <button class="ac-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0"><i class="las la-times"></i></button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Create Bank Account</h4>
+          </div>
+          <form>
+            <p class="mb-4 text-lg font-medium">Profile Photo</p>
+            <div class="mb-6 flex flex-wrap items-center gap-5 xl:gap-10">
+              <img src="{% static 'dashboard/images/placeholder.png' %}" class="h-20 w-20 lg:h-auto lg:w-auto" alt="placeholder" />
+              <div class="flex gap-4">
+                <input type="file" name="photo" id="photo" class="hidden" />
+                <label for="photo" class="btn">Upload Photo</label>
+                <button class="btn-outline">Cancel</button>
+              </div>
+            </div>
+            <div class="mt-6 grid grid-cols-2 gap-4 xl:mt-8 xxxl:gap-6">
+              <div class="col-span-2">
+                <label for="name" class="mb-4 block font-medium md:text-lg">Account Holder Name</label>
+                <input type="text" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Enter Name" id="name" required />
+              </div>
+              <div class="col-span-2">
+                <label for="number" class="mb-4 block font-medium md:text-lg">Phone Number</label>
+                <input type="number" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Enter Number" id="number" required />
+              </div>
+              <div class="col-span-2">
+                <label for="currency" class="mb-4 block font-medium md:text-lg">Select Currency</label>
+                <select name="currency" class="nc-select full dark:!border-n500">
+                  <option value="usd">USD</option>
+                  <option value="gbp">GBP</option>
+                  <option value="yen">YEN</option>
+                  <option value="jpn">JPN</option>
+                </select>
+              </div>
+              <div class="col-span-2 md:col-span-1">
+                <label for="rate" class="mb-4 block font-medium md:text-lg">Interest Rate</label>
+                <input type="number" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Interest Rate %" id="rate" required />
+              </div>
+              <div class="col-span-2 md:col-span-1">
+                <label for="expire" class="mb-4 block font-medium md:text-lg">Expiry Date</label>
+                <div class="relative bg-secondary1/5 py-3 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl">
+                  <input id="date" class="border-none" placeholder="Select Date" autocomplete="off" />
+                  <i class="las la-calendar absolute ltr:right-4 rtl:left-4 top-1/2 -translate-y-1/2 cursor-pointer"></i>
+                </div>
+              </div>
+              <div class="col-span-2">
+                <label for="amount" class="mb-4 block font-medium md:text-lg">Amount</label>
+                <input type="number" class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3" placeholder="Enter Amount" id="amount" required />
+              </div>
+              <div class="col-span-2">
+                <label for="status" class="mb-4 block font-medium md:text-lg">Select Status</label>
+                <select name="currency" class="nc-select full dark:!border-n500">
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+              <div class="col-span-2 mt-4">
+                <button class="btn flex w-full justify-center" type="submit">Create Account</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Make Payment modal -->
+  <div class="qt-modal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+        <div class="relative">
+          <button class="qt-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0"><i class="las la-times"></i></button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Quick Transfer</h4>
+          </div>
+          <form action="{% url 'search_user' %}" method="POST" class="flex-fill">
+            {% csrf_token %}
+            <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+              <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 spend order-1">
+                <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                  <p>Enter account number to search</p>
+                </div>
+                <div class="flex justify-between items-center font-medium">
+                  <input type="number" class="bg-transparent" name="acc_number" placeholder="ex: 1234567890" maxlength="10" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button class="btn flex justify-center w-full" type="submit">Search Now</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Make Payment modal -->
+  <div class="qt-modal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+        <div class="relative">
+          <button class="qt-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0"><i class="las la-times"></i></button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Quick Transfer</h4>
+          </div>
+
+          <div class="bb-dashed pb-4 mb-4 lg:mb-6 lg:pb-6 flex flex-col">
+            <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 spend order-1">
+              <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                <p>Spend</p>
+                <p>Balance : 10,000 USD</p>
+              </div>
+              <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                <p class="shrink-0">$ USD</p>
+              </div>
+            </div>
+            <button class="p-2 border order-2 border-n30 dark:border-n500 self-center -my-4 relative z-[2] rounded-lg bg-n0 dark:bg-bg4 text-primary changeOrderBtn"><i class="las la-exchange-alt rotate-90"></i></button>
+            <div class="box border border-n30 dark:border-n500 bg-primary/5 dark:bg-bg3 xl:p-3 xxl:p-4 receive order-3">
+              <div class="flex justify-between gap-3 bb-dashed items-center text-sm mb-4 pb-4">
+                <p>Receive</p>
+                <p>Balance : 10,000 USD</p>
+              </div>
+              <div class="flex justify-between items-center text-xl gap-4 font-medium">
+                <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
+                <p class="shrink-0">€ EURO</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="text-lg font-medium mb-6">Payment Method</p>
+            <div class="border border-primary border-dashed bg-primary/5 rounded-lg p-3 flex items-center gap-4 mb-6 lg:mb-8">
+              <img src="{% static 'dashboard/images/card-sm-1.png' %}" width="60" height="40" alt="card" />
+              <div>
+                <p class="font-medium mb-1">John Snow - Metal</p>
+                <span class="text-xs">**4291 - Exp: 12/26</span>
+              </div>
+            </div>
+            <a href="#" class="btn flex justify-center w-full">Send Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

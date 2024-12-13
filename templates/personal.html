@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- Start Page Banner Area -->
+<div class="ctp-page-banner-area" data-jarallax='{"speed": 0.3}'>
+    <div class="container">
+        <div class="ctp-page-banner-content">
+            <h3>Personal</h3>
+            <ul class="list">
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>Personal</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Banner Area -->
+
+<div class="currency-transfer-provider-with-background-color">
+
+    <!-- Start Services Area -->
+    <div class="ctp-services-area pt-100 pb-75">
+        <div class="container">
+            <div class="section-title ctp-title">
+                <h2>Personal Currency Transfers Services</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="ctp-services-card">
+                        <h3>
+                            <div class="icon">
+                                <img src="{% static 'assets/img/currency-transfer-provider/services/mobile-payment.svg' %}" alt="image">
+                            </div>
+                            Regular Payments
+                        </h3>
+                        <p>Enjoy the convenience of regular payments with Truist Mircofinance Bank, ensuring your bills and obligations are met seamlessly and on time.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6">
+                    <div class="ctp-services-card">
+                        <h3>
+                            <div class="icon">
+                                <img src="{% static 'assets/img/currency-transfer-provider/services/warning.svg' %}" alt="image">
+                            </div>
+                            Rate Alerts
+                        </h3>
+                        <p>Stay informed about favorable rates with Truist Mircofinance Bank's rate alerts, helping you make timely and informed financial decisions.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6">
+                    <div class="ctp-services-card">
+                        <h3>
+                            <div class="icon">
+                                <img src="{% static 'assets/img/currency-transfer-provider/services/fluctuation.svg' %}" alt="image">
+                            </div>
+                            Market Analysis
+                        </h3>
+                        <p>Access insightful market analysis from Truist Mircofinance Bank, empowering you to make informed financial decisions and stay ahead in a dynamic market landscape.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6">
+                    <div class="ctp-services-card">
+                        <h3>
+                            <div class="icon">
+                                <img src="{% static 'assets/img/currency-transfer-provider/services/contract.svg' %}" alt="image">
+                            </div>
+                            Spot Contracts
+                        </h3>
+                        <p>Secure your foreign exchange needs efficiently with Truist Mircofinance Bank's spot contracts, ensuring instant and competitive currency exchange rates for seamless transactions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Services Area -->
+
+    <!-- Start Currency Area -->
+    <div class="ctp-currency-area pb-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="ctp-currency-image"></div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="ctp-currency-content">
+                        <h3>Personal Currency Transfers</h3>
+                        <p>With Truist Mircofinance Bank's personal currency transfers, you can conveniently send and receive money internationally, benefiting from competitive exchange rates and low fees. Whether it's supporting loved ones abroad or managing personal finances across borders, we make global money transfers simple, secure, and cost-effective.</p>
+                        <p>Our personal currency transfer service offers you the flexibility to send funds to over 100 countries, making it easy to support family, pay bills, or invest globally. With our user-friendly online platform and dedicated customer support, you can track your transfers, receive real-time updates, and ensure a smooth and reliable transaction experience. Trust Truist Mircofinance Bank for your personal currency transfers and experience the convenience and peace of mind you deserve.</p>
+                        <ul class="list">
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Regular Payments
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Emigration
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Sending Money Home
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Excellent Exchange Rates
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Currency Area -->
+
+    <!-- Start Send Money Online Area -->
+    <div class="ctp-send-money-online-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-7 col-md-12">
+                    <div class="ctp-send-money-online-content">
+                        <h1>There are only a few steps you can take to send money online</h1>
+                        <ul class="ctp-list">
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Move money on-the-go
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Currency wallets
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/img/currency-transfer-provider/circle-check.svg' %}" alt="image"> Set rate alerts
+                            </li>
+                        </ul>
+                        <div class="video-view">
+                            <a href="#" class="video-btn popup-youtube">
+                                        <i class="fas fa-play"></i> 
+                                        <span>See how it works</span>
+                                    </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-12">
+                    <form class="ctp-send-money-online-form">
+                        <div class="form-header">
+                            <span>Exchange Rate</span>
+                            <h3>1 GBP = 1.29356 USD</h3>
+                        </div>
+                        <div class="form-content">
+                            <div class="form-group">
+                                <label>Delivery Method</label>
+                                <select>
+                                            <option>Bank Transfer</option>
+                                            <option>Send Money</option>
+                                            <option>Interest Money</option>
+                                            <option>Invest Money</option>
+                                        </select>
+                            </div>
+                            <div class="form-group">
+                                <label>You Transfer</label>
+                                <input type="text" class="form-control" autocomplete="off" value="100">
+                                <div class="amount-currency-select">
+                                    <select>
+                                                <option>GBP</option>
+                                                <option>USD</option>
+                                                <option>EUR</option>
+                                                <option>BRL</option>
+                                            </select>
+                                </div>
+                            </div>
+                            <div class="form-group zero">
+                                <label>Recipient Gets</label>
+                                <input type="text" class="form-control" autocomplete="off" value="129.35">
+                                <div class="amount-currency-select">
+                                    <select>
+                                                <option>USD</option>
+                                                <option>GBP</option>
+                                                <option>EUR</option>
+                                                <option>BRL</option>
+                                            </select>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <p><span>Delivery Time:</span> 3 Working Days</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Send Money Online Area -->
+
+    <!-- Start Protec Area -->
+    <div class="ctp-protec-area pt-100 pb-75">
+        <div class="container">
+            <div class="section-title ctp-title">
+                <h2>Protecting Your Money</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="ctp-protec-card">
+                        <div class="content">
+                            <div class="number">
+                                <span>01</span>
+                            </div>
+                            <h3>Safeguarded with leading banks</h3>
+                            <p>Rest assured knowing that your funds are safeguarded with Truist Mircofinance Bank, partnering with industry-leading banks for enhanced security and protection.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="ctp-protec-card">
+                        <div class="content">
+                            <div class="number color-two">
+                                <span>02</span>
+                            </div>
+                            <h3>Extra-secure transactions</h3>
+                            <p>Truist Mircofinance Bank: Where your financial needs are met with leading security measures, convenience, and dedicated customer support.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="ctp-protec-card">
+                        <div class="content">
+                            <div class="number color-two">
+                                <span>03</span>
+                            </div>
+                            <h3>Audited regularly</h3>
+                            <p>Rest assured knowing that Truist Mircofinance Bank is audited regularly to ensure compliance, transparency, and the highest standards of financial integrity.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="ctp-protec-card">
+                        <div class="content">
+                            <div class="number">
+                                <span>04</span>
+                            </div>
+                            <h3>Data protection</h3>
+                            <p>At Truist Mircofinance Bank, we prioritize the protection of your data through advanced security measures and strict privacy protocols.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Protec Area -->
+
+    <!-- Start World Area -->
+    <div class="ctp-world-area pb-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="ctp-world-content">
+                        <h3>Receive money from all over the world</h3>
+
+                        <div class="world-inner-card">
+                            <h4>Get paid like a local</h4>
+                            <p>With Truist Mircofinance Bank, enjoy the convenience of getting paid like a local, wherever you are in the world, with our seamless international payment solutions.</p>
+                        </div>
+                        <div class="world-inner-card">
+                            <h4>Convert your money in seconds</h4>
+                            <p>Convert your currency instantly with Truist Mircofinance Bank's efficient currency conversion service, ensuring quick and seamless transactions in seconds.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="ctp-world-image"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End About Area -->
+
+    <!-- Start Countries Area -->
+    <div class="ctp-countries-area pb-75">
+        <div class="container">
+            <div class="section-title ctp-title">
+                <h2>Popular Countries Our Customers Send Money</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img1.png' %}" alt="image">
+                        <span>USA</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img2.png' %}" alt="image">
+                        <span>UK</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img3.png' %}" alt="image">
+                        <span>New Zealand</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img4.png' %}" alt="image">
+                        <span>France</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img5.png' %}" alt="image">
+                        <span>Germany</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img6.png' %}" alt="image">
+                        <span>Italy</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img7.png' %}" alt="image">
+                        <span>Greece</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img8.png' %}" alt="image">
+                        <span>China</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img9.png' %}" alt="image">
+                        <span>Kuwait</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img10.png' %}" alt="image">
+                        <span>Argentina</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img11.png' %}" alt="image">
+                        <span>Sweden</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-md-4">
+                    <div class="ctp-countries-card">
+                        <img src="{% static 'assets/img/currency-transfer-provider/countries/img12.png' %}" alt="image">
+                        <span>Thailand</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Countries Area -->
+
+</div>
+{% endblock content %}

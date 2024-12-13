@@ -1,0 +1,110 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<style>
+    .main-inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        {% comment %} height: 100vh; /* Ensure the container covers the full viewport height */ {% endcomment %}
+    }
+    
+    .transfer-form-container {
+        width: 100%; /* Optionally, adjust the width of the container */
+        max-width: 500px; /* Adjust the maximum width of the container as needed */
+    }
+    
+</style>
+  <!-- Main Content -->
+<main class="main-content has-sidebar">
+    <div class="main-inner">
+        <div class="transfer-form-container">
+
+      {% if receiver %}
+        <div class="col-span-3 lg:col-span-3">
+          <div class="box xxl:p-8 xl:p-10">
+            <h4 class="h4 bb-dashed mb-4 pb-4 md:mb-6 md:pb-6">Transfer Detail Form</h4>
+            <div class="flex flex-wrap gap-6 xxl:gap-10 items-center bb-dashed mb-6 pb-6">
+              <img src="{{ receiver.profile_pic.url }}" width="120" height="120" class="rounded-xl" alt="img" />
+              <div>
+                  <p class="md:text-lg font-medium block">{{ receiver.first_name }} {{ receiver.last_name }}</p> <br>
+                  <p class="md:text-lg font-medium block mb-4">{{ receiver.acc_number }}</p>
+                  
+              </div>
+            </div>
+            <form action="{% url 'form_view' %}" method="POST" enctype="multipart/form-data" class="mt-6">
+              {% csrf_token %}
+                <label for="fname" class="md:text-lg font-medium block mb-4">Amount</label>
+                <input  class="w-full bg-primary/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3" name="amount" onkeyup="CalculateBalance()" placeholder="${{ user.available_balance|intcomma }}" type="number" id="amount-send" required="required" />
+                <p class="md:text-lg font-medium block mb-4 mt-4">Available Balance: <b>${{ user.available_balance|intcomma }}</b></p>
+                <p class="md:text-lg font-medium block mb-4" id="new_balance"></p>
+                <p class="md:text-lg font-medium block mb-4 text-danger" id="error-div"></p>
+                <input type="text" class="w-full bg-primary/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3" onkeyup="CalculateBalance()" placeholder="Payment for fees"  name="remark" required="required" />
+                <div class="col-span-2 md:col-span-1">
+                    <br>
+                    <hr class=" bb-dashed  mb-4  ">
+                  <ul class="total-fees">
+                      <h5>Total Fees</h5>
+                      <li style="color: #20b757;">Free</li>
+
+                      <hr class="h4 bb-dashed mb-4   ">
+                      <li>
+                          <h5>Total To Pay</h5>
+                      </li>
+                      <li>
+                          <li><h5 id="total-to-pay" style="color: #20b757;">USD 0.00</h5></li>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+                <input class="xxlr" name="acc_number" value="{{ user.acc_number }}" type="hidden">
+                <input class="xxlr" name="receiver" value="{{ receiver.acc_number }}" type="hidden">
+              <div></div>
+              <div class="col-span-2">
+                <div class="flex mt-6 xxl:mt-10 gap-4">
+                  <button type="submit" class="btn px-5 w-full  justify-center">Proceed</button>
+                  <!-- <button class="btn-outline px-5">Cancel</button> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        {% endif %}
+        </div>
+    </div>
+</main>
+
+<script>
+    function CalculateBalance(){
+        let available_balance = "{{ user.available_balance }}" // Get users current account balance 
+        let new_balance = document.getElementById("new_balance")
+        let sendAmount_input = document.getElementById("amount-send")
+        let sendAmount = sendAmount_input.value
+        let errorDiv = document.getElementById("error-div")
+        let total_to_pay = document.getElementById("total-to-pay")
+
+        let errors = []
+
+        new_bal = available_balance - sendAmount
+        console.log(new_bal);
+
+        // new_balance.innerHTML = `New Balance $${new_bal.toString().replace(/\B(?))}`
+        new_balance.innerHTML = `New Balance <b> $${new_bal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </b>`;
+        total_to_pay.innerHTML = `USD <b> $${sendAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </b>`;
+
+        if (new_bal < 0){
+            new_balance.style.color = "red"
+            alert("You can only send $" + available_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+        } else {
+            new_balance.style.color = "#20b757"
+
+        }
+    
+    }
+</script>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

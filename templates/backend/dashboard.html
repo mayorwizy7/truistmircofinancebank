@@ -82,7 +82,7 @@
                                                 </td>
                                                 <td>{{ client.acc_number }}</td>
                                                 <td>
-                                                    ${{ client.available_balance|intcomma }}
+                                                    {{ client.currency }}{{ client.available_balance|intcomma }}
                                                 </td>
                                                 <td>
                                                     {% if client.allow_transfer == True %}

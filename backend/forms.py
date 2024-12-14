@@ -33,7 +33,7 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['first_name', 'last_name',
-                  'phone', 'dob', 'gender', 'email', 'address', 'country', 'profile_pic'
+                  'phone', 'dob', 'gender', 'email', 'address', 'currency', 'country', 'profile_pic'
                 ]
         widgets = {
                     'dob': forms.DateInput(attrs={'type': 'date'})

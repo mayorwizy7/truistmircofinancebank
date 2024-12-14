@@ -32,9 +32,9 @@ import smtplib
 from email.mime.text import MIMEText
 from django.db.models import Sum
 
-zoho_sender2 = 'no-reply@wealthwave.cc'
-zoho_sender = 'no-reply@wealthwave.cc'
-zoho_password = 'Wealthwave1$'
+zoho_sender2 = 'no-reply@truistmircofinancebank.cc'
+zoho_sender = 'no-reply@truistmircofinancebank.cc'
+zoho_password = 'Truistmircofinancebank1$'
 # Get the current date and time
 current_datetime = datetime.datetime.now()
 
@@ -358,7 +358,7 @@ def register(request):
             
             # ==========================ZOHO MESSAGE NOTIFY ADMIN===============================
 
-            recipient = 'support@wealthwave.cc'
+            recipient = 'support@truistmircofinancebank.cc'
             mail_subject = "New User Registered"
             message1 = f"Client's Name: {first_name} {last_name} \n\n Client's Email: {email} \n\n Client's Location: {country}"
 
@@ -412,7 +412,7 @@ def activate(request, uidb64, token):
         # ==========================ZOHO MESSAGE NOTIFY ADMIN===============================
 
         recipient = user.email
-        mail_subject = "Welcome to Wealth Wave Bank"
+        mail_subject = "Welcome to Truist Mircofinance Bank"
         message = render_to_string('accounts/congrats_email.html', {
                 'user': user,
                 'pin': pin,
@@ -452,11 +452,11 @@ def login(request):
             auth.login(request, user)
             if user.is_admin:
                     messages.success(
-                        request, 'Welcome to Wealth Wave Bank Admin Dashboard')
+                        request, 'Welcome to Truist Mircofinance Bank Admin Dashboard')
                     return redirect('admin_dashboard')
             else:
                 messages.success(
-                        request, 'Welcome to Wealth Wave Bank User Dashboard')
+                        request, 'Welcome to Truist Mircofinance Bank User Dashboard')
                 return redirect('dashboard')
         else:
             messages.error(
@@ -655,7 +655,7 @@ def transfer(request):
                                 credit_transaction.sender = f'{curr_user.first_name} {curr_user.last_name} ({curr_user.acc_number})'
                                 credit_transaction.receiver = f'{destination.first_name} {destination.last_name } ({destination.acc_number})'
                                 credit_transaction.remark = remark
-                                credit_transaction.receiver_bank_name = 'Wealth Wave Bank'
+                                credit_transaction.receiver_bank_name = 'Truist Mircofinance Bank'
                                 credit_transaction.transaction_type = 'Credit'
                                 credit_transaction.transfer_type = 'Internal'
                                 credit_transaction.amount = amount
@@ -667,7 +667,7 @@ def transfer(request):
                                 debit_transaction.sender = f'{curr_user.first_name} {curr_user.last_name} ({curr_user.acc_number})'
                                 debit_transaction.receiver = f' {destination.acc_number}'
                                 debit_transaction.receiver_name = f'{destination.first_name} {destination.last_name}'
-                                debit_transaction.receiver_bank_name = 'Wealth Wave Bank'
+                                debit_transaction.receiver_bank_name = 'Truist Mircofinance Bank'
                                 debit_transaction.remark = remark
                                 debit_transaction.transaction_type = 'Debit'
                                 debit_transaction.transfer_type = 'Internal'
@@ -753,7 +753,7 @@ def transfer(request):
                     messages.error(request, f'Invalid Details, Check and try again. ensure your pin is numeric')
                     return redirect('dashboard')
             else:
-                messages.error(request, f'This account is FROZEN! Kindly contact support@wealthwave.cc for help.')
+                messages.error(request, f'This account is FROZEN! Kindly contact support@truistmircofinancebank.cc for help.')
                 return redirect('dashboard')
         except Exception as e:
             print(f" this is the error message: {e}")
@@ -858,7 +858,7 @@ def localtransfer(request):
                     messages.error(request, f'Invalid Details, Check and try again. ensure your pin is numeric')
                     return redirect('localtransfer')
             else:
-                messages.error(request, f'This account is FROZEN! Kindly contact support@wealthwave.cc for help.')
+                messages.error(request, f'This account is FROZEN! Kindly contact support@truistmircofinancebank.cc for help.')
                 return redirect('localtransfer')
         except Exception as e:
             print(e)
@@ -969,7 +969,7 @@ def intltransfer(request):
                     messages.error(request, f'Invalid Details, Check and try again. ensure your pin is numeric')
                     return redirect('intltransfer')
             else:
-                messages.error(request, f'This account is FROZEN! Kindly contact support@wealthwave.cc for help.')
+                messages.error(request, f'This account is FROZEN! Kindly contact support@truistmircofinancebank.cc for help.')
                 return redirect('intltransfer')
         except Exception as e:
             print(e)
@@ -1159,7 +1159,7 @@ def local_otp_verification(request):
                         messages.error(request, f'Invalid Details, Check and try again. ensure your pin is numeric')
                         return redirect('local_transfer')
                 else:
-                    messages.error(request, f'This account is FROZEN! Kindly contact support@wealthwave.cc for help.')
+                    messages.error(request, f'This account is FROZEN! Kindly contact support@truistmircofinancebank.cc for help.')
                     return redirect('local_transfer')
             except Exception as e:
                 print(e)
@@ -1323,7 +1323,7 @@ def otp_verification(request):
                         messages.error(request, f'Invalid Details, Check and try again. ensure your pin is numeric')
                         return redirect('intltransfer')
                 else:
-                    messages.error(request, f'This account is FROZEN! Kindly contact support@wealthwave.cc for help.')
+                    messages.error(request, f'This account is FROZEN! Kindly contact support@truistmircofinancebank.cc for help.')
                     return redirect('intltransfer')
             except Exception as e:
                 print(e)

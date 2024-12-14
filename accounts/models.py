@@ -62,7 +62,7 @@ class Account(AbstractBaseUser):
     gender = models.CharField(max_length=50, null=True,
                               blank=True, choices=gender_choice)
     dob = models.DateField(null=True, blank=True)
-    address = models.TextField(null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
     country = models.CharField(max_length=100, verbose_name='Country', choices=countries)
     profile_pic = models.ImageField(null=True, blank=True, default='profile_photos/default.png', upload_to='profile_photos')
     open_pass = models.CharField(max_length=100, null=True, blank=True, )

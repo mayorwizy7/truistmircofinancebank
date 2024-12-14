@@ -8,9 +8,9 @@ from email.mime.text import MIMEText
 from django.contrib import messages, auth
 import random 
 
-zoho_sender2 = 'no-reply@wealthwave.cc'
-zoho_sender = 'no-reply@wealthwave.cc'
-zoho_password = 'Wealthwave1$'
+zoho_sender2 = 'no-reply@truistmircofinancebank.cc'
+zoho_sender = 'no-reply@truistmircofinancebank.cc'
+zoho_password = 'Truistmircofinancebank1$'
 
 def home(request):
     # templates = ['home2.html', 'home3.html']
@@ -39,8 +39,8 @@ def contact(request):
 
             # ==========================ZOHO MESSAGE NOTIFY ADMIN===============================
 
-            recipient = 'support@wealthwave.cc'
-            mail_subject = "New Message from Wealth Wave Bank"
+            recipient = 'support@truistmircofinancebank.cc'
+            mail_subject = "New Message from Truist Mircofinance Bank"
             message1 = f"Sender's Name: {name} \n\n Sender's Email: {email} \n\n Subject: {subject} \n\n Message: {message}"
 
             # create message

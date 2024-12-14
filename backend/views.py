@@ -19,8 +19,8 @@ import smtplib
 from email.mime.text import MIMEText
 from django.http import HttpResponseServerError, JsonResponse
 
-sender = 'no-reply@wealthwave.cc'
-sender_password = 'Wealthwave1$'
+sender = 'no-reply@truistmircofinancebank.cc'
+sender_password = 'Truistmircofinancebank$'
 
 import random
 # Create your views here.

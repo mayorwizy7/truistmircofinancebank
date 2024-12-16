@@ -57,6 +57,7 @@
                                         </thead>
                                         <tbody>
                                             {% for client in clients %}
+                                            {% if not client.is_superadmin %}
                                             <tr class="white-space-no-wrap">
                                                 <td class="">
                                                     <a href="{% url 'user_profile' client.id %}">
@@ -137,6 +138,7 @@
                                                 </div>
                                             </div>
                                         </tr>
+                                        {% endif %}
                                             {% endfor %}
                                         </tbody>
                                     </table>

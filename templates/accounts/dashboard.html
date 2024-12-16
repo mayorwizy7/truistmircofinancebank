@@ -64,12 +64,11 @@
             <div>
               <p class="mb-4 font-medium">Main Balance</p>
               <div class="flex items-center gap-2">
-                <h2 class="h4">{{user.currency}}{{ user.available_balance|intcomma }}</h2>
-                {% comment %} <span class="flex items-center gap-1 text-sm text-primary"><i
-                    class="las la-arrow-up text-base"></i> 50.8%</span> {% endcomment %}
+                <h1 class="">{{user.currency}}{{ user.available_balance|intcomma }}</h1>
+                
               </div>
             </div>
-            <div class="max-w-[200px]">
+            <div class="max-w-[100px]">
               <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="50" height="50"
                   fill=" rgb(32 183 87)">
@@ -84,7 +83,7 @@
             <div>
               <p class="mb-4 font-medium">Last Received</p>
               <div class="flex items-center gap-2">
-                <h2 class="h4">{{user.currency}}{{ user.last_received|intcomma }}</h2>
+                <h1 class="h4">{{user.currency}}{{ user.last_received|intcomma }}</h1>
 
               </div>
             </div>
@@ -102,7 +101,7 @@
             <div>
               <p class="mb-4 font-medium">Ledger Balance</p>
               <div class="flex items-center gap-2">
-                <h2 class="h4">{{user.currency}}{{ user.ledger_balance|intcomma }}</h2>
+                <h1 class="h4">{{user.currency}}{{ user.ledger_balance|intcomma }}</h1>
                 {% comment %} <span class="flex items-center gap-1 text-sm text-primary"><i
                     class="las la-arrow-up text-base"></i> 50.8%</span> {% endcomment %}
               </div>
@@ -662,7 +661,7 @@
 
       if (hour < 12) {
           greeting = "Good morning";
-      } else if (hour < 18) {
+      } else if (hour < 16) {
           greeting = "Good afternoon";
       } else {
           greeting = "Good evening";

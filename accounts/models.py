@@ -3,7 +3,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
 from shortuuid.django_fields import ShortUUIDField
 from phonenumber_field.modelfields import PhoneNumberField
-from . countries import countries, currency_symbols_tuple
+from . countries import countries
+from . currency import currency_symbols_tuple
 
 
 

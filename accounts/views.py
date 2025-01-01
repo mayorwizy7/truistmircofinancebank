@@ -14,7 +14,7 @@ from .sms import sms
 import locale
 import datetime
 from django.http import JsonResponse
-
+from .currency import currency_symbols, convert_currency
 
 
 
@@ -42,8 +42,11 @@ current_datetime = datetime.datetime.now()
 formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
 
+
 @login_required(login_url='login')
 def dashboard(request):
+    selected_currency = request.user.currency
+    currency_symbol = currency_symbols.get(selected_currency, "")
     transactions = TransferHistory.objects.filter(
         account=request.user).order_by('-transaction_time')
     
@@ -95,12 +98,15 @@ def dashboard(request):
                 'form': form,
                 'credit_card': credit_card,
                 'total_bal': total_bal,
+                'currency_symbol': currency_symbol,
                }
     return render(request, 'accounts/dashboard.html', context)
 
 
 
 def transaction_detail(request, id):
+    selected_currency = request.user.currency
+    currency_symbol = currency_symbols.get(selected_currency, "")
     transaction = TransferHistory.objects.get(id=id)
     total = 0  # Initialize total with a default value
     
@@ -114,7 +120,8 @@ def transaction_detail(request, id):
 
     context = {
         "transaction":transaction,
-        "total_amount": total
+        "total_amount": total,
+        "currency_symbol": currency_symbol,
 
     }
     return render(request, 'accounts/transaction_detail.html', context)
@@ -124,6 +131,8 @@ def transaction_detail(request, id):
 
 
 def transfer_success(request, id):
+    selected_currency = request.user.currency
+    currency_symbol = currency_symbols.get(selected_currency, "")
     transaction = TransferHistory.objects.get(id=id)
     total = 0  # Initialize total with a default value
     
@@ -148,7 +157,8 @@ def transfer_success(request, id):
 
     context = {
         "transaction":transaction,
-        "total_amount": total
+        "total_amount": total,
+        "currency_symbol": currency_symbol,
 
     }
     return render(request, 'accounts/transfer_success.html', context)
@@ -175,6 +185,8 @@ def add_beneficiary(request):
 
 @login_required(login_url='login')
 def transactions(request):
+    selected_currency = request.user.currency
+    currency_symbol = currency_symbols.get(selected_currency, "")
     transactions = TransferHistory.objects.filter(
         account=request.user).order_by('-transaction_time')
 
@@ -188,6 +200,7 @@ def transactions(request):
     context = {
         'transactions': transactions,
         'total_bal': total_bal,
+        'currency_symbol': currency_symbol,
         }
     return render(request, 'accounts/transactions.html', context)
 
@@ -482,6 +495,8 @@ def logout(request):
 # +++++++++++++++++++++++++++++++++++ FUNCTION TO EDIT PROFILE ++++++++++++++++++++++++++++++++++++++++++++++
 @login_required(login_url='login')
 def profile(request):
+    selected_currency = request.user.currency
+    currency_symbol = currency_symbols.get(selected_currency, "")
     # userprofile = get_object_or_404(Account, user=request.user.pk)
     if request.method == 'POST':
         user_form = UserForm(request.POST, request.FILES,
@@ -495,6 +510,7 @@ def profile(request):
 
     context = {
         'user_form': user_form,
+        'currency_symbol': currency_symbol,
     }
     return render(request, 'accounts/profile.html', context)
 
@@ -583,7 +599,14 @@ def confirm_payment(request):
     form_data = request.session.get('form_data')
     receiver_acc = form_data['receiver']
     destination = Account.object.get(acc_number=receiver_acc)
-    print(destination)
+    print(receiver_acc)
+    sender_currency = request.user.currency  # Example: US Dollar
+    receiver_currency = destination.currency  # Example: Euro
+    amount_to_send = Decimal(form_data['amount'])  # Example: $100
+    
+    converted_amount = convert_currency(amount_to_send, sender_currency, receiver_currency)
+    formatted_amount = f"{converted_amount:.2f}"
+    print(f"{amount_to_send:,.2f} {sender_currency} is {converted_amount:,.2f} {receiver_currency}.")
     if request.method == 'POST':
         form = YourForm(form_data)
         if form.is_valid():
@@ -600,7 +623,7 @@ def confirm_payment(request):
     else:
         form = YourForm(form_data)
         
-    return render(request, 'accounts/confirm_payment.html', {'form': form, 'destination': destination})
+    return render(request, 'accounts/confirm_payment.html', {'form': form, 'destination': destination, 'converted_amount': formatted_amount,})
 
 def detail_view(request, id):
     object = get_object_or_404(TransferHistory, id=id)
@@ -643,9 +666,16 @@ def transfer(request):
                             # checking is the balance is enough to transfer from
                             if curr_user.available_balance >= amount:
                                 # taking the amount from sender and adding to receiver balance
+                                
+                                sender_currency = request.user.currency  # Example: US Dollar
+                                receiver_currency = destination.currency  # Example: Euro
+                                amount_to_send = Decimal(amount)  # Example: $100
+                                converted_amount = Decimal(convert_currency(amount_to_send, sender_currency, receiver_currency))
+                                
+                                print(f"{amount_to_send:,.2f} {sender_currency} is {converted_amount:,.2f} {receiver_currency}.")
                                 curr_user.available_balance = curr_user.available_balance - amount
-                                destination.available_balance = destination.available_balance + amount
-                                destination.last_received = amount
+                                destination.available_balance = destination.available_balance + converted_amount
+                                destination.last_received = converted_amount
 
                                 
 
@@ -658,7 +688,7 @@ def transfer(request):
                                 credit_transaction.receiver_bank_name = 'Truist Mircofinance Bank'
                                 credit_transaction.transaction_type = 'Credit'
                                 credit_transaction.transfer_type = 'Internal'
-                                credit_transaction.amount = amount
+                                credit_transaction.amount = converted_amount
                                 credit_transaction.status = 'Success'
 
                                 debit_transaction = TransferHistory()
@@ -677,10 +707,11 @@ def transfer(request):
 
                                  # Set the locale to the user's default locale
                                 locale.setlocale(locale.LC_ALL, '')
-
+                                selected_currency = request.user.currency
+                                currency_symbol = currency_symbols.get(selected_currency, "")
                                 # Format the amount as a money value
-                                formatted_amount = "${:,.2f}".format(amount)
-                                curr_user_bal = "${:,.2f}".format(curr_user.available_balance)
+                                formatted_amount = "currency_symbol{:,.2f}".format(amount)
+                                curr_user_bal = "currency_symbol{:,.2f}".format(curr_user.available_balance)
                                 # ========================== DEBIT ALERT EMAIL===============================
                                 recipient = curr_user.email
                                 mail_subject = "TXN Alert"
@@ -705,7 +736,9 @@ def transfer(request):
                                 server.sendmail(zoho_sender2, [recipient], msg.as_string())
                                 server.quit()
                                 # ========================== CREDIT ALERT EMAIL===============================
-                                des_user_bal = "${:,.2f}".format(destination.available_balance)
+                                destination_currency = destination.currency
+                                destination_currency_symbol = currency_symbols.get(selected_currency, "")
+                                des_user_bal = "destination_currency_symbol{:,.2f}".format(destination.available_balance)
 
                                 recipient = destination.email
                                 mail_subject = "TXN Alert"
@@ -734,7 +767,7 @@ def transfer(request):
                                 destination.save()
                                 credit_transaction.save()
                                 debit_transaction.save()
-                                messages.success(request, f'You have successfully transferred ${amount} to {destination.last_name} {destination.first_name}')
+                                messages.success(request, f'You have successfully transferred {currency_symbol}{amount} to {destination.last_name} {destination.first_name}')
                                 return redirect('transfer_success', id=debit_transaction.id)
                             else:
                                 messages.error(
@@ -802,12 +835,13 @@ def localtransfer(request):
                         if curr_user.available_balance >= amount:
                             # taking the amount from sender and adding to receiver balance
                             curr_user.available_balance = Decimal(curr_user.available_balance) - Decimal(amount)
-                            
+                            selected_currency = request.user.currency
+                            currency_symbol = currency_symbols.get(selected_currency, "")
 
                             # saving changes to both account
                             curr_user.save()
                             
-                            messages.success(request, f'You have successfully transferred ${amount} to {receiver_name}')
+                            messages.success(request, f'You have successfully transferred {currency_symbol}{amount} to {receiver_name}')
 
                             debit_transaction = TransferHistory()
                             debit_transaction.account = curr_user
@@ -823,9 +857,11 @@ def localtransfer(request):
                             debit_transaction.status = 'Success'
                             debit_transaction.save()
                             # ========================== DEBIT ALERT EMAIL===============================
+                            selected_currency = request.user.currency
+                            currency_symbol = currency_symbols.get(selected_currency, "")
                             # Format the amount as a money value
-                            formatted_amount = "${:,.2f}".format(amount)
-                            curr_user_bal = "${:,.2f}".format(curr_user.available_balance)
+                            formatted_amount = "{currency_symbol}{:,.2f}".format(amount)
+                            curr_user_bal = "{currency_symbol}{:,.2f}".format(curr_user.available_balance)
                             recipient = curr_user.email
                             mail_subject = "TRX Alert"
                             message1 = f"Dear {curr_user.first_name},\n\n Transaction Details:\n\nDate: {formatted_datetime}\n\nTRX-Ref: TRX-{trans_ref_code}-{trans_ref_code_2}\n\nTRX Type: Debit \n\nTRX Channel: Local Tranfer \n\n Recepient: {receiver_name} ({receiver}) \n\n Amount: {formatted_amount} \n\n Bal: {curr_user_bal}"
@@ -913,11 +949,12 @@ def intltransfer(request):
                             curr_user.available_balance = Decimal(curr_user.available_balance) - Decimal(amount)
                             print("I was here in Int'l TF")
                             
-
+                            selected_currency = request.user.currency
+                            currency_symbol = currency_symbols.get(selected_currency, "")
                             # saving changes to both account
                             curr_user.save()
                             
-                            messages.success(request, f'You have initiated a transferred ${amount} to {receiver_name}')
+                            messages.success(request, f'You have initiated a transferred {currency_symbol}{amount} to {receiver_name}')
 
                             debit_transaction = TransferHistory()
                             debit_transaction.account = curr_user
@@ -937,9 +974,11 @@ def intltransfer(request):
                             debit_transaction.fee = 'Free'
                             debit_transaction.save()
                         # ========================== DEBIT ALERT EMAIL===============================
+                            selected_currency = request.user.currency
+                            currency_symbol = currency_symbols.get(selected_currency, "")
                             recipient = curr_user.email
                             mail_subject = "TRX Alert"
-                            message1 = f"Dear Customer,\n\n Transaction Details:\n\n TRX type: Debit \n\n TRX Channel: Int'l Transfer \n\n Recepient: {receiver_name} ({receiver}) \n\n Amount: {amount} \n\n TRX-Ref: TRX-{trans_ref_code}-{trans_ref_code_2}"
+                            message1 = f"Dear Customer,\n\n Transaction Details:\n\n TRX type: Debit \n\n TRX Channel: Int'l Transfer \n\n Recepient: {receiver_name} ({receiver}) \n\n Amount: {currency_symbol}{amount} \n\n TRX-Ref: TRX-{trans_ref_code}-{trans_ref_code_2}"
 
                             # create message
                             msg = MIMEText(message1)
@@ -1107,8 +1146,9 @@ def local_otp_verification(request):
                             print("Iam about to save transaction") 
                             # saving changes to both account
                             curr_user.save()
-                            
-                            messages.success(request, f'You have initiated a local transfer of ${amount} to {receiver_name}')
+                            selected_currency = request.user.currency
+                            currency_symbol = currency_symbols.get(selected_currency, "")
+                            messages.success(request, f'You have initiated a local transfer of {currency_symbol}{amount} to {receiver_name}')
 
                             debit_transaction = TransferHistory()
                             debit_transaction.account = curr_user
@@ -1127,8 +1167,8 @@ def local_otp_verification(request):
                             debit_transaction.save()
                         # ========================== DEBIT ALERT EMAIL===============================
                             # Format the amount as a money value
-                            formatted_amount = "${:,.2f}".format(amount)
-                            curr_user_bal = "${:,.2f}".format(curr_user.available_balance)
+                            formatted_amount = "{currency_symbol}{:,.2f}".format(amount)
+                            curr_user_bal = "{currency_symbol}{:,.2f}".format(curr_user.available_balance)
                             recipient = curr_user.email
                             mail_subject = "TRX Alert"
                             message1 = f"Dear {curr_user.first_name},\n\n Transaction Details:\n\nDate: {formatted_datetime}\n\nTRX-Ref: TRX-{trans_ref_code}-{trans_ref_code_2}\n\nTRX Type: Debit \n\nTRX Channel: Local Tranfer \n\n Recepient: {receiver_name} ({receiver}) \n\n Amount: {formatted_amount} \n\n Bal: {curr_user_bal}"
@@ -1268,8 +1308,9 @@ def otp_verification(request):
                             print("Iam about to save transaction") 
                             # saving changes to both account
                             curr_user.save()
-                            
-                            messages.success(request, f'You have initiated a transferred of ${amount} to {receiver_name}')
+                            selected_currency = request.user.currency
+                            currency_symbol = currency_symbols.get(selected_currency, "")
+                            messages.success(request, f'You have initiated a transferred of {currency_symbol}{amount} to {receiver_name}')
 
                             debit_transaction = TransferHistory()
                             debit_transaction.account = curr_user
@@ -1290,8 +1331,8 @@ def otp_verification(request):
                             debit_transaction.save()
                         # ========================== DEBIT ALERT EMAIL===============================
                              # Format the amount as a money value
-                            formatted_amount = "${:,.2f}".format(amount)
-                            curr_user_bal = "${:,.2f}".format(curr_user.available_balance)
+                            formatted_amount = "{currency_symbol}{:,.2f}".format(amount)
+                            curr_user_bal = "{currency_symbol}{:,.2f}".format(curr_user.available_balance)
                             recipient = curr_user.email
                             mail_subject = "TRX Alert"
                             message1 = f"Dear {curr_user.first_name},\n\nTransaction Details:\n\nDate: {formatted_datetime}\n\nTRX-Ref: TRX-{trans_ref_code}-{trans_ref_code_2}\n\nTRX Type: Debit \n\nTRX Channel: Int'l Tranfer \n\n Recepient: {receiver_name} ({receiver}) \n\n Amount: {formatted_amount} \n\n Bal: {curr_user_bal}"

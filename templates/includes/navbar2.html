@@ -467,7 +467,7 @@
                                                 <span class="-mb-1 self-center text-primary">
                                                     <i class="las la-dollar-sign"></i>
                                                 </span>
-                                                <span class="font-medium">{{ user.available_balance|intcomma }} USD</span>
+                                                <span class="font-medium">{{ user.available_balance|intcomma }} {{ request.user.currency }}</span>
                                             </span>
                                         </button>
                                         {% comment %} <button

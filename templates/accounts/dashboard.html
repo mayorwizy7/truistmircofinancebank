@@ -64,7 +64,7 @@
             <div>
               <p class="mb-4 font-medium">Main Balance</p>
               <div class="flex items-center gap-2">
-                <h2 class="h4">{{user.currency}}{{ user.available_balance|intcomma }}</h2>
+                <h2 class="h4">{{currency_symbol}}{{ user.available_balance|intcomma }}</h2>
                 
               </div>
             </div>
@@ -83,7 +83,7 @@
             <div>
               <p class="mb-4 font-medium">Last Received</p>
               <div class="flex items-center gap-2">
-                <h2 class="h4">{{user.currency}}{{ user.last_received|intcomma }}</h2>
+                <h2 class="h4">{{currency_symbol}}{{ user.last_received|intcomma }}</h2>
 
               </div>
             </div>
@@ -101,7 +101,7 @@
             <div>
               <p class="mb-4 font-medium">Ledger Balance</p>
               <div class="flex items-center gap-2">
-                <h2 class="h4">{{user.currency}}{{ user.ledger_balance|intcomma }}</h2>
+                <h2 class="h4">{{currency_symbol}}{{ user.ledger_balance|intcomma }}</h2>
                 {% comment %} <span class="flex items-center gap-1 text-sm text-primary"><i
                     class="las la-arrow-up text-base"></i> 50.8%</span> {% endcomment %}
               </div>
@@ -354,7 +354,7 @@
     </td>
     <td class="py-2">
       <div>
-        <p class="mb-1 font-medium">{{user.currency}}{{ transaction.amount|intcomma }}</p>
+        <p class="mb-1 font-medium">{{currency_symbol}}{{ transaction.amount|intcomma }}</p>
         {% if transaction.transaction_type == 'Debit' %}
         <span class="text-xs text-secondary2">Debit</span>
         {% else %}
@@ -365,7 +365,7 @@
     {% if transaction.fee == 'Free' %}
     <td class="py-2">{{ transaction.fee }}</td>
     {% else %}
-    <td class="py-2">{{user.currency}}{{ transaction.fee|intcomma }}</td>
+    <td class="py-2">{{currency_symbol}}{{ transaction.fee|intcomma }}</td>
     {% endif %}
 
     <td class="py-2">
@@ -582,7 +582,7 @@
             </div>
             <div class="flex justify-between items-center text-xl gap-4 font-medium">
               <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="0.00" />
-              <p class="shrink-0">{{user.currency}} USD</p>
+              <p class="shrink-0">{{currency_symbol}} USD</p>
             </div>
           </div>
           <button

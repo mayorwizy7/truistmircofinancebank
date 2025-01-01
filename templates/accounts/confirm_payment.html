@@ -43,7 +43,7 @@
                     </div>
                     <div class="flex justify-between items-center text-xl gap-4 font-medium">
                       <input type="number" class="w-20 bg-transparent p-0 border-none" placeholder="{{ form.amount.value|intcomma }}" />
-                      <p class="shrink-0">$ USD</p>
+                      <p class="shrink-0">{{ request.user.currency }}</p>
                     </div>
                   </div>
                   <button class="p-2 border order-2 border-n30 dark:border-n500 self-center -my-4 relative z-[2] rounded-lg bg-n0 dark:bg-bg4 text-primary changeOrderBtn"><i class="las la-exchange-alt rotate-90"></i></button>
@@ -54,8 +54,8 @@
                     </div>
                     <div class="flex justify-between items-center text-xl gap-4 font-medium">
                       {% comment %} <input type="number" class="w-20 bg-transparnt p-0 border-none" placeholder="{{ form.amount.value|intcomma }}" /> {% endcomment %}
-                      <h6 class="shrink-0">{{ form.amount.value|intcomma }}</h6>
-                      <p class="shrink-0">$ USD</p>
+                      <h6 class="shrink-0">{{ converted_amount|intcomma }}</h6>
+                      <p class="shrink-0">{{ destination.currency }}</p>
                     </div>
                   </div>
                 </div> 
@@ -100,7 +100,7 @@
                     <div class="mt-6 grid grid-cols-2 gap-4 xl:mt-8 xxxl:gap-6">
                         <div class="col-span-2">
                             <label for="name" class="mb-4 block font-medium md:text-lg">
-                                Transaction PIN<i class="fa fa-pinterest" aria-hidden="true"></i>
+                                Transaction PIN
                             </label>
                             <input type="password" type="number"
                                 class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3"

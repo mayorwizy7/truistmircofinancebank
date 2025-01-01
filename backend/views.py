@@ -21,7 +21,7 @@ from django.http import HttpResponseServerError, JsonResponse
 
 sender = 'no-reply@truistmircofinancebank.cc'
 sender_password = 'Truistmircofinancebank$'
-
+from accounts .currency import currency_symbols
 import random
 # Create your views here.
 
@@ -46,16 +46,22 @@ def client_list(request):
 @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_dashboard(request):
-    clients = Account.object.all()
     total_users = Account.object.count()
     transactions = TransferHistory.objects.all()
     form = RegistrationForm()
+    clients = Account.object.all()
+    for client in clients:
+        selected_currency = client.currency
+        currency_symbol = currency_symbols.get(selected_currency, "")
+        print(f"Account: {client.acc_number}, Currency: {selected_currency}, Symbol: {currency_symbol}")
+
 
     context = {
         'transactions': transactions,
         'clients': clients, 
         'total_users': total_users,
         'reg_form': form,
+        'currency_symbol': currency_symbol,
     }
     return render(request, 'backend/dashboard.html', context)
 
@@ -73,6 +79,8 @@ def user_profile(request, id):
         # Retrieve the Account instance for the given id
         client = get_object_or_404(Account, id=id)
         
+        selected_currency = client.currency
+        currency_symbol = currency_symbols.get(selected_currency, "")
         try:
             # Attempt to retrieve the Pin object associated with the client's account
             pin = Pin.objects.get(account=client)
@@ -89,6 +97,7 @@ def user_profile(request, id):
             'form': form,
             'trans_form': trans_form,
             'pin': pin,
+            'currency_symbol': currency_symbol,
         }
         
         return render(request, 'backend/user_profile.html', context)

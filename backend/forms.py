@@ -21,7 +21,7 @@ class CountdownForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CountdownForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control'
+            self.fields[field].widget.attrs['class'] = 'form-control mb-4'
 
 
 
@@ -42,7 +42,7 @@ class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control'
+            self.fields[field].widget.attrs['class'] = 'form-control mb-4'
             
 
 
@@ -61,7 +61,7 @@ class TransactionsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(TransactionsForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control'
+            self.fields[field].widget.attrs['class'] = 'form-control mb-4'
 
 
 
@@ -77,7 +77,7 @@ class UpdateHistoryForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UpdateHistoryForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control'
+            self.fields[field].widget.attrs['class'] = 'form-control mb-4'
 
 
 
@@ -114,4 +114,4 @@ class RegistrationForm(forms.ModelForm):
         self.fields['email'].widget.attrs['placeholder'] = 'Enter Email Address'
         self.fields['country'].widget.attrs['placeholder'] = 'Choose Your Country'
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control'
+            self.fields[field].widget.attrs['class'] = 'form-control mb-4'
